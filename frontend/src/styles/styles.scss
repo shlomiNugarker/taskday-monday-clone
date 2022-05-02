@@ -1,0 +1,52 @@
+// // SETUP
+@import 'setup/variables';
+// @import 'setup/typography';
+// @import '../styles/fonts/monday/monday-icons-html.woff';
+// // BASICS
+@import 'basics/helpers';
+@import 'basics/base';
+
+// // COMPONENTS
+@import 'components/_side-bar';
+@import 'components/_boards-nav-bar';
+@import 'components/_main-menu';
+@import 'components/_boards-nav-bar';
+@import 'components/_board-header-main';
+@import 'components/_board-toolbar';
+@import 'components/board-filter';
+@import 'components/group-list';
+@import 'components/task-list';
+@import 'components/task-preview';
+@import 'components/board-details-header';
+@import 'components/columns-header';
+@import 'components/task-preview';
+@import 'components/title-preview';
+@import 'components/add-task';
+
+// dynamic cmps
+@import 'components/dynamic-cmps/task-cmp';
+@import 'components/dynamic-cmps/status-cmp';
+@import 'components/dynamic-cmps/person-cmp';
+@import 'components/dynamic-cmps/date-cmp';
+@import 'components/dynamic-cmps/text-cmp';
+@import 'components/dynamic-cmps/priority-cmp';
+
+@import 'views/boardDetailsView';
+@import 'views/_boardView';
+@import 'views/task-details';
+// @import 'components/group-list';
+// @import 'components/item-preview';
+// @import 'components/item-list';
+// @import 'components/board-header-main';
+// @import 'components/board-toolbar';
+// @import 'components/modals/work-space-menu-modal.scss';
+// @import 'components/status-picker';
+// @import 'components/date-picker';
+
+//  VIEWS
+// @import 'views/main-board';
+// @import 'views/home';
+
+// .filter-icon-html {
+//   @include mkIcon('\f333');
+// @import 'components/main-board-media-queries.scss';

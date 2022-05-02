@@ -1,0 +1,17 @@
+.text-cmp {
+  min-width: 150px;
+  background-color: rgb(15, 105, 184);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: white;
+
+  .text-icon {
+    color: white;
+  }
+
+  input {
+    width: 145px;
+  }
+}

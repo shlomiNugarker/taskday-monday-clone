@@ -1,0 +1,60 @@
+.status-cmp {
+  min-width: 150px;
+  margin-left: 22px;
+  color: white;
+  // background-color: lightcoral;
+  display: flex;
+
+  justify-content: center;
+  // align-content: center;
+  align-items: center;
+
+  .currOpt {
+    display: flex;
+    cursor: pointer;
+    width: 100%;
+    align-self: center;
+    justify-content: center;
+
+    span {
+      position: absolute;
+      z-index: 5;
+    }
+  }
+  .el-dropdown-menu {
+    padding: 0;
+  }
+
+  .el-dropdown-link {
+    margin-left: 0px;
+    width: 100%;
+  }
+  .el-dropdown__list {
+    padding: 5px;
+  }
+  .currOptDone {
+    position: absolute;
+  }
+  .el-dropdown {
+    height: 100%;
+  }
+  .currOpt {
+    width: 100%;
+    color: white;
+    height: 35px;
+    align-items: center;
+  }
+  .el-dropdown-menu {
+    width: 150px;
+  }
+  .el-tooltip__trigger {
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0px;
+  }
+  .el-dropdown-link {
+    margin-left: 0px;
+  }
+}

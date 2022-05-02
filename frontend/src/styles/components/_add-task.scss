@@ -1,0 +1,79 @@
+.add-task {
+  display: flex;
+  padding-bottom: 1px;
+  margin-left: 10px;
+  height: 35px;
+  margin-top: 1px;
+  width: 1235px;
+
+  .add {
+    border: 1px solid rgba(124, 124, 129, 0.1529411765);
+    border-left: none;
+    border-right: none;
+    // background-color: rgba(255, 160, 122, 0.509);
+    z-index: 5;
+    min-width: 680px;
+    position: sticky;
+    left: 54px;
+    display: flex;
+    align-items: center;
+    // justify-content: space-between;
+    height: 100%;
+
+    .input-container {
+      width: 100%;
+
+      input {
+        font-size: 14px;
+        width: 100%;
+        border: none;
+        cursor: pointer;
+        &:focus {
+          outline: none !important;
+          // box-shadow: inset 0px 0px 0px 1px $blue;
+          // border-radius: 0.5px;
+          border: none;
+        }
+      }
+    }
+  }
+  .side {
+    width: 7px;
+    height: 35px;
+    margin-right: 5px;
+  }
+  .right-side {
+    border: 1px solid rgba(124, 124, 129, 0.1529411765);
+    border-left: none;
+    cursor: pointer;
+    // background-color: aquamarine;
+
+    width: 526px;
+    display: flex;
+    flex-direction: row-reverse;
+    .btn-container {
+      display: flex;
+      flex-direction: row-reverse;
+      width: 100%;
+      button {
+        z-index: 5;
+        margin-right: 2px;
+        background-color: $blue;
+        color: white;
+        border: none;
+      }
+    }
+  }
+  .end-cmps {
+    background-color: rgb(245 246 248 / 85%);
+    width: 25px;
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 2px;
+
+    div {
+      background-color: #d0d4e4;
+      width: 10px;
+    }
+  }
+}

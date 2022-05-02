@@ -1,0 +1,24 @@
+.task-preview {
+  display: flex;
+  padding-bottom: 2px;
+  margin-left: 10px;
+
+  .end-cmps {
+    background-color: rgb(245 246 248 / 85%);
+    width: 25px;
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 2px;
+
+    div {
+      background-color: #d0d4e4;
+      width: 10px;
+    }
+  }
+}
+
+.left-btn-task {
+  .el-tooltip__trigger {
+    width: 30px;
+  }
+}

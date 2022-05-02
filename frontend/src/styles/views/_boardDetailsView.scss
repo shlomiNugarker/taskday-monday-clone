@@ -1,0 +1,21 @@
+.container-details-view {
+  width: 100%;
+  display: flex;
+
+  .boardDetails {
+    // // background-color: lightgreen;
+    // width: 100%;
+    // margin-left: 100px;
+    height: 100vh;
+  }
+
+  .loading {
+    width: 100%;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    img {
+      width: 430px;
+    }
+  }
+}
