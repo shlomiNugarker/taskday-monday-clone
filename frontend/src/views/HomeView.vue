@@ -1,4 +1,8 @@
-<template></template>
+<template>
+  <section>
+    <h1>Hello home</h1>
+  </section>
+</template>
 
 <script>
 export default {
