@@ -46,7 +46,10 @@ export default {
   created() {},
   methods: {
     focusOut() {
-      setTimeout(() => (this.isAdd = false), 1000)
+      setTimeout(() => {
+        this.isAdd = false
+        this.newTaskTitle = ''
+      }, 1000)
     },
     focusIn() {
       // this.$refs.input.focus()

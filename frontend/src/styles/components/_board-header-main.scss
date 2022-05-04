@@ -4,6 +4,10 @@
   display: flex;
   justify-content: space-between;
 
+  &:first-child {
+    min-width: 20px;
+  }
+
   .menu-circle {
     display: flex;
     align-items: center;
@@ -113,10 +117,22 @@
       cursor: pointer;
     }
 
+    .input-title {
+      display: flex;
+      justify-content: center;
+      margin-left: 5px;
+      font-size: 30px;
+      border: none;
+
+      &:focus {
+        outline: none !important;
+      }
+    }
+
     h1 {
       font-family: roboto-light, Rubik, 'Noto Kufi Arabic', 'Noto Sans JP',
         sans-serif;
-      font-size: 30px;
+      font-size: 20px;
       line-height: 40px;
       height: 42px;
       color: #3d3e43;

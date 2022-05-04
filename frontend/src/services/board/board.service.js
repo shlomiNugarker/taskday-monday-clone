@@ -1,4 +1,5 @@
 import { storageService } from '../async-storage.service'
+import { httpService } from '../http.service'
 import { utilService } from '../util.service.js'
 
 export const boardService = {
@@ -29,6 +30,7 @@ async function update(board) {
 
 async function getBoardsList() {
   var res
+  // res = await httpService.get('board')
   res = await storageService.query('board')
   res.forEach((board, idx) => {
     res[idx] = {

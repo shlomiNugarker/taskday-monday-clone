@@ -72,11 +72,7 @@ function makeBoard() {
       _id: 'b101',
       title: 'Type your title',
       createdAt: 1651365468605,
-      // "createdBy": {
-      //     "_id": "u101",
-      //     "fullname": "Abi Abambi",
-      //     "imgUrl": "http://some-img"
-      // },
+
       predefineColors: [
         '#ff4500',
         '#ff8c00',
@@ -240,7 +236,7 @@ function makeBoard() {
           style: {},
         },
       ],
-      // "status":{}
+
       activitiesLog: [
         {
           id: 'a101',
@@ -257,7 +253,7 @@ function makeBoard() {
           },
         },
       ],
-      // for monday
+
       cmpsOrder: ['status-picker', 'member-picker', 'date-picker'],
     },
   ])

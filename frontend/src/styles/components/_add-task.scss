@@ -4,7 +4,7 @@
   margin-left: 10px;
   height: 35px;
   margin-top: 1px;
-  width: 1235px;
+  // width: 1235px;
 
   .add {
     border: 1px solid rgba(124, 124, 129, 0.1529411765);
@@ -16,8 +16,9 @@
     position: sticky;
     left: 54px;
     display: flex;
+    flex: 0 1;
     align-items: center;
-    // justify-content: space-between;
+    justify-content: space-between;
     height: 100%;
 
     .input-container {
@@ -49,11 +50,14 @@
     // background-color: aquamarine;
 
     width: 526px;
+
     display: flex;
     flex-direction: row-reverse;
     .btn-container {
       display: flex;
       flex-direction: row-reverse;
+      position: relative;
+      left: 30px;
       width: 100%;
       button {
         z-index: 5;
@@ -72,7 +76,7 @@
     margin-left: 2px;
 
     div {
-      background-color: #d0d4e4;
+      // background-color: #d0d4e4;
       width: 10px;
     }
   }

@@ -1,6 +1,6 @@
 <template>
   <section class="text-cmp" @click="add">
-    <div v-if="!text && !isAdd">
+    <div class="container-icon" v-if="!text && !isAdd">
       <font-awesome-icon class="text-icon" icon="circle-plus" />
     </div>
     <div v-if="!isAdd">{{ text }}</div>

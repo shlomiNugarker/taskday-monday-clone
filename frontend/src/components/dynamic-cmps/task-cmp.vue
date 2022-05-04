@@ -39,7 +39,9 @@
           </button>
         </div>
       </div>
-      <add-comment-btn class="add-comment-icon" />
+      <router-link :to="$store.getters.currBoard._id + '/task/' + task.id">
+        <add-comment-btn class="add-comment-icon" @click="openDetails" />
+      </router-link>
     </section>
   </div>
 </template>
@@ -77,6 +79,11 @@ export default {
     this.taskCopy = JSON.parse(JSON.stringify(this.task))
   },
   methods: {
+    openDetails() {
+      this.$router.push($store.getters.currBoard._id + '/task/' + task.id)
+
+      // :to="$store.getters.currBoard._id + '/task/' + item.id"
+    },
     onEdit() {
       this.isEdit = true
       setTimeout(() => {

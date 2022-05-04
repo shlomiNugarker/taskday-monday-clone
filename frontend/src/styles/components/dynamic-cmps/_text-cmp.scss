@@ -7,8 +7,13 @@
   cursor: pointer;
   color: white;
 
+  .container-icon {
+  }
+
   .text-icon {
     color: white;
+    position: absolute;
+    left: -10px;
   }
 
   input {

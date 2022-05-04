@@ -3,14 +3,26 @@
     <div class="board-header-main">
       <div>
         <div class="title">
-          <!-- <h1>{{ board.title }}</h1> -->
-          <h1><input type="text" /></h1>
+          <div v-if="!isEdit" @click="focusIn">
+            {{ title }}
+          </div>
+          <div v-if="isEdit">
+            <input
+              @keydown.enter="saveTitle"
+              @input="saveTitle"
+              class="input-title"
+              ref="input"
+              @focusout="isEdit = false"
+              type="text"
+              v-model="title"
+            />
+          </div>
 
-          <span @click="onClickInfo" :class="getInfo">
+          <span @click="onClickInfo">
             <font-awesome-icon class="info-icon" icon="circle-info" />
           </span>
 
-          <span @click="onClickStar" :class="getStar">
+          <span @click="onClickStar">
             <img class="star-icon" src="../styles/icon/star-yellow.png" />
           </span>
         </div>
@@ -41,7 +53,7 @@
         </div>
       </div>
     </div>
-    <p class="subtitle" v-if="isInfo">
+    <p class="subtitle">
       Learn how to create tasks that are clear, transparent, and on point.
     </p>
   </section>
@@ -55,11 +67,29 @@ export default {
   },
   data() {
     return {
-      isInfo: true,
+      isEdit: true,
+      title: '',
     }
+  },
+  created() {
+    this.title = JSON.parse(JSON.stringify(this.board.title))
   },
   components: {},
   computed: {},
-  methods: {},
+  methods: {
+    focusIn() {
+      this.isEdit = true
+
+      setTimeout(() => {
+        this.$refs.input.focus()
+      }, 10)
+    },
+    focusOut() {
+      this.isEdit = false
+    },
+    saveTitle() {
+      console.log('save')
+    },
+  },
 }
 </script>
