@@ -34,7 +34,12 @@ if (process.env.NODE_ENV === 'production') {
   app.use(cors(corsOptions))
 }
 
+const { connectSockets } = require('./services/socket.service')
+
 //****** Todo routes******
+
+const setupAsyncLocalStorage = require('./middlewares/setupAls.middleware')
+app.all('*', setupAsyncLocalStorage)
 
 const boardRoutes = require('./api/board/board.routes')
 
