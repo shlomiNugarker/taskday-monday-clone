@@ -68,12 +68,10 @@ export default {
   data() {
     return {
       isEdit: true,
-      title: '',
+      title: this.board.title,
     }
   },
-  created() {
-    this.title = JSON.parse(JSON.stringify(this.board.title))
-  },
+  created() {},
   components: {},
   computed: {},
   methods: {
@@ -89,6 +87,11 @@ export default {
     },
     saveTitle() {
       console.log('save')
+    },
+  },
+  watch: {
+    '$store.getters.currBoard'() {
+      this.title = this.$store.getters.currBoard.title
     },
   },
 }

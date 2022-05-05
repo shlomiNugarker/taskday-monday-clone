@@ -11,6 +11,8 @@ export const boardService = {
   getEmptyTask,
   getGroupById,
   getEmptyGroup,
+  getEmptyBoard,
+  add,
 }
 
 async function query(filterBy) {
@@ -76,6 +78,7 @@ function getEmptyTask(groupToEditTitle) {
 function getGroupById(board, groupId) {
   return board.groups.find((group) => group.id === groupId)
 }
+
 function getEmptyGroup() {
   return {
     id: 'g_' + utilService.makeId(),
@@ -93,4 +96,44 @@ async function removeGroup(board, groupId) {
   // const updatedBoard = await httpService.put(`board`, board)
   const updatedBoard = await storageService.put('board', board)
   return updatedBoard
+}
+
+async function add(board) {
+  // const addedBoard = await httpService.post(`board`, board)
+
+  // board.byUser = userService.getLoggedinUser()
+  const addedBoard = await storageService.post('board', board)
+  return addedBoard
+}
+
+function getEmptyBoard(boardName) {
+  const newBoard = {
+    title: '',
+    createdAt: new Date().getTime(),
+    createdBy: {
+      _id: 'u_' + utilService.makeId(), // fix to correct user
+      fullname: 'Shlomi Nugarker',
+      imgUrl:
+        'https://files.monday.com/use1/photos/26222916/thumb_small/26222916-user_photo_2021_11_30_09_26_11.png?1638264371',
+    },
+    members: [
+      {
+        _id: 'u' + utilService.makeId(), // fix to correct user
+        fullname: 'Shlomi Nugarker',
+        imgUrl:
+          'https://files.monday.com/use1/photos/26222916/thumb_small/26222916-user_photo_2021_11_30_09_26_11.png?1638264371',
+      },
+    ],
+    cmpsOrder: [
+      'task-cmp',
+      'status-cmp',
+      'person-cmp',
+      'priority-cmp',
+      'date-cmp',
+      'text-cmp',
+    ],
+    groups: [getEmptyGroup()],
+  }
+  newBoard.title = boardName
+  return newBoard
 }

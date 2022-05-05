@@ -25,11 +25,11 @@
     </div>
 
     <div class="items-title">
-      <div>
+      <div @click="open">
         <span>
           <plus-icon />
         </span>
-        Add
+        Add Board
       </div>
       <div>
         <span>
@@ -75,7 +75,9 @@ export default {
     // boards: Array,
   },
   data() {
-    return {}
+    return {
+      newBoardNmae: '',
+    }
   },
   computed: {
     boardsList() {
@@ -99,6 +101,33 @@ export default {
       this.$router.push(`/board/${boardId}`)
       this.$store.dispatch({ type: 'getBoardById', boardId })
       this.closeModal()
+    },
+    async newBoard() {
+      var newBoard = await this.$store.dispatch({
+        type: 'newBoard',
+        boardName: this.newBoardNmae,
+      })
+      this.$router.push('/board/' + newBoard._id)
+    },
+    open() {
+      this.$prompt('Please input name', 'Add new board', {
+        confirmButtonText: 'ADD',
+        cancelButtonText: 'Cancel',
+      })
+        .then(({ value }) => {
+          this.newBoardNmae = value
+          this.newBoard()
+          this.$message({
+            type: 'success',
+            message: `The "${value}" board was successfully added`,
+          })
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: 'Input canceled',
+          })
+        })
     },
   },
   components: {

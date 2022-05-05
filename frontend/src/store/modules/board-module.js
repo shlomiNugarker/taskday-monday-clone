@@ -55,6 +55,16 @@ export default {
       state.filterBy = filterBy
     },
 
+    //Boards
+    addBoard(state, { newBoard }) {
+      console.log(newBoard)
+      state.board = newBoard
+      state.boardsList.push({
+        boardId: newBoard._id,
+        boardTitle: newBoard.title,
+      })
+    },
+
     //Groups:
     loadGroups(state, { groups }) {
       state.currBoard.groups = groups
@@ -86,13 +96,20 @@ export default {
         console.log('cannot get boards..')
       }
     },
-    async getBoardsList({ commit }) {
+    async newBoard({ commit }, { boardName }) {
+      var newBoard = boardService.getEmptyBoard(boardName)
+      newBoard = await boardService.add(newBoard)
+      commit({ type: 'addBoard', newBoard })
+      return newBoard
+    },
+    async getBoardsList({ state, commit }) {
       const boardsList = await boardService.getBoardsList()
       console.log(boardsList)
       commit({ type: 'loadBoardsList', boardsList })
     },
-    async getBoardById({ commit }, { boardId }) {
+    async getBoardById({ state, commit }, { boardId }) {
       try {
+        // state.currBoard = null
         const board = await boardService.getBoardById(boardId)
         commit({
           type: 'setCurrBoard',
