@@ -40,7 +40,7 @@
         </div>
       </div>
       <router-link :to="$store.getters.currBoard._id + '/task/' + task.id">
-        <add-comment-btn class="add-comment-icon" @click="openDetails" />
+        <add-comment-btn class="add-comment-icon" />
       </router-link>
     </section>
   </div>
@@ -80,7 +80,9 @@ export default {
   },
   methods: {
     openDetails() {
-      this.$router.push($store.getters.currBoard._id + '/task/' + task.id)
+      this.$router.push(
+        this.$store.getters.currBoard._id + '/task/' + this.task.id
+      )
 
       // :to="$store.getters.currBoard._id + '/task/' + item.id"
     },

@@ -120,6 +120,20 @@
       }
     }
 
+    p {
+      flex-grow: 1;
+    }
+
+    .board-btn-opts {
+      background-color: lightgreen;
+      width: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3px;
+      border-radius: 5px;
+    }
+
     div {
       display: flex;
       align-items: center;
@@ -138,6 +152,10 @@
     border-color: #e6e9ef;
     border-color: #dcdfec;
     margin: 15px 0px;
+  }
+
+  .el-dropdown-link {
+    display: flex;
   }
 }
 

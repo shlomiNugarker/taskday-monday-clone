@@ -52,14 +52,36 @@
         v-for="board in boardsList"
         :key="board.boardId"
         class="board-item"
-        @click="moveToBoard(board.boardId)"
+        @click.stop="moveToBoard(board.boardId)"
         v-bind:class="[{ 'board-clicked': currBoard._id === board.boardId }]"
       >
         <span>
           <board-icon />
         </span>
 
-        {{ board.boardTitle }}
+        <p>
+          {{ board.boardTitle }}
+        </p>
+        <span class="board-btn-opts" @click.stop="openboardModal">
+          <font-awesome-icon icon="ellipsis" />
+        </span>
+        <!-- //modal -->
+
+        <!-- <el-dropdown class="side-drop-down" trigger="click" @click.stop="">
+          <span class="el-dropdown-link">
+            <font-awesome-icon icon="ellipsis" />
+            <el-icon class="el-icon2"> </el-icon>
+          </span>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item @click="removeTask()">
+                <font-awesome-icon icon="trash-can" />Delete
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown> -->
+
+        <!-- //modal -->
       </div>
     </div>
   </section>
@@ -119,7 +141,7 @@ export default {
           this.newBoard()
           this.$message({
             type: 'success',
-            message: `The "${value}" board was successfully added`,
+            message: `The "${value}" board was successfully added (:`,
           })
         })
         .catch(() => {
@@ -129,7 +151,11 @@ export default {
           })
         })
     },
+    openboardModal() {
+      console.log('Heyy')
+    },
   },
+
   components: {
     plusIcon,
     filterIcon,

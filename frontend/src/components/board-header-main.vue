@@ -3,7 +3,7 @@
     <div class="board-header-main">
       <div>
         <div class="title">
-          <div v-if="!isEdit" @click="focusIn">
+          <div v-if="!isEdit" @click="focusIn" @change="updateBoard">
             {{ title }}
           </div>
           <div v-if="isEdit">
@@ -87,6 +87,16 @@ export default {
     },
     saveTitle() {
       console.log('save')
+      this.updateBoard()
+    },
+    updateBoard() {
+      const boardToEdit = JSON.parse(JSON.stringify(this.board))
+      boardToEdit.title = this.title
+
+      this.$store.dispatch({
+        type: 'updateBoard',
+        boardToEdit,
+      })
     },
   },
   watch: {

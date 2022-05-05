@@ -72,6 +72,10 @@ export default {
     updateGroup(state, { groupToEdit, idx }) {
       state.currBoard.groups.splice(idx, 1, groupToEdit)
     },
+    updateBoard(state, { boardToEdit }) {
+      state.currBoard = boardToEdit
+    },
+
     addGroup(state, { newGroup }) {
       state.currBoard.groups.unshift(newGroup)
     },
@@ -109,7 +113,6 @@ export default {
     },
     async getBoardById({ state, commit }, { boardId }) {
       try {
-        // state.currBoard = null
         const board = await boardService.getBoardById(boardId)
         commit({
           type: 'setCurrBoard',
@@ -183,6 +186,14 @@ export default {
       // socketService.emit('board newUpdateBoard', copyBoard)
       await boardService.update(copyBoard)
       commit({ type: 'setCurrBoard', board: copyBoard })
+    },
+    async updateBoard({ dispatch, commit }, { boardToEdit }) {
+      await boardService.update(boardToEdit)
+      commit({ type: 'updateBoard', boardToEdit })
+      console.log(dispatch)
+      dispatch({
+        type: 'getBoardsList',
+      })
     },
   },
 }
