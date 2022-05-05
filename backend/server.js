@@ -43,6 +43,9 @@ app.all('*', setupAsyncLocalStorage)
 
 const boardRoutes = require('./api/board/board.routes')
 
+// const { connectSockets } = require('./services/socket.service.back')
+// connectSockets(http, session)
+
 app.use('/api/board', boardRoutes)
 
 // Make every server-side-route to match the index.html
