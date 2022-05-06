@@ -16,24 +16,25 @@ export const boardService = {
 }
 
 async function query(filterBy) {
-  return await storageService.query('board')
+  return await httpService.query('board')
+  // return await storageService.query('board')
 }
 
 async function getBoardById(boardId) {
-  return await storageService.get('board', boardId)
+  return await httpService.get('board/' + boardId)
+  // return await storageService.get('board', boardId)
 }
 
 async function update(board) {
-  // const updatedBoard = await httpService.put(`board`, board)
-
-  const updatedBoard = await storageService.put('board', board)
+  const updatedBoard = await httpService.put(`board`, board)
+  // const updatedBoard = await storageService.put('board', board)
   return updatedBoard
 }
 
 async function getBoardsList() {
   var res
-  // res = await httpService.get('board')
-  res = await storageService.query('board')
+  res = await httpService.get('board')
+  // res = await storageService.query('board')
   res.forEach((board, idx) => {
     res[idx] = {
       boardId: board._id,
@@ -42,7 +43,6 @@ async function getBoardsList() {
   })
 
   return res
-  // return JSON.parse(JSON.stringify(res))
 }
 
 function getEmptyTask(groupToEditTitle) {
@@ -93,16 +93,15 @@ async function removeGroup(board, groupId) {
     (currGroup) => currGroup.id === groupId
   )
   board.groups.splice(groupIdx, 1)
-  // const updatedBoard = await httpService.put(`board`, board)
-  const updatedBoard = await storageService.put('board', board)
+  const updatedBoard = await httpService.put(`board`, board)
+  // const updatedBoard = await storageService.put('board', board)
   return updatedBoard
 }
 
 async function add(board) {
-  // const addedBoard = await httpService.post(`board`, board)
+  const addedBoard = await httpService.post(`board`, board)
 
-  // board.byUser = userService.getLoggedinUser()
-  const addedBoard = await storageService.post('board', board)
+  // const addedBoard = await storageService.post('board', board)
   return addedBoard
 }
 
@@ -131,6 +130,18 @@ function getEmptyBoard(boardName) {
       'priority-cmp',
       'date-cmp',
       'text-cmp',
+    ],
+    predefineColors: [
+      '#ff4500',
+      '#ff8c00',
+      '#ffd700',
+      '#90ee90',
+      '#00ced1',
+      '#00ecd1',
+      '#1e90ff',
+      '#c71585',
+      '#c7f5a5',
+      '#c7158577',
     ],
     groups: [getEmptyGroup()],
   }

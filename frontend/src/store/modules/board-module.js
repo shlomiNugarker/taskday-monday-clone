@@ -108,12 +108,13 @@ export default {
     },
     async getBoardsList({ state, commit }) {
       const boardsList = await boardService.getBoardsList()
-      console.log(boardsList)
+
       commit({ type: 'loadBoardsList', boardsList })
     },
     async getBoardById({ state, commit }, { boardId }) {
       try {
         const board = await boardService.getBoardById(boardId)
+
         commit({
           type: 'setCurrBoard',
           board,
@@ -190,7 +191,6 @@ export default {
     async updateBoard({ dispatch, commit }, { boardToEdit }) {
       await boardService.update(boardToEdit)
       commit({ type: 'updateBoard', boardToEdit })
-      console.log(dispatch)
       dispatch({
         type: 'getBoardsList',
       })

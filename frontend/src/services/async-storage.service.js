@@ -64,7 +64,7 @@ function _makeId(length = 5) {
   return text
 }
 
-if (!localStorage.board) makeBoard()
+// if (!localStorage.board) makeBoard()
 
 function makeBoard() {
   _save('board', [

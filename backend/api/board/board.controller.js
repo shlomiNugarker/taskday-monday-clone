@@ -13,6 +13,7 @@ async function getBoards(req, res) {
 async function getBoard(req, res) {
   try {
     const board = await boardService.getById(req.params.id)
+    console.log(req.params.id)
     res.send(board)
   } catch (err) {
     logger.error('Cannot get boards', err)

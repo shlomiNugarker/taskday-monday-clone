@@ -68,10 +68,13 @@ export default {
   data() {
     return {
       isEdit: true,
-      title: this.board.title,
+      title: '',
+      wait: false,
     }
   },
-  created() {},
+  created() {
+    this.title = JSON.parse(JSON.stringify(this.board.title))
+  },
   components: {},
   computed: {},
   methods: {
@@ -86,17 +89,22 @@ export default {
       this.isEdit = false
     },
     saveTitle() {
-      console.log('save')
+      if (this.wait) return
+      this.wait = true
       this.updateBoard()
     },
     updateBoard() {
-      const boardToEdit = JSON.parse(JSON.stringify(this.board))
-      boardToEdit.title = this.title
+      setTimeout(() => {
+        this.wait = false
+        console.log(this.title)
+        const boardToEdit = JSON.parse(JSON.stringify(this.board))
+        boardToEdit.title = this.title
 
-      this.$store.dispatch({
-        type: 'updateBoard',
-        boardToEdit,
-      })
+        this.$store.dispatch({
+          type: 'updateBoard',
+          boardToEdit,
+        })
+      }, 2000)
     },
   },
   watch: {
