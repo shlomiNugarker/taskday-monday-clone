@@ -1,4 +1,5 @@
-import { boardService } from '../../services/board/board.service'
+import { boardService } from '../../services/board/board.service.js'
+import { socketService } from '../../services/socket.service'
 
 export default {
   state: {
@@ -13,6 +14,7 @@ export default {
       priorityTxt: '',
     },
     isNavBarOpen: false,
+    isLoading: true,
   },
   getters: {
     isNavBarOpen(state) {
@@ -29,6 +31,9 @@ export default {
     },
     currBoard(state) {
       return state.currBoard
+    },
+    isLoading(state) {
+      return state.isLoading
     },
     members(state) {
       return state.currBoard.members
@@ -49,7 +54,7 @@ export default {
     },
     setCurrBoard(state, { board }) {
       state.currBoard = board
-      // const copyBoard = JSON.parse(JSON.stringify(state.board))
+      state.isLoading = false
     },
     updateFilter(state, { filterBy }) {
       state.filterBy = filterBy
@@ -57,14 +62,18 @@ export default {
 
     //Boards
     addBoard(state, { newBoard }) {
-      console.log(newBoard)
       state.board = newBoard
       state.boardsList.push({
         boardId: newBoard._id,
         boardTitle: newBoard.title,
       })
     },
-
+    removeBoard(state, { boardId }) {
+      state.currBoard = null
+      state.boardsList = state.boardsList.filter(
+        (board) => board.boardId !== boardId
+      )
+    },
     //Groups:
     loadGroups(state, { groups }) {
       state.currBoard.groups = groups
@@ -86,6 +95,9 @@ export default {
     },
     removeTask(state, { groupIdx, taskIdx }) {
       state.currBoard.groups[groupIdx].tasks.splice(taskIdx, 1)
+    },
+    setLoading(state, { bool }) {
+      state.isLoading = bool
     },
   },
   actions: {
@@ -113,7 +125,13 @@ export default {
     },
     async getBoardById({ state, commit }, { boardId }) {
       try {
+        commit({
+          type: 'setLoading',
+          bool: true,
+        })
+
         const board = await boardService.getBoardById(boardId)
+        socketService.emit('open board', board._id)
 
         commit({
           type: 'setCurrBoard',
@@ -123,9 +141,12 @@ export default {
         console.log('cannot get board..')
       }
     },
+    async removeBoard({ commit }, { boardId }) {
+      await boardService.remove(boardId)
+      commit({ type: 'removeBoard', boardId })
+    },
     async editTask({ state, commit }, { task, groupId }) {
       const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
-      console.log('im from rdit')
 
       var groupIdx = state.currBoard.groups.findIndex(
         (currGroup) => currGroup.id === groupId
@@ -135,14 +156,15 @@ export default {
       )
 
       copyBoard.groups[groupIdx].tasks.splice(taskIdx, 1, task)
-      commit({ type: 'loadGroups', groups: copyBoard.groups })
       await boardService.update(copyBoard)
+      socketService.emit('board newUpdateBoard', copyBoard)
+      commit({ type: 'loadGroups', groups: copyBoard.groups })
     },
     async updateGroup({ state, commit }, { groupToEdit, idx }) {
       const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
       copyBoard.groups.splice(idx, 1, groupToEdit)
       await boardService.update(copyBoard)
-      // socketService.emit('board newUpdateBoard', copyBoard)
+      socketService.emit('board newUpdateBoard', copyBoard)
       commit({ type: 'updateGroup', groupToEdit, idx })
     },
     async addTask({ state, commit }, { newTaskTitle, groupId }) {
@@ -153,7 +175,7 @@ export default {
       )
       copyBoard.groups[groupIdx].tasks.push(newTask)
       await boardService.update(copyBoard)
-      // socketService.emit('board newUpdateBoard', copyBoard)
+      socketService.emit('board newUpdateBoard', copyBoard)
       commit({ type: 'addTask', newTask, groupIdx })
     },
     async removeTask({ state, commit }, { groupId, task }) {
@@ -162,7 +184,7 @@ export default {
       var groupIdx = copyBoard.groups.findIndex((group) => group.id === groupId)
       var taskIdx = group.tasks.findIndex((reqTask) => reqTask.id === task.id)
       copyBoard.groups[groupIdx].tasks.splice(taskIdx, 1)
-      // socketService.emit('board newUpdateBoard', copyBoard)
+      socketService.emit('board newUpdateBoard', copyBoard)
       await boardService.update(copyBoard)
       commit({ type: 'removeTask', groupIdx, taskIdx })
       // commit({ type: 'filter', filterBy: state.filterBy})
@@ -176,7 +198,7 @@ export default {
       await boardService.update(copyBoard)
 
       commit({ type: 'addGroup', newGroup })
-      // socketService.emit('board newUpdateBoard', copyBoard)
+      socketService.emit('board newUpdateBoard', copyBoard)
     },
     async removeGroup({ state, commit }, { groupId }) {
       const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
@@ -184,12 +206,13 @@ export default {
         (currGroup) => currGroup.id === groupId
       )
       copyBoard.groups.splice(groupIdx, 1)
-      // socketService.emit('board newUpdateBoard', copyBoard)
+      socketService.emit('board newUpdateBoard', copyBoard)
       await boardService.update(copyBoard)
       commit({ type: 'setCurrBoard', board: copyBoard })
     },
     async updateBoard({ dispatch, commit }, { boardToEdit }) {
       await boardService.update(boardToEdit)
+      socketService.emit('board newUpdateBoard', boardToEdit)
       commit({ type: 'updateBoard', boardToEdit })
       dispatch({
         type: 'getBoardsList',

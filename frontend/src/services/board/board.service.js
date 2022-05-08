@@ -3,10 +3,10 @@ import { httpService } from '../http.service'
 import { utilService } from '../util.service.js'
 
 export const boardService = {
-  //Board
   query,
   getBoardById,
   update,
+  remove,
   getBoardsList,
   getEmptyTask,
   getGroupById,
@@ -29,6 +29,11 @@ async function update(board) {
   const updatedBoard = await httpService.put(`board`, board)
   // const updatedBoard = await storageService.put('board', board)
   return updatedBoard
+}
+
+async function remove(boardId) {
+  return await httpService.delete(`board/${boardId}`)
+  // return await storageService.remove('board', boardId)
 }
 
 async function getBoardsList() {

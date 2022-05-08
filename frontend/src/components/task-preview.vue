@@ -71,7 +71,6 @@ export default {
     changeStatus(status) {
       const task = JSON.parse(JSON.stringify(this.task))
       task.status = status.status
-      console.log(task)
 
       this.$store.dispatch({
         type: 'editTask',
@@ -82,7 +81,6 @@ export default {
     changePriority({ priority }) {
       const task = JSON.parse(JSON.stringify(this.task))
       task.priority = priority
-      console.log(task)
 
       this.$store.dispatch({
         type: 'editTask',
@@ -91,7 +89,6 @@ export default {
       })
     },
     changeTitle({ title }) {
-      console.log(title)
       const task = JSON.parse(JSON.stringify(this.task))
       task.title = title
 
@@ -110,17 +107,7 @@ export default {
         task.timeline.startDate = null
         task.timeline.endDate = null
       }
-      // task.activityLog.unshift({
-      //   id: 'a_' + utilService.makeId(),
-      //   action: 'Timeline changed',
-      //   time: Date.now(),
-      //   byUser: {
-      //     _id: 'u101',
-      //     fullname: 'Shlomi Nugarker',
-      //     imgUrl:
-      //       'https://files.monday.com/use1/photos/26222916/thumb_small/26222916-user_photo_2021_11_30_09_26_11.png?1638264371',
-      //   },
-      // })
+
       this.$store.dispatch({
         type: 'editTask',
         task,

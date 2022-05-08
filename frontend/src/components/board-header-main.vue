@@ -73,7 +73,7 @@ export default {
     }
   },
   created() {
-    this.title = JSON.parse(JSON.stringify(this.board.title))
+    this.title = JSON.parse(JSON.stringify(this.board?.title))
   },
   components: {},
   computed: {},
@@ -109,7 +109,7 @@ export default {
   },
   watch: {
     '$store.getters.currBoard'() {
-      this.title = this.$store.getters.currBoard.title
+      this.title = this.$store.getters.currBoard?.title
     },
   },
 }

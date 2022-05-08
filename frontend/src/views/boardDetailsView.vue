@@ -2,17 +2,17 @@
   <section class="container-details-view">
     <main
       class="boardDetails"
-      v-if="currBoard"
+      v-if="!isLoading"
       :class="[{ 'nav-bar-open': isNavBarOpen }]"
     >
       <router-view></router-view>
       <board-details-header />
-      <group-list :groups="currBoard.groups" :boardId="currBoard._id" />
+      <group-list :groups="currBoard?.groups" :boardId="currBoard?._id" />
     </main>
 
     <div
       class="loading"
-      v-if="!currBoard"
+      v-if="isLoading"
       :class="[{ 'nav-bar-open': isNavBarOpen }]"
     >
       <img src="../styles/images/Loader.gif" alt="" />
@@ -21,9 +21,9 @@
 </template>
 
 <script>
-import { faThumbsDown } from '@fortawesome/free-solid-svg-icons'
 import boardDetailsHeader from '../components/board-details-header.vue'
 import groupList from '../components/group-list.vue'
+import { socketService } from '../services/socket.service'
 export default {
   name: 'board-details',
   data() {
@@ -36,11 +36,22 @@ export default {
     isNavBarOpen() {
       return this.$store.getters.isNavBarOpen
     },
+    isLoading() {
+      return this.$store.getters.isLoading
+    },
   },
   created() {
-    // this.$store.dispatch({ type: 'getBoards' })
+    socketService.on('board updateBoard', this.updateBoard)
   },
-  methods: {},
+  unmount() {
+    socketService.off('board updateBoard', this.updateBoard)
+  },
+  methods: {
+    updateBoard(board) {
+      console.log('update board, details page')
+      this.$store.commit({ type: 'setCurrBoard', board })
+    },
+  },
   watch: {
     '$route.params.boardId'() {},
   },

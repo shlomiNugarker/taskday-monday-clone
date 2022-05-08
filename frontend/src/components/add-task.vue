@@ -53,10 +53,9 @@ export default {
     },
     focusIn() {
       // this.$refs.input.focus()
-      console.log(this.$refs.input)
+      // console.log(this.$refs.input)
     },
     addTask() {
-      console.log('this.newTaskTitle')
       this.isAdd = false
       if (!this.newTaskTitle) return
       const groupId = this.group.id

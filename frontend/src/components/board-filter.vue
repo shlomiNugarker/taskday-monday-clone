@@ -61,7 +61,6 @@ export default {
   computed: {},
   methods: {
     addGroup() {
-      console.log('add group')
       this.$store.dispatch({ type: 'addGroup' })
     },
     filter() {

@@ -50,7 +50,7 @@ export default {
       const groupToEdit = JSON.parse(JSON.stringify(this.groups[idx]))
       groupToEdit.title = title
 
-      console.log(groupToEdit)
+      // console.log(groupToEdit)
 
       this.$store.dispatch({
         type: 'updateGroup',

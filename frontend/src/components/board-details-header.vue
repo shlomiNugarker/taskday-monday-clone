@@ -3,8 +3,8 @@
     class="board-details-header"
     :class="[{ 'nav-bar-open': isNavBarOpen }]"
   >
-    <board-header-main :board="currBoard" />
-    <board-toolbar />
+    <board-header-main :board="currBoard" v-if="showHeader" />
+    <board-toolbar @toggleToolbar="showHeader = !showHeader" />
     <board-filter
       :currBoard="currBoard"
       :filterBy="filterBy"
@@ -22,6 +22,7 @@ export default {
   data() {
     return {
       filterBy: null,
+      showHeader: true,
       // currBoard: this.$store.getters.currBoard,
     }
   },

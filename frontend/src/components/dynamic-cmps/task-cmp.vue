@@ -20,7 +20,7 @@
       <div class="container-task flex">
         <div class="task-title">
           <span class="side" :style="{ 'background-color': groupColor }"></span>
-          <p v-if="!isEdit">{{ taskCopy.title }}</p>
+          <p v-if="!isEdit">{{ task.title }}</p>
           <input
             ref="input"
             type="text"
@@ -93,10 +93,6 @@ export default {
       }, 1)
     },
     changeTitle(event, title) {
-      // console.log(title)
-      // this.taskCopy.title = title
-      // console.log(this.taskCopy.title)
-
       setTimeout(() => {
         this.$emit('changeTitle', {
           groupId: this.groupId,
@@ -108,7 +104,7 @@ export default {
     removeTask() {
       const groupId = this.groupId
       const task = this.task
-      console.log(this.task)
+
       this.$store.dispatch({ type: 'removeTask', groupId, task })
     },
   },

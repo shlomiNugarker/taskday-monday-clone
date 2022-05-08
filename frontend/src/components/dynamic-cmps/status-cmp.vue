@@ -68,12 +68,7 @@ export default {
   watch: {},
   created() {},
   methods: {
-    // openModal() {
-    //   this.isEditStatus = !this.isEditStatus
-    //   setTimeout(() => (this.isEditStatus = false), 3000)
-    // },
     changeStatus(status) {
-      console.log(status)
       this.isEditStatus = false
       this.isPlay = true
       setTimeout(() => (this.isPlay = false), 2500)
@@ -89,30 +84,4 @@ export default {
 }
 </script>
 
-<style>
-/* .currOptDone {
-  position: absolute;
-}
-.el-dropdown {
-  height: 100%;
-}
-.currOpt {
-  width: 100%;
-  color: white;
-  height: 35px;
-  align-items: center;
-}
-.el-dropdown-menu {
-  width: 200px;
-}
-.el-tooltip__trigger {
-  width: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 0px;
-}
-.el-dropdown-link {
-  margin-left: 0px;
-} */
-</style>
+<style></style>

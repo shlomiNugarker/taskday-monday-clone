@@ -33,7 +33,6 @@ export default {
   created() {},
   methods: {
     mouseOver() {
-      console.log('jkjki')
       this.isOver = true
     },
     mouseLeave() {

@@ -34,8 +34,6 @@ if (process.env.NODE_ENV === 'production') {
   app.use(cors(corsOptions))
 }
 
-const { connectSockets } = require('./services/socket.service')
-
 //****** Todo routes******
 
 const setupAsyncLocalStorage = require('./middlewares/setupAls.middleware')
@@ -43,10 +41,10 @@ app.all('*', setupAsyncLocalStorage)
 
 const boardRoutes = require('./api/board/board.routes')
 
-// const { connectSockets } = require('./services/socket.service.back')
-// connectSockets(http, session)
+const { connectSockets } = require('./services/socket.service')
 
 app.use('/api/board', boardRoutes)
+connectSockets(http, session)
 
 // Make every server-side-route to match the index.html
 // so when requesting http://localhost:3030/index.html/car/123 it will still respond with

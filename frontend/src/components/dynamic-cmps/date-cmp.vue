@@ -53,7 +53,6 @@ export default {
       }
       this.$emit('changeTimeline', {
         dates: [newDates[0], newDates[1]],
-        // dates: [Date.parse(newDates[0]), Date.parse(newDates[1])],
         taskId: this.task.id,
         groupId: this.groupId,
       })
@@ -105,6 +104,15 @@ export default {
       return {
         background: `linear-gradient(to left, rgb(31, 31, 31) 0% ${degPrecent}%, ${this.groupColor} ${degPrecent}% 100%)`,
       }
+    },
+  },
+  watch: {
+    '$store.getters.currBoard'() {
+      console.log('board changed')
+      this.startDate = this.task.timeline.startDate
+      this.endDate = this.task.timeline.endDate
+      if (!this.startDate || !this.endDate) this.value1 = null
+      else this.value1 = [this.startDate, this.endDate]
     },
   },
 }

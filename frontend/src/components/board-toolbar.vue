@@ -87,7 +87,7 @@
             Automate
           </button>
         </div>
-        <span class="collapse-btn" @click="openDetails">
+        <span class="collapse-btn" @click="toggleToolbar">
           <!-- <img class="arrow-up" src="../../styles/icon/arrow-up.png" alt="" -->
           <font-awesome-icon class="arrow-up" icon="angle-up" />
         </span>
@@ -108,8 +108,8 @@ export default {
   components: {},
   computed: {},
   methods: {
-    openDetails() {
-      this.$emit('openDetails')
+    toggleToolbar() {
+      this.$emit('toggleToolbar')
     },
   },
 }

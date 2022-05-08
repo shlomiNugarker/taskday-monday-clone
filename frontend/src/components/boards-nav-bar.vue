@@ -52,34 +52,33 @@
         v-for="board in boardsList"
         :key="board.boardId"
         class="board-item"
-        @click.stop="moveToBoard(board.boardId)"
-        v-bind:class="[{ 'board-clicked': currBoard._id === board.boardId }]"
+        v-bind:class="[{ 'board-clicked': currBoard?._id === board.boardId }]"
       >
         <span>
           <board-icon />
         </span>
 
-        <p>
+        <p @click.stop="moveToBoard(board.boardId)">
           {{ board.boardTitle }}
         </p>
-        <span class="board-btn-opts" @click.stop="openboardModal">
+        <!-- <span class="board-btn-opts" @click.stop="openboardModal">
           <font-awesome-icon icon="ellipsis" />
-        </span>
+        </span> -->
         <!-- //modal -->
 
-        <!-- <el-dropdown class="side-drop-down" trigger="click" @click.stop="">
+        <el-dropdown class="side-drop-down" trigger="click" @click.stop="">
           <span class="el-dropdown-link">
             <font-awesome-icon icon="ellipsis" />
             <el-icon class="el-icon2"> </el-icon>
           </span>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item @click="removeTask()">
+              <el-dropdown-item @click="removeBoard(board.boardId)">
                 <font-awesome-icon icon="trash-can" />Delete
               </el-dropdown-item>
             </el-dropdown-menu>
           </template>
-        </el-dropdown> -->
+        </el-dropdown>
 
         <!-- //modal -->
       </div>
@@ -151,8 +150,13 @@ export default {
           })
         })
     },
-    openboardModal() {
-      console.log('Heyy')
+    openboardModal() {},
+    removeBoard(boardId) {
+      console.log(boardId)
+      this.$store.dispatch({
+        type: 'removeBoard',
+        boardId,
+      })
     },
   },
 
