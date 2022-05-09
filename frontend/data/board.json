@@ -1,8 +1,13 @@
 [
   {
     "_id": "b101",
-    "title": "Type your title",
+    "title": "Board 1",
     "createdAt": 1651365468605,
+    "createdBy": {
+      "_id": "u101",
+      "fullname": "Shlomi Nugarker",
+      "imgUrl": "https://files.monday.com/use1/photos/26222916/thumb_small/26222916-user_photo_2021_11_30_09_26_11.png?1638264371"
+    },
 
     "predefineColors": [
       "#ff4500",
@@ -15,19 +20,6 @@
       "#c71585",
       "#c7f5a5",
       "#c7158577"
-    ],
-    "style": {},
-    "labels": [
-      {
-        "id": "l101",
-        "title": "Done",
-        "color": "#61bd4f"
-      },
-      {
-        "id": "l102",
-        "title": "Progress",
-        "color": "#61bd33"
-      }
     ],
     "members": [
       {
@@ -49,7 +41,7 @@
     "groups": [
       {
         "id": "g101",
-        "title": "Add a group name",
+        "title": "This is group 1",
         "color": "#784bd1",
         "tasks": [
           {
@@ -58,126 +50,61 @@
             "status": "Done",
             "priority": "High",
             "text": "Finish !",
-            "status-picker": {
-              "text": "null",
-              "color": "null"
-            },
+
             "timeline": {
               "startDate": "",
               "endDate": ""
-            }
-          },
-          {
-            "id": "c102",
-            "title": "Add cmps !",
-            "status": "Stuck",
-            "timeline": {
-              "startDate": "",
-              "endDate": ""
-            }
-          }
-        ],
-        "style": {}
-      },
-      {
-        "id": "g102",
-        "title": "Add a group name",
-        "color": "#1677ee",
-        "tasks": [
-          {
-            "id": "c103",
-            "title": "Do that",
-            "status": "Working on it",
-            "priority": "High",
-            "text": "Finish !",
-            "timeline": {
-              "startDate": 1651365468605,
-              "endDate": 1651369468605
-            }
-          },
-          {
-            "id": "c104",
-            "title": "Help me",
-            "status": "Working on it",
-            "timeline": {
-              "startDate": 1589983468418,
-              "endDate": 1589983468418
             },
-            "description": "description",
+            "activityLog": [],
             "comments": [
               {
-                "id": "ZdPnm",
-                "txt": "also @yaronb please CR this",
-                "createdAt": 1651369468605,
-                "byMember": {
-                  "_id": "u101",
-                  "fullname": "Shlomi Nugarker",
-                  "imgUrl": "https://media-exp1.licdn.com/dms/image/C4E03AQEnH6Lj0aymwg/profile-displayphoto-shrink_800_800/0/1650388602421?e=1657152000&v=beta&t=tsNDkf7ek1ei69b1_aAQFIQjeJiAvYnPdW-RiK2TaZA"
-                }
-              }
-            ],
-            "checklists": [
-              {
-                "id": "YEhmF",
-                "title": "Checklist",
-                "todos": [
+                "id": "u1sdf01",
+                "byUser": {
+                  "_id": "u10zdf1",
+                  "fullname": "Israel Israeli",
+                  "imgUrl": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+                },
+                "txt": "update from first task",
+                "replies": [
                   {
-                    "id": "212jX",
-                    "title": "To Do 1",
-                    "isDone": false
+                    "id": "r101",
+                    "byUser": {
+                      "_id": "u101",
+                      "fullname": "Yaakob J",
+                      "imgUrl": "https://www.google.com"
+                    },
+                    "txt": "1 replay from first task",
+                    "time": 1589983468418,
+                    "likes": [
+                      {
+                        "_id": "uss01",
+                        "fullname": "Yaakob J",
+                        "imgUrl": "https://www.google.com"
+                      }
+                    ]
+                  }
+                ],
+                "likes": [
+                  {
+                    "_id": "uss01",
+                    "fullname": "Yaakob J",
+                    "imgUrl": "https://www.google.com"
                   }
                 ]
               }
-            ],
-            "members": [
-              {
-                "_id": "u101",
-                "username": "Shlomi",
-                "fullname": "Shlomi Nugarker",
-                "imgUrl": "https://media-exp1.licdn.com/dms/image/C4E03AQEnH6Lj0aymwg/profile-displayphoto-shrink_800_800/0/1650388602421?e=1657152000&v=beta&t=tsNDkf7ek1ei69b1_aAQFIQjeJiAvYnPdW-RiK2TaZA"
-              },
-              {
-                "_id": "u102",
-                "username": "Israel",
-                "fullname": "Israel Israeli",
-                "imgUrl": "https://images.maariv.co.il/image/upload/f_auto,fl_lossy/c_fill,g_faces:center,h_792,w_900/565343"
-              }
-            ],
-            "labelIds": ["l101", "l102"],
-            "createdAt": 1590999730348,
-            "dueDate": 16156215211,
-            "byMember": {
-              "_id": "u101",
-              "username": "Dan",
-              "fullname": "Tal",
-              "imgUrl": "https://images.unsplash.com/photo-1536164261511-3a17e671d380?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=382&q=80"
-            },
-            "style": {
-              "bgColor": "#26de81"
-            }
+            ]
           }
-        ],
-        "style": {}
+        ]
       }
     ],
 
-    "activitiesLog": [
-      {
-        "id": "a101",
-        "txt": "Changed Color",
-        "createdAt": 154514,
-        "byMember": {
-          "_id": "u101",
-          "fullname": "Abi Abambi",
-          "imgUrl": "http://some-img"
-        },
-        "task": {
-          "id": "c101",
-          "title": "Replace Logo"
-        }
-      }
-    ],
-
-    "cmpsOrder": ["status-picker", "member-picker", "date-picker"]
+    "cmpsOrder": [
+      "task-cmp",
+      "status-cmp",
+      "person-cmp",
+      "priority-cmp",
+      "date-cmp",
+      "text-cmp"
+    ]
   }
 ]

@@ -14,7 +14,8 @@ export default {
       priorityTxt: '',
     },
     isNavBarOpen: false,
-    isLoading: true,
+    isLoading: false,
+    currTaskIdx: '',
   },
   getters: {
     isNavBarOpen(state) {
@@ -41,6 +42,11 @@ export default {
     currFilterBy(state) {
       return JSON.parse(JSON.stringify(state.filterBy))
     },
+    currTask(state) {
+      return state.currBoard.groups[state.currTaskIdx.groupIdx].tasks[
+        state.currTaskIdx.taskIdx
+      ]
+    },
   },
   mutations: {
     setBoards(state, { boards }) {
@@ -58,6 +64,10 @@ export default {
     },
     updateFilter(state, { filterBy }) {
       state.filterBy = filterBy
+    },
+    setCurrTaskIdx(state, { groupIdx, taskIdx }) {
+      state.currTaskIdx = { groupIdx, taskIdx }
+      // console.log(state.currTask)
     },
 
     //Boards
@@ -120,8 +130,30 @@ export default {
     },
     async getBoardsList({ state, commit }) {
       const boardsList = await boardService.getBoardsList()
+      console.log(boardsList)
 
       commit({ type: 'loadBoardsList', boardsList })
+    },
+    async getCurrTask({ commit, state }, { boardId, taskId }) {
+      const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
+      // console.log(copyBoard)
+
+      var currTask, groupIdx, taskIdx
+
+      for (var i = 0; i < copyBoard.groups.length; i++) {
+        for (var j = 0; j < copyBoard.groups[i].tasks.length; j++) {
+          if (taskId === copyBoard.groups[i].tasks[j].id) {
+            // console.log('groupIdx:', i)
+            groupIdx = i
+            // console.log('taskIdx:', j)
+            taskIdx = j
+            // currTask = copyBoard.groups[i].tasks[j]
+          }
+        }
+      }
+
+      commit({ type: 'setCurrTaskIdx', groupIdx, taskIdx })
+      // console.log(currTask)
     },
     async getBoardById({ state, commit }, { boardId }) {
       try {

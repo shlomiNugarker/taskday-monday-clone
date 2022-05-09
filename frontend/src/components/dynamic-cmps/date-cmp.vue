@@ -72,7 +72,7 @@ export default {
           datesToShowStr = datesToShowStr.slice(0, 6)
         } else {
           datesToShowStr =
-            datesToShowStr.slice(0, 7) + ' - ' + datesToShowStr.slice(13, 16)
+            datesToShowStr.slice(0, 7) + ' - ' + datesToShowStr.slice(11, 20)
         }
       }
       return datesToShowStr

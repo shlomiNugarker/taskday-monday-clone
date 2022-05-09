@@ -39,7 +39,9 @@ async function remove(boardId) {
 async function getBoardsList() {
   var res
   res = await httpService.get('board')
+  console.log(res)
   // res = await storageService.query('board')
+
   res.forEach((board, idx) => {
     res[idx] = {
       boardId: board._id,
@@ -62,9 +64,7 @@ function getEmptyTask(groupToEditTitle) {
       endDate: '',
     },
     priority: '',
-    stopwatch: {
-      secondsCount: 0,
-    },
+
     activityLog: [
       {
         id: 'a_' + utilService.makeId(),
@@ -73,7 +73,7 @@ function getEmptyTask(groupToEditTitle) {
         byUser: {},
       },
     ],
-    updates: [],
+    comments: [],
   }
   return newTask
 }

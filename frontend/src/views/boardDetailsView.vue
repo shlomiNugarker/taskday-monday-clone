@@ -41,6 +41,8 @@ export default {
     },
   },
   created() {
+    const boardId = this.$route.params.boardId
+    this.$store.dispatch({ type: 'getBoardById', boardId })
     socketService.on('board updateBoard', this.updateBoard)
   },
   unmount() {
@@ -52,8 +54,12 @@ export default {
       this.$store.commit({ type: 'setCurrBoard', board })
     },
   },
+
   watch: {
-    '$route.params.boardId'() {},
+    '$route.params.boardId'() {
+      const boardId = this.$route.params.boardId
+      this.$store.dispatch({ type: 'getBoardById', boardId })
+    },
   },
   components: {
     boardDetailsHeader,

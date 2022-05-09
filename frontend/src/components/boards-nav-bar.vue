@@ -97,7 +97,7 @@ export default {
   },
   data() {
     return {
-      newBoardNmae: '',
+      newBoardName: '',
     }
   },
   computed: {
@@ -126,7 +126,7 @@ export default {
     async newBoard() {
       var newBoard = await this.$store.dispatch({
         type: 'newBoard',
-        boardName: this.newBoardNmae,
+        boardName: this.newBoardName,
       })
       this.$router.push('/board/' + newBoard._id)
     },

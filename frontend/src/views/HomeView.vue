@@ -1,20 +1,8 @@
 <template>
   <section>
-    <h1>Hello home</h1>
-
-    <el-dropdown class="side-drop-down" trigger="click">
-      <span class="el-dropdown-link">
-        <font-awesome-icon icon="caret-down" />
-        <el-icon class="el-icon2"> </el-icon>
-      </span>
-      <template #dropdown>
-        <el-dropdown-menu>
-          <el-dropdown-item @click="removeTask()">
-            <font-awesome-icon icon="trash-can" />Delete
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </template>
-    </el-dropdown>
+    <h1>fdsff</h1>
+    <h1 @click="goDemo">Hello home go</h1>
+    {{ boardsList }}
   </section>
 </template>
 
@@ -24,9 +12,21 @@ export default {
   data() {
     return {}
   },
-  computed: {},
-  created() {},
-  methods: {},
+  computed: {
+    boardsList() {
+      return this.$store.getters.boardsList
+    },
+  },
+  created() {
+    this.$store.dispatch({ type: 'getBoardsList' })
+  },
+  methods: {
+    goDemo() {
+      var boardId = this.boardsList[0].boardId
+      console.log(boardId)
+      this.$router.push(`/board/${boardId}`)
+    },
+  },
   components: {},
 }
 </script>

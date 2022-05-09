@@ -1,12 +1,12 @@
 <template>
   <section class="task-details" ref="detailModal">
     <div class="container">
-      <div class="close-details-btn">
+      <div class="close-details-btn" @click="handleClose">
         <font-awesome-icon class="close-icon" icon="x" />
       </div>
 
       <div class="details-input flex">
-        <h1>task title</h1>
+        <h1>{{ currTask.title }}</h1>
         <!-- <input type="text" /> -->
         <div class="add-view-container flex">
           <img src="" alt="" />
@@ -25,23 +25,31 @@
     <div class="details-container">
       <div class="update-details-page detail-page">
         <div class="input-update">
-          <input type="text" placeholder="Write an update" />
+          <input
+            type="text"
+            placeholder="Write an update"
+            v-model="updateTxt"
+          />
           <div>
-            <button>update</button>
+            <button @click="addUpdate">update</button>
           </div>
         </div>
         <div class="send-update">
           <div></div>
         </div>
 
-        <div class="space-view">
-          <div class="post-component">
+        <div class="space-view" v-if="currTask.comments.length">
+          <div
+            class="post-component"
+            v-for="comment in currTask.comments"
+            :key="comment._id"
+          >
             <div class="post-header">
               <div class="left-side-post">
                 <div class="img-user-container">
-                  <img class="user-img" src="" />
+                  <img class="user-img" :src="comment.byUser.imgUrl" />
                 </div>
-                <div class="title">full name</div>
+                <div class="title">{{ comment.byUser.fullname }}</div>
 
                 <div>
                   <p class="green logged-in"></p>
@@ -66,7 +74,7 @@
               </div>
             </div>
             <div class="body-text">
-              <p class="text">message</p>
+              <p class="text">{{ comment.txt }}</p>
               <div class="seen-area">
                 <span>
                   <img class="view-icon" src="../styles/icon/view.png" alt />
@@ -88,6 +96,7 @@
                 <span>
                   <font-awesome-icon class="reply-icon" icon="reply" />
                 </span>
+
                 <p>Reply</p>
               </div>
             </div>
@@ -131,17 +140,74 @@
 </template>
 
 <script>
+import { utilService } from '../services/util.service'
 export default {
   name: 'task-details',
   props: {},
   data() {
-    return {}
+    return {
+      updateTxt: '',
+    }
   },
   components: {},
-  created() {},
+  created() {
+    const taskId = this.$route.params.taskId
+    const boardId = this.$route.params.boardId
+    console.log('param-task:', taskId)
+    console.log('param-board:', boardId)
+
+    this.$store.dispatch({
+      type: 'getCurrTask',
+      boardId,
+      taskId,
+    })
+  },
   unmounted() {},
-  computed: {},
-  methods: {},
+  computed: {
+    currTask() {
+      return this.$store.getters.currTask
+    },
+  },
+  methods: {
+    handleClose() {
+      this.$router.push('/board/' + this.$store.getters.currBoard._id)
+    },
+    getCurrTask() {
+      const taskId = this.$route.params.taskId
+      const boardId = this.$route.params.boardId
+      console.log('param-task:', taskId)
+      console.log('param-board:', boardId)
+
+      this.$store.dispatch({
+        type: 'getCurrTask',
+        boardId,
+        taskId,
+      })
+    },
+  },
+  addUpdate() {
+    const newUpdete = {
+      id: utilService.makeId(),
+      // byUser: this.$store.getters.loggedinUser,
+      byUser: '',
+      txt: this.updateTxt,
+      replies: [],
+      likes: [],
+    }
+    console.log(newUpdete)
+    const copyTask = JSON.parse(JSON.stringify(this.currTask))
+    copyTask.comments.unshift(newUpdete)
+    this.updateTxt = ''
+    this.$store.dispatch({
+      type: 'editTask',
+      task: copyTask,
+      groupId: this.groupId,
+    })
+    socketService.emit('task newItemUpdate', {
+      taskId: copyTask.id,
+      groupId: this.groupId,
+    })
+  },
 }
 </script>
 
