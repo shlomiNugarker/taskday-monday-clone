@@ -1,109 +1,110 @@
 <template>
-  <section class="task-details" ref="detailModal">
-    <div class="container">
-      <div class="close-details-btn" @click="handleClose">
-        <font-awesome-icon class="close-icon" icon="x" />
-      </div>
+  <main>
+    <section class="task-details" ref="detailModal">
+      <div class="container">
+        <div class="close-details-btn" @click="handleClose">
+          <font-awesome-icon class="close-icon" icon="x" />
+        </div>
 
-      <div class="details-input flex">
-        <h1>{{ currTask.title }}</h1>
-        <!-- <input type="text" /> -->
-        <div class="add-view-container flex">
-          <img src="" alt="" />
-          <!-- <span v-for="member in task.members" :key="member._id"> -->
-          <!-- <el-avatar :src="member.imgUrl" /> -->
-          <!-- <avatar-img></avatar-img> -->
-          <!-- </span> -->
-          <p class="subset-tab-details"></p>
-          <div>
-            <font-awesome-icon class="dots" icon="ellipsis" />
+        <div class="details-input flex">
+          <h1>{{ currTask.title }}</h1>
+          <!-- <input type="text" /> -->
+          <div class="add-view-container flex">
+            <img src="" alt="" />
+            <!-- <span v-for="member in task.members" :key="member._id"> -->
+            <!-- <el-avatar :src="member.imgUrl" /> -->
+            <!-- <avatar-img></avatar-img> -->
+            <!-- </span> -->
+            <p class="subset-tab-details"></p>
+            <div>
+              <font-awesome-icon class="dots" icon="ellipsis" />
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="details-container">
-      <div class="update-details-page detail-page">
-        <div class="input-update">
-          <input
-            type="text"
-            placeholder="Write an update"
-            v-model="updateTxt"
-            @keyup.enter="addUpdate"
-          />
-          <div>
-            <button @click="addUpdate">update</button>
+      <div class="details-container">
+        <div class="update-details-page detail-page">
+          <div class="input-update">
+            <input
+              type="text"
+              placeholder="Write an update"
+              v-model="updateTxt"
+              @keyup.enter="addUpdate"
+            />
+            <div>
+              <button @click="addUpdate">update</button>
+            </div>
           </div>
-        </div>
-        <div class="send-update">
-          <div></div>
-        </div>
-        {{ groupId }}
-        <div class="space-view" v-if="currTask.comments.length">
-          <div
-            class="post-component"
-            v-for="comment in currTask.comments"
-            :key="comment._id"
-          >
-            <div class="post-header">
-              <div class="left-side-post">
-                <div class="img-user-container">
-                  <img class="user-img" :src="comment.byUser.imgUrl" />
+          <div class="send-update">
+            <div></div>
+          </div>
+          {{ groupId }}
+          <div class="space-view" v-if="currTask.comments.length">
+            <div
+              class="post-component"
+              v-for="comment in currTask.comments"
+              :key="comment._id"
+            >
+              <div class="post-header">
+                <div class="left-side-post">
+                  <div class="img-user-container">
+                    <img class="user-img" :src="comment.byUser.imgUrl" />
+                  </div>
+                  <div class="title">{{ comment.byUser.fullname }}</div>
+
+                  <div>
+                    <p class="green logged-in"></p>
+                  </div>
                 </div>
-                <div class="title">{{ comment.byUser.fullname }}</div>
-
-                <div>
-                  <p class="green logged-in"></p>
+                <div class="post-title">
+                  <div>
+                    <img
+                      class="clock-post-img"
+                      src="../styles/icon/clock.png"
+                      alt
+                    />
+                  </div>
+                  <div class="time">1d</div>
+                  <div>
+                    <img
+                      class="alarm-post-img"
+                      src="../styles/icon/alarm-details.png"
+                      alt
+                    />
+                  </div>
                 </div>
               </div>
-              <div class="post-title">
-                <div>
-                  <img
-                    class="clock-post-img"
-                    src="../styles/icon/clock.png"
-                    alt
-                  />
-                </div>
-                <div class="time">1d</div>
-                <div>
-                  <img
-                    class="alarm-post-img"
-                    src="../styles/icon/alarm-details.png"
-                    alt
-                  />
+              <div class="body-text">
+                <p class="text">{{ comment.txt }}</p>
+                <div class="seen-area">
+                  <span>
+                    <img class="view-icon" src="../styles/icon/view.png" alt />
+                  </span>
+                  <span class="seen">1</span>
+                  <p>seen</p>
                 </div>
               </div>
-            </div>
-            <div class="body-text">
-              <p class="text">{{ comment.txt }}</p>
-              <div class="seen-area">
-                <span>
-                  <img class="view-icon" src="../styles/icon/view.png" alt />
-                </span>
-                <span class="seen">1</span>
-                <p>seen</p>
+
+              <div class="post-actions">
+                <div class="left-btn">
+                  <span>
+                    <font-awesome-icon class="like-icon" icon="thumbs-up" />
+                  </span>
+                  <p>like</p>
+                </div>
+
+                <div class="right-btn">
+                  <span>
+                    <font-awesome-icon class="reply-icon" icon="reply" />
+                  </span>
+
+                  <p>Reply</p>
+                </div>
               </div>
-            </div>
+              <!-- Replay -->
 
-            <div class="post-actions">
-              <div class="left-btn">
-                <span>
-                  <font-awesome-icon class="like-icon" icon="thumbs-up" />
-                </span>
-                <p>like</p>
-              </div>
-
-              <div class="right-btn">
-                <span>
-                  <font-awesome-icon class="reply-icon" icon="reply" />
-                </span>
-
-                <p>Reply</p>
-              </div>
-            </div>
-            <!-- Replay -->
-
-            <!-- <div class="reply-container">
+              <!-- <div class="reply-container">
               <div class="left-side-reply">
                 <div>
                   <img class="user-img" src="" alt="" />
@@ -130,14 +131,15 @@
               </div>
             </div> -->
 
-            <!--  -->
+              <!--  -->
+            </div>
           </div>
         </div>
+        <div class="files-details-page detail-page"></div>
+        <div class="activity-details-page detail-page"></div>
       </div>
-      <div class="files-details-page detail-page"></div>
-      <div class="activity-details-page detail-page"></div>
-    </div>
-  </section>
+    </section>
+  </main>
 </template>
 
 <script>

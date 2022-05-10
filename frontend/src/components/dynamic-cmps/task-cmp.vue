@@ -39,9 +39,13 @@
           </button>
         </div>
       </div>
-      <!-- <router-link> -->
-      <add-comment-btn @click="openDetails(groupId)" class="add-comment-icon" />
-      <!-- </router-link> -->
+      <span class="add-comment-container">
+        <add-comment-btn
+          @click="openDetails(groupId)"
+          class="add-comment-icon"
+        />
+        <span v-if="commentsNum" class="msgs">{{ commentsNum }}</span>
+      </span>
     </section>
   </div>
 </template>
@@ -72,6 +76,9 @@ export default {
     isHoverStyle() {
       if (this.isHover) return ''
       return 'hidden'
+    },
+    commentsNum() {
+      return this.task.comments.length
     },
   },
   watch: {},

@@ -63,10 +63,25 @@
       // background-color: rgb(172, 30, 30);
     }
   }
-  .add-comment-icon {
-    &:hover {
-      color: $blue;
-      cursor: pointer;
+  .add-comment-container {
+    display: flex;
+    .add-comment-icon {
+      &:hover {
+        color: $blue;
+        cursor: pointer;
+      }
+    }
+    .msgs {
+      position: absolute;
+      margin-top: 10px;
+      margin-left: 12px;
+      background-color: $blue;
+      border-radius: 50%;
+      width: 12px;
+      height: 12px;
+      font-size: 10px;
+      color: white;
+      text-align: center;
     }
   }
 }

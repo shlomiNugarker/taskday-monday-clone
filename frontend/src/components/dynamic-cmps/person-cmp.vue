@@ -45,8 +45,6 @@
 </template>
 
 <script>
-import avatar from '../avatar-img.vue'
-
 export default {
   props: {
     task: {
@@ -112,9 +110,7 @@ export default {
       })
     },
   },
-  components: {
-    avatar,
-  },
+  components: {},
 }
 </script>
 
