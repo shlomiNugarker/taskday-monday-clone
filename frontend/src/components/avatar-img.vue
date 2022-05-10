@@ -10,8 +10,6 @@
         :style="{ marginLeft: idx * this.margin + 'px' }"
       />
     </div>
-
-    <!-- <img src="../styles/images/none-user.svg" alt="" /> -->
   </section>
 </template>
 
@@ -26,16 +24,12 @@ export default {
     }
   },
   props: {
-    members: Array,
+    persons: Array,
   },
   created() {
-    this.membersToShow = this.members || [
-      { imgUrl: 'https://cdn-icons-png.flaticon.com/512/1946/1946429.png' },
-    ]
-
-    // this.membersToShow.forEach((member) => {
-    //   if (!member.imgUrl) member.imgUrl = '../styles/images/none-user.svg'
-    // })
+    this.membersToShow = this.persons.length
+      ? this.persons
+      : [{ imgUrl: 'https://cdn.monday.com/icons/dapulse-person-column.svg' }]
   },
   components: {},
   computed: {

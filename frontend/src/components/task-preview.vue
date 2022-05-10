@@ -11,6 +11,8 @@
       @changeTitle="changeTitle"
       @changeTimeline="changeTimeline"
       @changePriority="changePriority"
+      @removeAssignedMember="removeAssignedMember"
+      @addAssignedMember="addAssignedMember"
       :isHover="isHover"
       :group="group"
       :boardId="boardId"
@@ -108,6 +110,27 @@ export default {
         task.timeline.endDate = null
       }
 
+      this.$store.dispatch({
+        type: 'editTask',
+        task,
+        groupId: this.groupId,
+      })
+    },
+    removeAssignedMember(memberObj) {
+      const task = JSON.parse(JSON.stringify(this.task))
+      const personIdx = task.person.findIndex(
+        (person) => person._id === memberObj.memberId
+      )
+      task.person.splice(personIdx, 1)
+      this.$store.dispatch({
+        type: 'editTask',
+        task,
+        groupId: this.groupId,
+      })
+    },
+    addAssignedMember(memberObj) {
+      const task = JSON.parse(JSON.stringify(this.task))
+      task.person.push(memberObj.person)
       this.$store.dispatch({
         type: 'editTask',
         task,

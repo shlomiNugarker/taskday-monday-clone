@@ -67,7 +67,7 @@ export default {
   },
   data() {
     return {
-      isEdit: true,
+      isEdit: false,
       title: '',
       wait: false,
     }

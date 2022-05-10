@@ -73,6 +73,7 @@ function getEmptyTask(groupToEditTitle) {
         byUser: {},
       },
     ],
+    person: [],
     comments: [],
   }
   return newTask

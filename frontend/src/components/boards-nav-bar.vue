@@ -136,7 +136,7 @@ export default {
         cancelButtonText: 'Cancel',
       })
         .then(({ value }) => {
-          this.newBoardNmae = value
+          this.newBoardName = value
           this.newBoard()
           this.$message({
             type: 'success',

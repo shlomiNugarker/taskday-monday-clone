@@ -29,6 +29,7 @@
             type="text"
             placeholder="Write an update"
             v-model="updateTxt"
+            @keyup.enter="addUpdate"
           />
           <div>
             <button @click="addUpdate">update</button>
@@ -37,7 +38,7 @@
         <div class="send-update">
           <div></div>
         </div>
-
+        {{ groupId }}
         <div class="space-view" v-if="currTask.comments.length">
           <div
             class="post-component"
@@ -167,6 +168,9 @@ export default {
     currTask() {
       return this.$store.getters.currTask
     },
+    groupId() {
+      return this.$store.getters.currGroupId
+    },
   },
   methods: {
     handleClose() {
@@ -184,29 +188,31 @@ export default {
         taskId,
       })
     },
-  },
-  addUpdate() {
-    const newUpdete = {
-      id: utilService.makeId(),
-      // byUser: this.$store.getters.loggedinUser,
-      byUser: '',
-      txt: this.updateTxt,
-      replies: [],
-      likes: [],
-    }
-    console.log(newUpdete)
-    const copyTask = JSON.parse(JSON.stringify(this.currTask))
-    copyTask.comments.unshift(newUpdete)
-    this.updateTxt = ''
-    this.$store.dispatch({
-      type: 'editTask',
-      task: copyTask,
-      groupId: this.groupId,
-    })
-    socketService.emit('task newItemUpdate', {
-      taskId: copyTask.id,
-      groupId: this.groupId,
-    })
+    addUpdate() {
+      const newUpdete = {
+        id: utilService.makeId(),
+        // byUser: this.$store.getters.loggedinUser,
+        byUser: {
+          _id: 'u10zdf1',
+          fullname: 'demo loggedin User',
+          imgUrl:
+            'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+        },
+        txt: this.updateTxt,
+        replies: [],
+        likes: [],
+      }
+      console.log(newUpdete)
+      const copyTask = JSON.parse(JSON.stringify(this.currTask))
+      copyTask.comments.unshift(newUpdete)
+      this.updateTxt = ''
+
+      this.$store.dispatch({
+        type: 'editTask',
+        task: copyTask,
+        groupId: this.groupId,
+      })
+    },
   },
 }
 </script>

@@ -25,7 +25,9 @@
                 color: 'white',
               }"
             >
-              {{ opt.priority }}
+              <p>
+                {{ opt.priority }}
+              </p>
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>

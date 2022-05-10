@@ -47,6 +47,12 @@ export default {
         state.currTaskIdx.taskIdx
       ]
     },
+    currGroupId(state) {
+      return state.currBoard.groups[state.currTaskIdx.groupIdx].id
+    },
+    members(state) {
+      return state.currBoard.members
+    },
   },
   mutations: {
     setBoards(state, { boards }) {
@@ -122,10 +128,15 @@ export default {
         console.log('cannot get boards..')
       }
     },
-    async newBoard({ commit }, { boardName }) {
+    async newBoard({ commit, dispatch }, { boardName }) {
       var newBoard = boardService.getEmptyBoard(boardName)
       newBoard = await boardService.add(newBoard)
       commit({ type: 'addBoard', newBoard })
+
+      dispatch({
+        type: 'getBoardsList',
+      })
+
       return newBoard
     },
     async getBoardsList({ state, commit }) {

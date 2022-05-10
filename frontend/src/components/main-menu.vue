@@ -7,7 +7,7 @@
           See plans
         </p>
       </div>
-      <div @click="toggleNavBar">
+      <div>
         <img
           src="../styles/icon/icon.png"
           alt=""
@@ -16,16 +16,14 @@
         />
 
         <div class="top-navigation-items-area">
-          <div class="cliked-btn-nav">
+          <div class="cliked-btn-nav" @click="toggleNavBar">
             <menu-icon></menu-icon>
           </div>
           <div>
             <notification-icon></notification-icon>
-            <!-- <font-awesome-icon icon="bell" /> -->
           </div>
           <div>
             <inbox-icon></inbox-icon>
-            <!-- <font-awesome-icon icon="inbox" /> -->
           </div>
 
           <div>

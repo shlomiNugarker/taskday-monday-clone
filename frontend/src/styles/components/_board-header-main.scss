@@ -107,7 +107,7 @@
   .title {
     display: flex;
     align-items: center;
-    font-size: 40px;
+    font-size: 35px;
     color: #323338;
 
     span {
@@ -121,8 +121,9 @@
       display: flex;
       justify-content: center;
       margin-left: 5px;
-      font-size: 30px;
+      font-size: 35px;
       border: none;
+      min-width: 100px;
 
       &:focus {
         outline: none !important;
