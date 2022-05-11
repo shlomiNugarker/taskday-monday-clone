@@ -141,7 +141,6 @@ export default {
     },
     async getBoardsList({ state, commit }) {
       const boardsList = await boardService.getBoardsList()
-      console.log(boardsList)
 
       commit({ type: 'loadBoardsList', boardsList })
     },
@@ -257,6 +256,24 @@ export default {
       await boardService.update(boardToEdit)
       socketService.emit('board newUpdateBoard', boardToEdit)
       commit({ type: 'updateBoard', boardToEdit })
+      dispatch({
+        type: 'getBoardsList',
+      })
+    },
+    async UpdateBoardDragDrop({ dispatch, state, commit }, { group, groupId }) {
+      const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
+      var groupIdx = copyBoard.groups.findIndex(
+        (currGroup) => currGroup.id === groupId
+      )
+      copyBoard.groups.splice(groupIdx, 1, group)
+      console.log(copyBoard.groups)
+
+      await boardService.update(copyBoard)
+      commit({
+        type: 'setCurrBoard',
+        board: copyBoard,
+      })
+      socketService.emit('board newUpdateBoard', copyBoard)
       dispatch({
         type: 'getBoardsList',
       })

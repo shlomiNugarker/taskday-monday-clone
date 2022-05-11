@@ -39,7 +39,7 @@ async function remove(boardId) {
 async function getBoardsList() {
   var res
   res = await httpService.get('board')
-  console.log(res)
+
   // res = await storageService.query('board')
 
   res.forEach((board, idx) => {
