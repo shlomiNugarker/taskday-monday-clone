@@ -1,7 +1,7 @@
 .add-task {
   display: flex;
   padding-bottom: 1px;
-  margin-left: 10px;
+  margin-left: 53px;
   height: 35px;
   margin-top: 1px;
   // width: 1235px;
@@ -49,7 +49,7 @@
     cursor: pointer;
     // background-color: aquamarine;
 
-    width: 526px;
+    width: 510px;
 
     display: flex;
     flex-direction: row-reverse;
@@ -57,7 +57,7 @@
       display: flex;
       flex-direction: row-reverse;
       position: relative;
-      left: 30px;
+      // left: 50px;
       width: 100%;
       button {
         z-index: 5;

@@ -13,11 +13,18 @@ export default {
       statusTxt: '',
       priorityTxt: '',
     },
+    sortBy: {
+      type: '',
+      direction: 1,
+    },
     isNavBarOpen: false,
     isLoading: false,
     currTaskIdx: '',
   },
   getters: {
+    isDetailsOpen(state) {
+      return state.isDetailsOpen
+    },
     isNavBarOpen(state) {
       return state.isNavBarOpen
     },
@@ -41,6 +48,12 @@ export default {
     },
     currFilterBy(state) {
       return JSON.parse(JSON.stringify(state.filterBy))
+    },
+    currSortBy(state) {
+      return JSON.parse(JSON.stringify(state.sortBy))
+    },
+    currSortBy(state) {
+      return JSON.parse(JSON.stringify(state.sortBy))
     },
     currTask(state) {
       return state.currBoard.groups[state.currTaskIdx.groupIdx].tasks[
@@ -69,11 +82,14 @@ export default {
       state.isLoading = false
     },
     updateFilter(state, { filterBy }) {
+      console.log(filterBy)
       state.filterBy = filterBy
+    },
+    updateSort(state, { sortBy }) {
+      state.sortBy = sortBy
     },
     setCurrTaskIdx(state, { groupIdx, taskIdx }) {
       state.currTaskIdx = { groupIdx, taskIdx }
-      // console.log(state.currTask)
     },
 
     //Boards
@@ -174,6 +190,7 @@ export default {
         })
 
         const board = await boardService.getBoardById(boardId)
+
         socketService.emit('open board', board._id)
 
         commit({

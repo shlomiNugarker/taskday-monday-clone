@@ -9,6 +9,7 @@
       :currBoard="currBoard"
       :filterBy="filterBy"
       @filter="filter"
+      @sort="sort"
     />
   </section>
 </template>
@@ -45,6 +46,18 @@ export default {
     filter(filterBy) {
       this.filterBy = filterBy
       this.$store.commit({ type: 'updateFilter', filterBy })
+    },
+    sort(type) {
+      if (!type) {
+        var sortBy = { type: '', direction: 1 }
+        this.$store.commit({ type: 'updateSort', sortBy })
+        console.log('this.sortBy', this.sortBy)
+        return
+      }
+      var sortBy = JSON.parse(JSON.stringify(this.$store.getters.currSortBy))
+      sortBy.direction = sortBy.type === type ? sortBy.direction * -1 : 1
+      sortBy.type = type
+      this.$store.commit({ type: 'updateSort', sortBy })
     },
   },
   components: {

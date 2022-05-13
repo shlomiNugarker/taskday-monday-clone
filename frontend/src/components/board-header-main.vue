@@ -53,8 +53,18 @@
         </div>
       </div>
     </div>
-    <p class="subtitle">
-      Learn how to create tasks that are clear, transparent, and on point.
+    <p class="subtitle" v-if="!isEditSub" @click="focusSub">
+      {{ board.subtitle }}
+    </p>
+    <p class="subtitle" v-if="isEditSub">
+      <input
+        type="text"
+        ref="inputSub"
+        @focusout="isEditSub = false"
+        v-model="subTitle"
+        @keydown.enter="saveTitle"
+        @input="saveTitle"
+      />
     </p>
   </section>
 </template>
@@ -68,12 +78,15 @@ export default {
   data() {
     return {
       isEdit: false,
+      isEditSub: false,
       title: '',
       wait: false,
+      subTitle: '',
     }
   },
   created() {
     this.title = JSON.parse(JSON.stringify(this.board?.title))
+    this.subTitle = JSON.parse(JSON.stringify(this.board?.subtitle))
   },
   components: {},
   computed: {},
@@ -83,6 +96,13 @@ export default {
 
       setTimeout(() => {
         this.$refs.input.focus()
+      }, 10)
+    },
+    focusSub() {
+      this.isEditSub = true
+
+      setTimeout(() => {
+        this.$refs.inputSub.focus()
       }, 10)
     },
     focusOut() {
@@ -99,6 +119,7 @@ export default {
         console.log(this.title)
         const boardToEdit = JSON.parse(JSON.stringify(this.board))
         boardToEdit.title = this.title
+        boardToEdit.subtitle = this.subTitle
 
         this.$store.dispatch({
           type: 'updateBoard',

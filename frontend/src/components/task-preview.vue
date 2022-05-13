@@ -49,7 +49,7 @@ export default {
   name: '',
   data() {
     return {
-      isHover: true,
+      isHover: false,
       cmpsOrder: [
         'task-cmp',
         'status-cmp',

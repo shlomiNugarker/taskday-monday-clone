@@ -56,6 +56,7 @@ function getEmptyTask(groupToEditTitle) {
   const newTask = {
     id: 'i_' + utilService.makeId(),
     title: groupToEditTitle,
+    createdAt: new Date().getTime(),
     date: '',
     person: [],
     status: '-',
@@ -90,6 +91,7 @@ function getEmptyGroup() {
     id: 'g_' + utilService.makeId(),
     title: 'New Group',
     color: utilService.getRandomPredefinedColor(),
+    createdAt: new Date().getTime(),
     tasks: [getEmptyTask('New Task')],
   }
 }

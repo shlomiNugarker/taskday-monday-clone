@@ -1,7 +1,6 @@
 <template>
   <div class="left-btn-task flex">
     <span class="btn-down-task-container" :class="isHoverStyle">
-      <!-- <font-awesome-icon icon="caret-down" /> -->
       <el-dropdown class="side-drop-down" trigger="click">
         <span class="el-dropdown-link">
           <font-awesome-icon icon="caret-down" />
@@ -44,7 +43,9 @@
           @click="openDetails(groupId)"
           class="add-comment-icon"
         />
-        <span v-if="commentsNum" class="msgs">{{ commentsNum }}</span>
+        <span v-if="commentsNum" class="msgs" @click="openDetails(groupId)">{{
+          commentsNum
+        }}</span>
       </span>
     </section>
   </div>

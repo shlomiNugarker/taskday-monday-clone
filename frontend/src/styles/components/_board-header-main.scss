@@ -148,6 +148,13 @@
   &:hover {
     outline: 1px dashed #c5c7d0;
   }
+
+  input {
+    border: none;
+    &:focus {
+      outline: none !important;
+    }
+  }
 }
 .board-header-content {
   min-height: 190px;

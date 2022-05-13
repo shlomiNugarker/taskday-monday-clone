@@ -51,6 +51,7 @@
         font-size: 14px;
         // line-height: 24px;
         transition: width 0.1s;
+        // margin-top: 3px;
 
         &:hover {
           background-color: #dcdfec;
@@ -67,6 +68,13 @@
         }
       }
     }
+    .filter-container-btn {
+      padding-left: 0px;
+
+      .el-tooltip__trigger {
+        padding-left: 0px;
+      }
+    }
     button {
       background-color: white;
       min-width: 100px;
@@ -75,13 +83,45 @@
       border-radius: 5px;
       font-size: 14px;
       line-height: 24px;
-      padding: 5px;
+      cursor: pointer;
+      // padding: 3px;
+      margin-left: 5px;
+      height: 34px;
+
+      &.is-filter-style {
+        background-color: #dcdfec;
+      }
+      &.is-sort-style {
+        background-color: #dcdfec;
+      }
 
       &:hover {
         background-color: #dcdfec;
       }
     }
+
+    .side-drop-down {
+      padding: 0;
+    }
+    .el-dropdown-link {
+      margin: 0;
+    }
   }
+}
+
+.dropdown-container-sort {
+  padding: 5px;
+}
+.img-person-filter {
+  margin-right: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.filter-container-drop-down {
+  display: flex;
+  padding: 15px;
 }
 form.nosubmit {
   border: none;
@@ -92,11 +132,18 @@ form.nosubmit {
   justify-content: center;
   align-items: center;
   // filter: opacity(0.7);
+  padding: 2px 0;
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 .sort-icon {
   width: 15px;
   // height: 40px;
-  margin-top: 5px;
+  // margin-top: 5px;
   margin-right: 5px;
   color: #68696c;
   filter: opacity(0.6);
@@ -104,7 +151,7 @@ form.nosubmit {
 .filter {
   width: 15px;
   // height: 40px;
-  margin-top: 7px;
+  // margin-top: 7px;
   margin-right: 7px;
 }
 
@@ -129,17 +176,3 @@ input.nosubmit {
   display: flex;
   justify-content: center;
 }
-.pin-icon {
-  // width: 20px;
-}
-
-// input:focus {
-//   // background-color: red;
-//   padding: 5px;
-//   border: 1px solid red;
-// }
-// input:focus {
-//   outline: none !important;
-//   box-shadow: inset 0px 0px 0px 1px $blue;
-//   border-radius: 5px;
-// }

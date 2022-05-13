@@ -82,6 +82,7 @@
       font-size: 10px;
       color: white;
       text-align: center;
+      cursor: pointer;
     }
   }
 }
@@ -105,12 +106,14 @@
     height: 18px;
     margin-right: 5px;
     background-color: #f5f6f8e0;
+    cursor: pointer;
 
     .el-dropdown-link {
       display: flex;
       align-self: center;
       align-items: center;
       justify-content: center;
+      margin-left: 11px;
     }
   }
 }

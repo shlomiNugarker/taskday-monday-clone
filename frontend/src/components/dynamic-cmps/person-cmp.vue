@@ -3,7 +3,6 @@
     <el-dropdown class="side-drop-down" trigger="click">
       <span class="el-dropdown-link">
         <font-awesome-icon icon="plus" class="plus-icon" :class="hideStyle" />
-        <!-- <avatar :persons="assignedMembers"></avatar> -->
         <div v-if="assignedMembers.length">
           <img
             v-for="(member, idx) in assignedMembers"
@@ -27,15 +26,22 @@
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item v-for="member in assignedMembers" :key="member._id">
-            <span @click="removePerson(member)"> {{ member.fullname }} x </span>
+            <span class="member-opt" @click="removePerson(member)">
+              <img class="img-url-person" :src="member.imgUrl" alt="" />
+              <span> {{ member.fullname }}</span>
+              <font-awesome-icon icon="xmark" />
+            </span>
           </el-dropdown-item>
           <p class="divider-p">People</p>
           <el-dropdown-item
             v-for="member in notAssignedMembers"
             :key="member._id"
           >
-            <span @click="addPerson(member)">
-              {{ member.fullname }}
+            <span @click="addPerson(member)" class="flex">
+              <img class="img-url-person" :src="member.imgUrl" alt="" />
+              <span>
+                {{ member.fullname }}
+              </span>
             </span>
           </el-dropdown-item>
         </el-dropdown-menu>
@@ -56,7 +62,7 @@ export default {
   name: 'person-cmp',
   data() {
     return {
-      margin: -5,
+      margin: -7,
       isOver: false,
       assignedMembers: [],
       notAssignedMembers: [],
@@ -144,5 +150,18 @@ export default {
 
 .relative {
   position: relative;
+}
+.member-opt {
+  display: flex;
+  min-width: 115px;
+
+  justify-content: space-between;
+  align-items: center;
+}
+.img-url-person {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 </style>

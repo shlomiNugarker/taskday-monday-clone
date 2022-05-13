@@ -61,10 +61,6 @@
         <p @click.stop="moveToBoard(board.boardId)">
           {{ board.boardTitle }}
         </p>
-        <!-- <span class="board-btn-opts" @click.stop="openboardModal">
-          <font-awesome-icon icon="ellipsis" />
-        </span> -->
-        <!-- //modal -->
 
         <el-dropdown class="side-drop-down" trigger="click" @click.stop="">
           <span class="el-dropdown-link">
@@ -168,3 +164,5 @@ export default {
   },
 }
 </script>
+
+<style></style>
