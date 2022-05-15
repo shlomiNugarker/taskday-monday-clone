@@ -1,9 +1,18 @@
 .container-groups {
-  height: calc(100vh - 227px);
-  overflow-x: auto;
+  // height: calc(100vh - 227px);
+  // overflow-x: auto;
   background-color: rgb(255, 255, 255);
+  // background-color: lightcoral;
+  // width: calc(100vw - 120px);
+
+  .smooth-dnd-container.vertical > .smooth-dnd-draggable-wrapper {
+    overflow: inherit;
+  }
+  &.smooth-dnd-container.vertical > .smooth-dnd-draggable-wrapper {
+    overflow: inherit;
+    display: block;
+  }
 }
 .group-list {
   padding: 15px 0px;
-  width: calc(100vw - 150px);
 }

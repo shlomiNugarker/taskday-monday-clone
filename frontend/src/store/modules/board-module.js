@@ -218,7 +218,8 @@ export default {
       copyBoard.groups[groupIdx].tasks.splice(taskIdx, 1, task)
       await boardService.update(copyBoard)
       socketService.emit('board newUpdateBoard', copyBoard)
-      commit({ type: 'loadGroups', groups: copyBoard.groups })
+      commit({ type: 'setCurrBoard', board: copyBoard })
+      commit({ type: 'loadGroups', groups: copyBoard.groups }) // <- cancel?
     },
     async updateGroup({ state, commit }, { groupToEdit, idx }) {
       const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
@@ -236,7 +237,8 @@ export default {
       copyBoard.groups[groupIdx].tasks.push(newTask)
       await boardService.update(copyBoard)
       socketService.emit('board newUpdateBoard', copyBoard)
-      commit({ type: 'addTask', newTask, groupIdx })
+      commit({ type: 'addTask', newTask, groupIdx }) // <- cancel??
+      commit({ type: 'setCurrBoard', board: copyBoard })
     },
     async removeTask({ state, commit }, { groupId, task }) {
       const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
@@ -277,6 +279,36 @@ export default {
       dispatch({
         type: 'getBoardsList',
       })
+    },
+    async justUpdateBoard({ commit, state }, { group }) {
+      const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
+      var groupIdx = state.currBoard.groups.findIndex(
+        (currGroup) => currGroup.id === group.id
+      )
+
+      console.log('from store')
+
+      commit({
+        type: 'setCurrBoard',
+        board: copyBoard,
+      })
+      copyBoard.groups.splice(groupIdx, 1, group)
+
+      await boardService.update(copyBoard)
+      socketService.emit('board newUpdateBoard', copyBoard)
+    },
+
+    async updateGroupsDragDrop({ commit, state }, { groups }) {
+      const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
+      console.log(groups)
+      copyBoard.groups = groups
+
+      commit({
+        type: 'setCurrBoard',
+        board: copyBoard,
+      })
+      await boardService.update(copyBoard)
+      socketService.emit('board newUpdateBoard', copyBoard)
     },
   },
 }

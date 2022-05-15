@@ -1,6 +1,12 @@
 .container-details-view {
   width: 100%;
   display: flex;
+  overflow: auto;
+  // overflow-y: auto;
+  // overflow-x: hidden;
+  height: 100vh;
+  overflow-y: auto;
+  // overflow-x: hidden;
 
   .boardDetails {
     // // background-color: lightgreen;

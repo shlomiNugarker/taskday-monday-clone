@@ -108,7 +108,6 @@ export default {
   },
   watch: {
     '$store.getters.currBoard'() {
-      console.log('board changed')
       this.startDate = this.task.timeline.startDate
       this.endDate = this.task.timeline.endDate
       if (!this.startDate || !this.endDate) this.value1 = null

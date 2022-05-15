@@ -1,0 +1,117 @@
+{
+  "title": "Board 1",
+  "subtitle": "subtitle",
+  "createdAt": 1651365468605,
+  "createdBy": {
+    "_id": "u101",
+    "fullname": "Shlomi Nugarker",
+    "imgUrl": "https://files.monday.com/use1/photos/26222916/thumb_small/26222916-user_photo_2021_11_30_09_26_11.png?1638264371"
+  },
+
+  "predefineColors": [
+    "#ff4500",
+    "#ff8c00",
+    "#ffd700",
+    "#90ee90",
+    "#00ced1",
+    "#00ecd1",
+    "#1e90ff",
+    "#c71585",
+    "#c7f5a5",
+    "#c7158577"
+  ],
+  "members": [
+    {
+      "_id": "u101",
+      "fullname": "Shlomi Nugarker",
+      "imgUrl": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+    },
+    {
+      "_id": "u102",
+      "fullname": "Nadia Blum",
+      "imgUrl": "https://media-exp1.licdn.com/dms/image/C4E03AQEnH6Lj0aymwg/profile-displayphoto-shrink_800_800/0/1650388602421?e=1657152000&v=beta&t=tsNDkf7ek1ei69b1_aAQFIQjeJiAvYnPdW-RiK2TaZA"
+    },
+    {
+      "_id": "u103",
+      "fullname": "dana Israeli",
+      "imgUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80"
+    }
+  ],
+  "groups": [
+    {
+      "id": "g101",
+      "title": "This is group 1",
+      "color": "#784bd1",
+      "createdAt": 1652458800015.0,
+      "tasks": [
+        {
+          "id": "c101",
+          "title": "Replace logo",
+          "status": "Done",
+          "priority": "High",
+          "text": "Finish !",
+          "createdAt": 1652438800015.0,
+
+          "timeline": {
+            "startDate": "",
+            "endDate": ""
+          },
+          "activityLog": [],
+          "person": [
+            {
+              "_id": "u101",
+              "fullname": "Shlomi Nugarker",
+              "imgUrl": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+            }
+          ],
+          "comments": [
+            {
+              "id": "u1sdf01",
+              "byUser": {
+                "_id": "u10zdf1",
+                "fullname": "Israel Israeli",
+                "imgUrl": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+              },
+              "txt": "update from first task",
+              "replies": [
+                {
+                  "id": "r101",
+                  "byUser": {
+                    "_id": "u101",
+                    "fullname": "Yaakob J",
+                    "imgUrl": "https://www.google.com"
+                  },
+                  "txt": "1 replay from first task",
+                  "time": 1589983468418,
+                  "likes": [
+                    {
+                      "_id": "uss01",
+                      "fullname": "Yaakob J",
+                      "imgUrl": "https://www.google.com"
+                    }
+                  ]
+                }
+              ],
+              "likes": [
+                {
+                  "_id": "uss01",
+                  "fullname": "Yaakob J",
+                  "imgUrl": "https://www.google.com"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+
+  "cmpsOrder": [
+    "task-cmp",
+    "status-cmp",
+    "person-cmp",
+    "priority-cmp",
+    "date-cmp",
+    "text-cmp"
+  ]
+}
