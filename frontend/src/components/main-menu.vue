@@ -16,7 +16,7 @@
         />
 
         <div class="top-navigation-items-area">
-          <div class="cliked-btn-nav" @click="toggleNavBar">
+          <div class="menu-icon cliked-btn-nav" @click="toggleNavBar">
             <menu-icon></menu-icon>
           </div>
           <div>

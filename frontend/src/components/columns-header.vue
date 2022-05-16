@@ -20,11 +20,17 @@
             </template>
           </el-dropdown>
         </span>
-        <div class="title" v-if="!isEdit" @click="onEdit">
+        <div
+          class="title"
+          :style="{ color: group.color }"
+          v-if="!isEdit"
+          @click="onEdit"
+        >
           {{ group.title }}
         </div>
         <div v-if="isEdit" class="title input-container">
           <input
+            :style="{ color: group.color }"
             ref="input"
             v-if="isEdit"
             type="text"

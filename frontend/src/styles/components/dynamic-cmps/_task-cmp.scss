@@ -1,5 +1,5 @@
 .task-cmp {
-  background-color: #f5f6f8d8;
+  background-color: #f5f6f8f0;
   color: #7c7c81;
   width: 100%;
   display: flex;
@@ -92,7 +92,7 @@
   // justify-content: center;
   z-index: 5;
   // min-width: 1200px;
-  min-width: 425px;
+  min-width: 375px;
   height: 35px;
   position: sticky;
   left: 30px;
@@ -106,6 +106,7 @@
     height: 18px;
     margin-right: 5px;
     background-color: #f5f6f8e0;
+    border-radius: 3px;
     cursor: pointer;
 
     .el-dropdown-link {

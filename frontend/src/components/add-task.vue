@@ -20,9 +20,9 @@
         <button @click.stop="addTask">Add</button>
       </div>
     </span>
-    <!-- <div class="end-cmps">
+    <div class="end-cmps">
       <div></div>
-    </div> -->
+    </div>
   </section>
 </template>
 
@@ -36,7 +36,7 @@ export default {
   name: 'add-task',
   data() {
     return {
-      isAdd: false,
+      isAdd: true,
       newTaskTitle: '',
       currGroup: JSON.parse(JSON.stringify(this.group)),
     }

@@ -16,6 +16,9 @@
     flex-direction: column;
     align-items: center;
   }
+  .menu-icon {
+    cursor: pointer;
+  }
 }
 .icon {
   margin: 5px;
@@ -87,7 +90,7 @@
   align-items: center;
   margin: 5px;
   border-radius: 10px;
-  cursor: pointer;
+  // cursor: pointer;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.6);

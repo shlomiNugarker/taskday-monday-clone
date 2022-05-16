@@ -6,17 +6,18 @@
           <div v-if="!isEdit" @click="focusIn" @change="updateBoard">
             {{ title }}
           </div>
-          <div v-if="isEdit">
-            <input
-              @keydown.enter="saveTitle"
-              @input="saveTitle"
-              class="input-title"
-              ref="input"
-              @focusout="isEdit = false"
-              type="text"
-              v-model="title"
-            />
-          </div>
+          <!-- <div> -->
+          <input
+            v-if="isEdit"
+            @keydown.enter="saveTitle"
+            @input="saveTitle"
+            class="input-title"
+            ref="input"
+            @focusout="isEdit = false"
+            type="text"
+            v-model="title"
+          />
+          <!-- </div> -->
 
           <span @click="onClickInfo">
             <font-awesome-icon class="info-icon" icon="circle-info" />
