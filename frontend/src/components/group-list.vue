@@ -1,31 +1,26 @@
 <template>
-  <div>
-    <Container
-      class="container-groups"
-      @drop="onDrop"
-      orientation="vertical"
-      :drag-handle-selector="'.group-handle'"
-    >
-      <Draggable v-for="group in groups" :key="group.id">
-        <div>
-          <columns-header
-            class="group-list"
-            :group="group"
-            @changeGroupTitle="changeGroupTitle"
-            @removeGroup="removeGroup"
-          />
-          <task-list
-            :tasks="group.tasks"
-            :groupId="group.id"
-            :boardId="boardId"
-            :group="group"
-          />
+  <!-- <div> -->
+  <Container class="container-groups" @drop="onDrop" orientation="vertical">
+    <Draggable v-for="group in groups" :key="group.id">
+      <!-- <div> -->
+      <columns-header
+        class="group-list"
+        :group="group"
+        @changeGroupTitle="changeGroupTitle"
+        @removeGroup="removeGroup"
+      />
+      <task-list
+        :tasks="group.tasks"
+        :groupId="group.id"
+        :boardId="boardId"
+        :group="group"
+      />
 
-          <add-task :group="group" @addTask="addTask" />
-        </div>
-      </Draggable>
-    </Container>
-  </div>
+      <add-task :group="group" @addTask="addTask" />
+      <!-- </div> -->
+    </Draggable>
+  </Container>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -49,7 +44,12 @@ export default {
     }
   },
   computed: {},
-  watch: {},
+  watch: {
+    '$store.getters.currBoard'() {
+      var currBoard = this.$store.getters.currBoard
+      this.copyGroups = JSON.parse(JSON.stringify(currBoard.groups))
+    },
+  },
   created() {},
   methods: {
     applyDrag(items, dragResult) {

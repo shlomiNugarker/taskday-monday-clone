@@ -7,13 +7,6 @@
       :non-drag-area-selector="'.none-drag-input'"
       :drag-class="'isInDrag'"
       orientation="vertical"
-      :drop-placeholder="{
-        className: `bg-primary bg-opacity-20  
-            border-dotted border-2 
-            border-primary rounded-lg mx-4 my-2`,
-        animationDuration: '200',
-        showOnTop: true,
-      }"
     >
       <Draggable v-for="task in tasksToShow" :key="task.id">
         <task-preview
@@ -109,7 +102,6 @@ export default {
   },
   watch: {
     '$store.getters.currBoard'() {
-      console.log('board changed')
       var currBoard = this.$store.getters.currBoard
       var groupIdx = currBoard.groups.findIndex(
         (currGroup) => currGroup.id === this.groupId
@@ -128,7 +120,6 @@ export default {
   methods: {
     applyDrag(tasks, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult
-      console.log('payload', payload)
       if (removedIndex === null && addedIndex === null) return tasks
       let itemToAdd = payload
       if (removedIndex !== null) {
@@ -144,7 +135,7 @@ export default {
       this.copyGroup.tasks = this.copyTasks
 
       this.$store.dispatch({
-        type: 'justUpdateBoard',
+        type: 'updateTaskDragDrop',
         group: this.copyGroup,
       })
     },
