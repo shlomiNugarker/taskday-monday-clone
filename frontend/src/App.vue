@@ -1,10 +1,10 @@
 <template>
   <section>
-    <div class="links">
+    <!-- <div class="links">
       <routerLink to="/login">Login</routerLink>|
       <routerLink to="/board">board</routerLink>|
       <routerLink to="/">Home</routerLink>
-    </div>
+    </div> -->
 
     <routerView />
   </section>

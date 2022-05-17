@@ -2,16 +2,14 @@
   width: 100%;
   display: flex;
   overflow: auto;
-  // overflow-y: auto;
-  // overflow-x: hidden;
   height: 100vh;
-  overflow-y: auto;
+
   // overflow-x: hidden;
+  // overflow-y: hidden;
+
+  overflow-y: auto;
 
   .boardDetails {
-    // // background-color: lightgreen;
-    // width: 100%;
-    // margin-left: 100px;
     height: 100vh;
   }
 

@@ -5,7 +5,7 @@
     </div>
     <div v-if="!isAdd">{{ text }}</div>
     <div v-if="isAdd">
-      <input ref="input" v-model="text" type="text" @focusout="out" />
+      <input ref="input" v-model="text" type="text" @focusout="out(text)" />
     </div>
   </section>
 </template>
@@ -36,6 +36,14 @@ export default {
     },
     out() {
       this.isAdd = false
+      this.changeText()
+    },
+    changeText() {
+      this.$emit('changeText', {
+        groupId: this.groupId,
+        taskId: this.task.id,
+        text: this.text,
+      })
     },
   },
   components: {},

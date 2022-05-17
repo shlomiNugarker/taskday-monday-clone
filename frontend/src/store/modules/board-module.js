@@ -157,7 +157,6 @@ export default {
     },
     async getBoardsList({ state, commit }) {
       const boardsList = await boardService.getBoardsList()
-      console.log(boardsList)
 
       commit({ type: 'loadBoardsList', boardsList })
     },
@@ -280,13 +279,11 @@ export default {
         type: 'getBoardsList',
       })
     },
-    async justUpdateBoard({ commit, state }, { group }) {
+    async updateTaskDragDrop({ commit, state }, { group }) {
       const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
       var groupIdx = state.currBoard.groups.findIndex(
         (currGroup) => currGroup.id === group.id
       )
-
-      console.log('from store')
 
       commit({
         type: 'setCurrBoard',
@@ -300,7 +297,7 @@ export default {
 
     async updateGroupsDragDrop({ commit, state }, { groups }) {
       const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
-      console.log(groups)
+
       copyBoard.groups = groups
 
       commit({

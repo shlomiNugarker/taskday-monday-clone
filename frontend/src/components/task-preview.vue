@@ -11,6 +11,7 @@
       @changeTitle="changeTitle"
       @changeTimeline="changeTimeline"
       @changePriority="changePriority"
+      @changeText="changeText"
       @removeAssignedMember="removeAssignedMember"
       @addAssignedMember="addAssignedMember"
       :isHover="isHover"
@@ -93,6 +94,16 @@ export default {
     changeTitle({ title }) {
       const task = JSON.parse(JSON.stringify(this.task))
       task.title = title
+
+      this.$store.dispatch({
+        type: 'editTask',
+        task,
+        groupId: this.groupId,
+      })
+    },
+    changeText({ text }) {
+      const task = JSON.parse(JSON.stringify(this.task))
+      task.text = text
 
       this.$store.dispatch({
         type: 'editTask',

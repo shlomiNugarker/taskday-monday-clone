@@ -6,7 +6,7 @@
           <font-awesome-icon class="close-icon" icon="x" />
         </div>
 
-        <div class="details-input flex">
+        <div class="details-input">
           <h1>{{ currTask.title }}</h1>
           <!-- <input type="text" /> -->
           <div class="add-view-container flex">
@@ -39,7 +39,7 @@
           <div class="send-update">
             <div></div>
           </div>
-          {{ groupId }}
+
           <div class="space-view" v-if="currTask.comments.length">
             <div
               class="post-component"

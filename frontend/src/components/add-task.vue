@@ -36,7 +36,7 @@ export default {
   name: 'add-task',
   data() {
     return {
-      isAdd: true,
+      isAdd: false,
       newTaskTitle: '',
       currGroup: JSON.parse(JSON.stringify(this.group)),
     }

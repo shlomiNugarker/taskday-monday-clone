@@ -8,12 +8,23 @@
         </p>
       </div>
       <div>
-        <img
+        <div class="icon" @click="goToHomePage">
+          <div class="logo">
+            <div class="blue"></div>
+            <div class="yellow">
+              <div class="green-dot"></div>
+            </div>
+            <div class="red">
+              <div class="yellow-dot"></div>
+            </div>
+          </div>
+        </div>
+        <!-- <img
           src="../styles/icon/icon.png"
           alt=""
           class="icon"
           @click="goToHomePage"
-        />
+        /> -->
 
         <div class="top-navigation-items-area">
           <div class="menu-icon cliked-btn-nav" @click="toggleNavBar">
@@ -91,10 +102,9 @@ export default {
     // },
   },
   methods: {
-    // goToHomePage() {
-    //   this.$emit('homeClicked');
-    //   this.$router.push(`/`);
-    // },
+    goToHomePage() {
+      this.$router.push(`/`)
+    },
     toggleNavBar() {
       this.$store.commit({ type: 'toggleNavBar' })
     },

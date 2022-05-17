@@ -1,0 +1,207 @@
+.home-view {
+  background-color: #040539;
+  min-height: 100vh;
+  font-family: sofia-pro, Roboto, Helvetica, Arial, sans-serif;
+  overflow: auto;
+  overflow-y: auto;
+
+  .header-container {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100vw;
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 90%;
+      height: 70px;
+      padding: 15px;
+
+      .container-logo {
+        .logo {
+          font-size: 1.5em;
+          display: flex;
+          position: relative;
+          margin-top: -25px;
+          font-weight: bold;
+
+          .blue {
+            position: absolute;
+            border: 2px solid #00c875;
+            width: 50px;
+            height: 25px;
+          }
+          .yellow {
+            position: absolute;
+            width: 25px;
+            height: 50px;
+            border: 2px solid #ffcb00;
+            left: 40px;
+            top: 10px;
+
+            .green-dot {
+              width: 2px;
+              height: 2px;
+              background-color: #00c875;
+              left: -2px;
+              position: absolute;
+              top: 11px;
+            }
+          }
+          .red {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            left: 53px;
+            border: 2px solid #e2435c;
+
+            .yellow-dot {
+              width: 2px;
+              height: 2px;
+              background-color: #ffcb00;
+              left: 8px;
+              position: absolute;
+              bottom: -2px;
+            }
+          }
+        }
+        .logo-txt {
+          position: relative;
+          left: 90px;
+          top: 8px;
+          font-size: 30px;
+
+          .green {
+            color: #00c875;
+          }
+          .yellow {
+            color: #ffcb00;
+          }
+          .red {
+            color: #e2435c;
+          }
+        }
+      }
+
+      .nav-bar {
+        ul {
+          display: flex;
+          align-items: center;
+          li {
+            list-style: none;
+            margin-left: 15px;
+
+            button {
+              color: #535768;
+              padding: 5px;
+              background-color: #fffafa00;
+              border: none;
+              font-size: 14px;
+            }
+          }
+          .login-btn {
+            button {
+              cursor: pointer;
+            }
+          }
+          .login-btn,
+          .contact-btn {
+            &:hover {
+              background-color: #f0f3ff;
+              border-radius: 8px;
+              button {
+                color: #5034ff;
+              }
+            }
+          }
+          .go-demo-btn {
+            background-color: #6c6cff;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-radius: 25px;
+            cursor: pointer;
+
+            &:hover {
+              background-color: #5a5ad5;
+            }
+
+            button {
+              color: white;
+              cursor: pointer;
+            }
+            .arrow-right {
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .title-container {
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    padding: 115px 0 0 0;
+    .title {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      p {
+        font-size: 70px;
+      }
+      span {
+        margin-top: 20px;
+        font-size: 20px;
+      }
+    }
+  }
+
+  .see-demo-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+
+    button {
+      background-color: #6c6cff;
+      display: flex;
+      align-items: center;
+      color: white;
+      padding: 15px;
+      border-radius: 25px;
+      cursor: pointer;
+
+      -webkit-box-shadow: 0px 0px 23px 4px rgba(0, 0, 0, 0.46);
+      box-shadow: 0px 0px 23px 4px rgba(0, 0, 0, 0.46);
+
+      span {
+        margin: 0 5px 0 0;
+      }
+
+      &:hover {
+        background-color: #5a5ad5;
+      }
+    }
+  }
+
+  .carrousel-container {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .el-carousel {
+      width: 50%;
+      img {
+        height: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
