@@ -42,7 +42,13 @@
       <div class="title">
         <p>A platform built for a</p>
         <p>new way of working</p>
-        <span>What would you like to manage with taskday?</span>
+        <span
+          >What would you like to manage with
+          <span class="green">T</span>as<span class="yellow">k</span>da<span
+            class="red"
+            >y</span
+          >?</span
+        >
       </div>
     </div>
 

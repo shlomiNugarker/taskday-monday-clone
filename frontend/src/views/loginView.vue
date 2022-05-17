@@ -1,47 +1,73 @@
 <template>
-  <div>
-    <span>Studio Ghibli Tier List</span>
-    <Container @drop="onDrop">
-      <Draggable v-for="(item, i) in items" :key="item.id">
-        <div>{{ i + 1 }} -> {{ item.data }}</div>
-      </Draggable>
-    </Container>
-  </div>
+  <section class="login-view">
+    <header class="header-container">
+      <div class="container-logo" @click="goHome">
+        <div class="logo">
+          <div class="blue"></div>
+          <div class="yellow">
+            <div class="green-dot"></div>
+          </div>
+          <div class="red">
+            <div class="yellow-dot"></div>
+          </div>
+        </div>
+        <div class="logo-txt">
+          <span class="green">T</span>as<span class="yellow">k</span>da<span
+            class="red"
+            >y</span
+          >
+        </div>
+      </div>
+    </header>
+    <div class="login-container">
+      <div class="title">
+        <p>Log in to your account</p>
+      </div>
+      <p>Enter your work email address and password</p>
+      <form class="login-singup-form">
+        <input type="email" placeholder="Example@company.com" />
+        <input type="password" placeholder="Password" />
+        <button>Login</button>
+      </form>
+
+      <div class="login-separator-component split-line">
+        <span class="separator-line"></span>
+        <h2>Or Sign in with</h2>
+        <span class="separator-line"></span>
+      </div>
+
+      <button type="button" class="social-login-provider">
+        <img
+          class="social-login-logo"
+          src="https://cdn.monday.com/images/logo_google_v2.svg"
+          aria-hidden="true"
+          alt=""
+        />
+        <div class="social-login-provider-name" aria-label="Login with Google">
+          Google
+        </div>
+      </button>
+
+      <div class="switch-login">
+        <div>Don't have an account yet? <span>Sign up</span></div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
-import { Container, Draggable } from 'vue3-smooth-dnd'
 export default {
-  name: 'app',
-  components: { Container, Draggable },
+  name: 'test',
   data() {
-    return {
-      items: [
-        { id: 1, data: 'Princess Mononoke' },
-        { id: 2, data: 'Spirited Away' },
-        { id: 3, data: 'My Neighbor Totoro' },
-        { id: 4, data: "Howl's Moving Castle" },
-      ],
-    }
+    return {}
+  },
+  computed: {},
+  created() {
+    // this.loadUsers()
   },
   methods: {
-    onDrop(dropResult) {
-      this.items = this.applyDrag(this.items, dropResult)
-    },
-    applyDrag(arr, dragResult) {
-      const { removedIndex, addedIndex, payload } = dragResult
-
-      if (removedIndex === null && addedIndex === null) return arr
-      const result = [...arr]
-      let itemToAdd = payload
-
-      if (removedIndex !== null) {
-        itemToAdd = result.splice(removedIndex, 1)[0]
-      }
-      if (addedIndex !== null) {
-        result.splice(addedIndex, 0, itemToAdd)
-      }
-      return result
+    goHome() {
+      this.$router.push(`/`)
     },
   },
 }
