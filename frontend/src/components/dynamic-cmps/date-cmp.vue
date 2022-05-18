@@ -107,12 +107,12 @@ export default {
     },
   },
   watch: {
-    '$store.getters.currBoard'() {
-      this.startDate = this.task.timeline.startDate
-      this.endDate = this.task.timeline.endDate
-      if (!this.startDate || !this.endDate) this.value1 = null
-      else this.value1 = [this.startDate, this.endDate]
-    },
+    // '$store.getters.currBoard'() {
+    //   this.startDate = this.task.timeline.startDate
+    //   this.endDate = this.task.timeline.endDate
+    //   if (!this.startDate || !this.endDate) this.value1 = null
+    //   else this.value1 = [this.startDate, this.endDate]
+    // },
   },
 }
 </script>

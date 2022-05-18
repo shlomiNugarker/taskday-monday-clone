@@ -218,7 +218,7 @@ export default {
       await boardService.update(copyBoard)
       socketService.emit('board newUpdateBoard', copyBoard)
       commit({ type: 'setCurrBoard', board: copyBoard })
-      commit({ type: 'loadGroups', groups: copyBoard.groups }) // <- cancel?
+      // commit({ type: 'loadGroups', groups: copyBoard.groups }) // <- cancel?
     },
     async updateGroup({ state, commit }, { groupToEdit, idx }) {
       const copyBoard = JSON.parse(JSON.stringify(state.currBoard))

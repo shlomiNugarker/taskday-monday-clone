@@ -1,5 +1,5 @@
 .boards-nav-bar {
-  z-index: 10;
+  z-index: 1330;
   // position: ;
   height: 100vh;
   width: 260px;
@@ -10,6 +10,9 @@
   border-right: 1px solid #d0d4e4;
   transition: left 0.3s;
   // margin-left: 70px;
+
+  // position: absolute; // need to fix layout - remove position absolute
+  // left: 70px;
 
   .close {
     font-size: 19px;

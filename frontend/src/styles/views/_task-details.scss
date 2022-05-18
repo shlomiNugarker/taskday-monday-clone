@@ -258,7 +258,7 @@
             .left-btn {
               border-top: 1px solid $clr1;
               border-right: 1px solid $clr1;
-              border-bottom: 1px solid $clr1;
+              // border-bottom: 1px solid $clr1;
               cursor: pointer;
 
               &:hover {
@@ -267,8 +267,8 @@
             }
             .right-btn {
               border-top: 1px solid $clr1;
-              border-right: 1px solid $clr1;
-              border-bottom: 1px solid $clr1;
+              // border-right: 1px solid $clr1;
+              // border-bottom: 1px solid $clr1;
 
               cursor: pointer;
 
