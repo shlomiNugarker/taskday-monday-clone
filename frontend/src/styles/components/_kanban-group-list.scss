@@ -7,8 +7,8 @@
 
     .group-kanban {
       margin: 10px;
-      padding: 15px 0 15px 5px;
-      min-width: 150px;
+      padding: 15px 0 0px 5px;
+      min-width: 250px;
       min-height: 300px;
       border-radius: 10px;
 
@@ -16,6 +16,25 @@
         min-height: 30px;
         color: white;
         text-align: center;
+        cursor: move;
+      }
+
+      .input-container {
+        input {
+          height: 30px;
+          border: none;
+          border-radius: 5px;
+          border-top-left-radius: 0px;
+          border-top-right-radius: 0px;
+          width: 100%;
+          background-color: #ecedf1;
+          margin: 0 0 5px 0;
+          cursor: pointer;
+
+          &:focus {
+            outline: none !important;
+          }
+        }
       }
     }
   }

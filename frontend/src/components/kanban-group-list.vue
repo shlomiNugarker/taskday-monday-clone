@@ -16,6 +16,8 @@
             :boardId="boardId"
             :group="group"
           />
+
+          <add-task-kanban :group="group" @addTask="addTask" />
         </div>
       </Draggable>
     </Container>
@@ -25,6 +27,7 @@
 <script>
 import { Container, Draggable } from 'vue3-smooth-dnd'
 import kanbanTaskList from './kanban-task-list.vue'
+import addTaskKanban from './add-task-kanban.vue'
 export default {
   props: {
     groups: {
@@ -64,6 +67,9 @@ export default {
         groups: this.copyGroups,
       })
     },
+    addTask({ newTaskTitle, groupId }) {
+      this.$store.dispatch({ type: 'addTask', newTaskTitle, groupId })
+    },
   },
 
   watch: {
@@ -76,6 +82,7 @@ export default {
     Container,
     Draggable,
     kanbanTaskList,
+    addTaskKanban,
   },
 }
 </script>

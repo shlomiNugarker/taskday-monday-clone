@@ -7,7 +7,7 @@ export default {
     currBoard: '',
     boardsList: null,
     filteredBoard: null,
-    currView: 'kanban',
+    currView: 'main-table',
     filterBy: {
       txt: '',
       personId: '',

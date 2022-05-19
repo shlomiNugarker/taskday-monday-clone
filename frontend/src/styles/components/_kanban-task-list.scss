@@ -1,15 +1,30 @@
 .kanban-task-list {
-  background-color: rgb(102, 103, 104);
+  background-color: #ecedf1;
   border-radius: 5px;
-  min-height: 100px;
+  min-height: 300px;
   max-height: 300px;
   min-width: 150px;
   overflow: auto;
   padding: 5px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+
   .task-container {
-    background-color: aliceblue;
+    display: flex;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 4px 8px rgb(0 0 0 / 20%);
     padding: 5px;
     margin: 5px;
     min-height: 50px;
+    border-radius: 5px;
+
+    .status-circle {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: red;
+      margin-right: 5px;
+    }
   }
 }

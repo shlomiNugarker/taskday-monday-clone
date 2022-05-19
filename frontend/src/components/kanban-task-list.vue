@@ -8,11 +8,16 @@
       :drag-class="'isInDrag'"
     >
       <Draggable v-for="task in tasksToShow" :key="task.id">
-        <div class="task-container">
+        <task-preview-kanban :task="task" :groupId="groupId" />
+        <!-- <div class="task-container">
+          <span
+            class="status-circle"
+            v-bind:style="{ backgroundColor: statusStyle }"
+          ></span>
           <p>
             {{ task.title }}
           </p>
-        </div>
+        </div> -->
       </Draggable>
     </Container>
   </section>
@@ -20,6 +25,7 @@
 
 <script>
 import { Container, Draggable } from 'vue3-smooth-dnd'
+import taskPreviewKanban from './task-preview-kanban.vue'
 
 export default {
   props: {
@@ -143,6 +149,7 @@ export default {
   components: {
     Container,
     Draggable,
+    taskPreviewKanban,
   },
 }
 </script>
