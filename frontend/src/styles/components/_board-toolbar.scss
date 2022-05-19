@@ -33,6 +33,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
+
+        &.kanban-btn,
+        &.main-table-btn {
+          cursor: pointer;
+        }
       }
     }
     .blue-bottom {

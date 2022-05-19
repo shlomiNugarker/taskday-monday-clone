@@ -7,7 +7,17 @@
     >
       <router-view></router-view>
       <board-details-header />
-      <group-list :groups="currBoard?.groups" :boardId="currBoard?._id" />
+      <group-list
+        :groups="currBoard?.groups"
+        :boardId="currBoard?._id"
+        v-if="isShowGroupList"
+      />
+
+      <kanban
+        v-if="!isShowGroupList"
+        :groups="currBoard?.groups"
+        :boardId="currBoard?._id"
+      ></kanban>
     </main>
 
     <div
@@ -23,11 +33,14 @@
 <script>
 import boardDetailsHeader from '../components/board-details-header.vue'
 import groupList from '../components/group-list.vue'
+import kanban from '../components/kanban-group-list.vue'
 import { socketService } from '../services/socket.service'
 export default {
   name: 'board-details',
   data() {
-    return {}
+    return {
+      // isShowGroupList: false,
+    }
   },
   computed: {
     currBoard() {
@@ -38,6 +51,15 @@ export default {
     },
     isLoading() {
       return this.$store.getters.isLoading
+    },
+    currView() {
+      return this.$store.getters.currView
+    },
+    isShowGroupList() {
+      if (this.currView === 'kanban') {
+        return false
+      }
+      return true
     },
   },
   created() {
@@ -64,6 +86,7 @@ export default {
   components: {
     boardDetailsHeader,
     groupList,
+    kanban,
   },
 }
 </script>

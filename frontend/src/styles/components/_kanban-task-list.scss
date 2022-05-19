@@ -1,0 +1,15 @@
+.kanban-task-list {
+  background-color: rgb(102, 103, 104);
+  border-radius: 5px;
+  min-height: 100px;
+  max-height: 300px;
+  min-width: 150px;
+  overflow: auto;
+  padding: 5px;
+  .task-container {
+    background-color: aliceblue;
+    padding: 5px;
+    margin: 5px;
+    min-height: 50px;
+  }
+}

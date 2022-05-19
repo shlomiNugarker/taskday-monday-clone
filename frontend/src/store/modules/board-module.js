@@ -7,6 +7,7 @@ export default {
     currBoard: '',
     boardsList: null,
     filteredBoard: null,
+    currView: 'kanban',
     filterBy: {
       txt: '',
       personId: '',
@@ -66,6 +67,9 @@ export default {
     members(state) {
       return state.currBoard.members
     },
+    currView(state) {
+      return state.currView
+    },
   },
   mutations: {
     setBoards(state, { boards }) {
@@ -87,6 +91,10 @@ export default {
     },
     updateSort(state, { sortBy }) {
       state.sortBy = sortBy
+    },
+    changeView(state, { view }) {
+      console.log(view)
+      state.currView = view
     },
     setCurrTaskIdx(state, { groupIdx, taskIdx }) {
       state.currTaskIdx = { groupIdx, taskIdx }

@@ -4,7 +4,10 @@
     :class="[{ 'nav-bar-open': isNavBarOpen }]"
   >
     <board-header-main :board="currBoard" v-if="showHeader" />
-    <board-toolbar @toggleToolbar="showHeader = !showHeader" />
+    <board-toolbar
+      @toggleToolbar="showHeader = !showHeader"
+      @changeView="changeView"
+    />
     <board-filter
       :currBoard="currBoard"
       :filterBy="filterBy"
@@ -58,6 +61,9 @@ export default {
       sortBy.direction = sortBy.type === type ? sortBy.direction * -1 : 1
       sortBy.type = type
       this.$store.commit({ type: 'updateSort', sortBy })
+    },
+    changeView(view) {
+      this.$store.commit({ type: 'changeView', view })
     },
   },
   components: {

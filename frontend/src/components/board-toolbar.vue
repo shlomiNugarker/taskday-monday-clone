@@ -3,8 +3,9 @@
     <div class="board-toolbar">
       <!-- <button class="loolbar-btn">Main-table</button> -->
       <div class="toolbar-btns flex">
-        <div class="blue-bottom">
-          <button>
+        <div :class="{ 'blue-bottom': currView === 'main-table' }">
+          <!-- <div class="blue-bottom" > -->
+          <button class="main-table-btn" @click="changeView('main-table')">
             <img
               class="icon-toolbar"
               src="../styles/icon/table.png"
@@ -13,14 +14,15 @@
           </button>
         </div>
 
-        <div>
-          <button>
-            <img
+        <div :class="{ 'blue-bottom': currView === 'kanban' }">
+          <button class="kanban-btn" @click="changeView('kanban')">
+            <font-awesome-icon class="chart-icon icon-toolbar" icon="bars" />
+            <!-- <img
               class="chart-icon icon-toolbar"
-              src="../styles/icon/chart.png"
+              src="../styles/icon/kanban.png"
               alt=""
-            />
-            Chart
+            /> -->
+            Kanban
           </button>
         </div>
 
@@ -106,10 +108,17 @@ export default {
     return {}
   },
   components: {},
-  computed: {},
+  computed: {
+    currView() {
+      return this.$store.getters.currView
+    },
+  },
   methods: {
     toggleToolbar() {
       this.$emit('toggleToolbar')
+    },
+    changeView(view) {
+      this.$emit('changeView', view)
     },
   },
 }

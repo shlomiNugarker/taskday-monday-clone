@@ -1,5 +1,5 @@
 <template>
-  <section class="boards-nav-bar" v-if="isNavBarOpen">
+  <section class="boards-nav-bar" v-if="isNavBarOpen" @mouseleave="mouseleave">
     <div class="close" @click="closeModal">
       <font-awesome-icon class="arrow-left" icon="angle-left" />
     </div>
@@ -146,13 +146,16 @@ export default {
           })
         })
     },
-    openboardModal() {},
     removeBoard(boardId) {
       console.log(boardId)
       this.$store.dispatch({
         type: 'removeBoard',
         boardId,
       })
+    },
+    mouseleave() {
+      console.log('out from workspace')
+      setTimeout(() => this.closeModal(), 2000)
     },
   },
 
