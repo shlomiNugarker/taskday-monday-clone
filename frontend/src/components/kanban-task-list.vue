@@ -110,6 +110,7 @@ export default {
     },
   },
   created() {
+    console.log('created')
     this.copyTasks = JSON.parse(JSON.stringify(this.tasks))
     this.copyGroup = JSON.parse(JSON.stringify(this.group))
   },
