@@ -98,6 +98,11 @@
       &:hover {
         background-color: #dcdfec;
       }
+      &.sort-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
 
     .side-drop-down {
@@ -105,6 +110,7 @@
     }
     .el-dropdown-link {
       margin: 0;
+      display: flex;
     }
   }
 }

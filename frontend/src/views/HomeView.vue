@@ -59,13 +59,23 @@
       </button>
     </div>
 
-    <div class="carrousel-container">
+    <!-- <div class="carrousel-container">
       <el-carousel :interval="4000" type="card" height="200px">
-        <el-carousel-item v-for="item in 3" :key="item">
-          <!-- <h3 text="2xl" justify="center">{{ item }}</h3> -->
-          <img src="../styles/images/img.png" alt="" />
+        <el-carousel-item v-for="url in imgs" :key="url">
+          <img :src="url" alt="" />
         </el-carousel-item>
       </el-carousel>
+    </div> -->
+    <div class="imgs-container">
+      <div class="img-container">
+        <img class="img img-1" src="../styles/images/1.png" alt="" />
+      </div>
+      <div class="img-container">
+        <img class="img img-2" src="../styles/images/2.png" alt="" />
+      </div>
+      <div class="img-container">
+        <img class="img img-3" src="../styles/images/3.png" alt="" />
+      </div>
     </div>
   </section>
 </template>
@@ -74,7 +84,13 @@
 export default {
   name: '',
   data() {
-    return {}
+    return {
+      imgs: [
+        '../styles/images/1.png',
+        '../styles/images/2.png',
+        '../styles/images/3.png',
+      ],
+    }
   },
   computed: {
     boardsList() {
@@ -83,6 +99,7 @@ export default {
   },
   created() {
     this.$store.dispatch({ type: 'getBoardsList' })
+    this.loadUsers()
   },
   methods: {
     goDemo() {
@@ -94,6 +111,9 @@ export default {
       var boardId = this.boardsList[0].boardId
       console.log(boardId)
       this.$router.push(`/login/`)
+    },
+    loadUsers() {
+      this.$store.dispatch({ type: 'loadUsers' })
     },
   },
   components: {},

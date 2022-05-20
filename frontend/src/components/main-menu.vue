@@ -1,6 +1,9 @@
 <template>
   <section class="flex">
     <header class="main-menu">
+      <span class="toggle-nav-bar" @click="closeModal"
+        ><font-awesome-icon class="icon-right" icon="angle-right"
+      /></span>
       <div class="seen-plans">
         <p>
           <!-- <img src="../../styles/icon/star-shape-big-and-small.png" alt /> -->
@@ -64,7 +67,11 @@
         </div>
 
         <div class="icon-container">
-          <img class="name-icon" src="../styles/icon/def-user.png" alt="" />
+          <img
+            class="name-icon"
+            src="https://media-exp1.licdn.com/dms/image/C4E03AQEnH6Lj0aymwg/profile-displayphoto-shrink_800_800/0/1650388602421?e=1657152000&v=beta&t=tsNDkf7ek1ei69b1_aAQFIQjeJiAvYnPdW-RiK2TaZA"
+            alt=""
+          />
         </div>
       </div>
     </header>
@@ -106,7 +113,11 @@ export default {
       this.$router.push(`/`)
     },
     toggleNavBar() {
-      this.$store.commit({ type: 'toggleNavBar' })
+      this.$store.commit({ type: 'toggleNavBar', bool: true })
+    },
+    closeModal() {
+      this.$store.commit({ type: 'toggleNavBar', bool: true })
+      // this.$emit('boardClicked')
     },
   },
   components: {

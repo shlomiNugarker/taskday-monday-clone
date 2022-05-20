@@ -196,9 +196,9 @@ export default {
         // byUser: this.$store.getters.loggedinUser,
         byUser: {
           _id: 'u10zdf1',
-          fullname: 'demo loggedin User',
+          fullname: 'Shlomi Nugarker',
           imgUrl:
-            'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+            'https://media-exp1.licdn.com/dms/image/C4E03AQEnH6Lj0aymwg/profile-displayphoto-shrink_800_800/0/1650388602421?e=1657152000&v=beta&t=tsNDkf7ek1ei69b1_aAQFIQjeJiAvYnPdW-RiK2TaZA',
         },
         txt: this.updateTxt,
         replies: [],

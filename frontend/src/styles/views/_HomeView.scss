@@ -214,4 +214,39 @@
       }
     }
   }
+
+  .imgs-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 70px;
+    padding: 0 0 29px 0;
+    .img-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      p {
+        color: white;
+      }
+      .img {
+        border-radius: 5px;
+
+        box-shadow: 1px 0px 33px 13px rgb(255 255 255 / 18%);
+      }
+
+      .img-1 {
+        // margin-left: 68%;
+        width: 75%;
+      }
+      .img-2 {
+        width: 150%;
+        z-index: 5;
+      }
+      .img-3 {
+        // margin-right: 68%;
+        width: 75%;
+      }
+    }
+  }
 }

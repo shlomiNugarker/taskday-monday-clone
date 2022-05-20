@@ -88,7 +88,7 @@
           </template>
         </el-dropdown>
       </div>
-      <button :class="isSort">
+      <button :class="isSort" class="sort-btn">
         <el-dropdown class="side-drop-down" trigger="click">
           <span class="el-dropdown-link">
             <span>

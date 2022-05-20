@@ -7,6 +7,8 @@
     <p>
       {{ task.title }}
     </p>
+
+    <div>person</div>
   </div>
 </template>
 <script>

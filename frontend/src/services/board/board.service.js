@@ -116,6 +116,7 @@ async function add(board) {
 function getEmptyBoard(boardName) {
   const newBoard = {
     title: '',
+    subtitle: 'Add subtitle',
     createdAt: new Date().getTime(),
     createdBy: {
       _id: 'u_' + utilService.makeId(), // fix to correct user

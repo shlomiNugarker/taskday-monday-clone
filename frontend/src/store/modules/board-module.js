@@ -75,8 +75,8 @@ export default {
     setBoards(state, { boards }) {
       state.boards = boards
     },
-    toggleNavBar(state) {
-      state.isNavBarOpen = !state.isNavBarOpen
+    toggleNavBar(state, { bool }) {
+      state.isNavBarOpen = bool
     },
     loadBoardsList(state, { boardsList }) {
       state.boardsList = boardsList

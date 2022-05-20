@@ -120,6 +120,12 @@
       span {
         width: 25px;
         margin-right: 3px;
+
+        .delete-icon {
+          &:hover {
+            background-color: white;
+          }
+        }
       }
     }
 

@@ -10,6 +10,7 @@
       padding: 15px 0 0px 5px;
       min-width: 250px;
       min-height: 300px;
+
       border-radius: 10px;
 
       .title {
@@ -30,6 +31,7 @@
           background-color: #ecedf1;
           margin: 0 0 5px 0;
           cursor: pointer;
+          padding: 20px;
 
           &:focus {
             outline: none !important;

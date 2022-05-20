@@ -19,6 +19,36 @@
   .menu-icon {
     cursor: pointer;
   }
+
+  .toggle-nav-bar {
+    position: absolute;
+    left: 87px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d0d4e4;
+    cursor: pointer;
+    transition: width 0.3s;
+
+    &:hover {
+      background-color: $blue;
+      width: 35px;
+      border-radius: 20px;
+
+      .icon-right {
+        color: white;
+      }
+    }
+
+    .icon-right {
+      color: #68696c;
+    }
+  }
 }
 .icon {
   position: relative;
@@ -196,6 +226,11 @@
   width: 35px;
   top: 43%;
   left: 0;
+  transition: width 0.3s;
+
+  &:hover {
+    width: 40px;
+  }
   p {
     transform: rotate(180deg);
     display: flex;

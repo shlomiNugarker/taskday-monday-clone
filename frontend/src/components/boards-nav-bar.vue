@@ -111,10 +111,11 @@ export default {
   created() {},
   methods: {
     closeModal() {
-      this.$store.commit({ type: 'toggleNavBar' })
+      this.$store.commit({ type: 'toggleNavBar', bool: false })
       // this.$emit('boardClicked')
     },
     moveToBoard(boardId) {
+      console.log('move to board', boardId)
       this.$router.push(`/board/${boardId}`)
       this.$store.dispatch({ type: 'getBoardById', boardId })
       this.closeModal()
@@ -154,8 +155,7 @@ export default {
       })
     },
     mouseleave() {
-      console.log('out from workspace')
-      setTimeout(() => this.closeModal(), 2000)
+      setTimeout(() => this.closeModal(), 1000)
     },
   },
 

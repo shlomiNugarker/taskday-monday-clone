@@ -6,6 +6,7 @@
       @drop="onDrop($event, 'tasksForDrop')"
       :non-drag-area-selector="'.none-drag-input'"
       :drag-class="'isInDrag'"
+      orientation="vertical"
     >
       <Draggable v-for="task in tasksToShow" :key="task.id">
         <task-preview-kanban :task="task" :groupId="groupId" />
