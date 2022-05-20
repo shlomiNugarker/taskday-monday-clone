@@ -487,3 +487,10 @@
     font-size: 14px;
   }
 }
+
+@media (max-width: 620px) {
+  .task-details {
+    height: 100%;
+    width: 100%;
+  }
+}

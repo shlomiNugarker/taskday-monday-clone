@@ -84,3 +84,17 @@
     }
   }
 }
+
+@media (max-width: 620px) {
+  .add-task {
+    margin-left: 10px;
+
+    .right-side {
+      width: 314px;
+    }
+    .add {
+      position: relative;
+      z-index: 4;
+    }
+  }
+}

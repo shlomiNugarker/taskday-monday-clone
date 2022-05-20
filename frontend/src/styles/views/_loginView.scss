@@ -158,3 +158,43 @@
     }
   }
 }
+
+@media (max-width: 650px) {
+  .login-view {
+    .header-container {
+    }
+
+    .login-container {
+      margin-top: 25px;
+      .title {
+        text-align: center;
+      }
+
+      .login-form {
+        // width: 100%;
+        input {
+          width: 75%;
+        }
+        button {
+          width: 75%;
+        }
+      }
+
+      .login-separator-component {
+        .separator-line {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .login-view {
+    .login-container {
+      .login-form {
+        width: 280px;
+      }
+    }
+  }
+}

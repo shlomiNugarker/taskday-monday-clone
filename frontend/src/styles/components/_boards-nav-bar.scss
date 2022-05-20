@@ -193,3 +193,20 @@
 //   z-index: -14;
 //   height: 100vh;
 // }
+
+@media (max-width: 620px) {
+  .el-overlay-message-box {
+    .el-message-box {
+      width: 100%;
+    }
+  }
+  .boards-nav-bar {
+    right: 0;
+    position: fixed;
+    margin-top: 70px;
+
+    .close {
+      display: none;
+    }
+  }
+}

@@ -34,7 +34,7 @@
           <button>Last seen</button>
         </div>
 
-        <div>
+        <div class="invite-btn">
           <button>
             <img class="invite-user-img" src="../styles/icon/user.png" alt="" />
             Invite/ <span>4</span>

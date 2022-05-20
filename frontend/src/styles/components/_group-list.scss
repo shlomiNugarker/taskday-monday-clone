@@ -17,3 +17,9 @@
 .group-list {
   padding: 15px 0px;
 }
+
+@media (max-width: 620px) {
+  .group-list {
+    padding: 0;
+  }
+}

@@ -48,7 +48,8 @@
   }
 
   .right-side-header {
-    display: flex;
+    display: none;
+    // display: flex;
     align-items: center;
     color: #3d3e43;
     // height: 40px;
@@ -194,4 +195,28 @@
   color: #323338;
 }
 
-// filter: opacity(0.5);
+@media (max-width: 850px) {
+  .board-header-main {
+    justify-content: center;
+
+    .right-side-header {
+      .last-seen-btn,
+      .invite-btn,
+      .invite,
+      .add-to-board,
+      .container-dots {
+        display: none;
+      }
+    }
+
+    .title {
+      font-size: 25px;
+    }
+  }
+  p {
+    &.subtitle {
+      text-align: center;
+      width: 100%;
+    }
+  }
+}

@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import ElementPlus from 'element-plus'
 import store from './store'
+import VueSnip from 'vue-snip'
 
 import DropdownMenu from '@innologica/vue-dropdown-menu'
 
@@ -23,6 +24,7 @@ dom.watch()
 
 const app = createApp(App)
 
+app.use(VueSnip)
 app.use(ElementPlus)
 app.use(DropdownMenu)
 app.component('font-awesome-icon', FontAwesomeIcon)

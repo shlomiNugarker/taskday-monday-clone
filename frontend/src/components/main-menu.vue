@@ -76,6 +76,29 @@
       </div>
     </header>
     <div class="empty-div" v-if="!isNavBarOpen"></div>
+
+    <div class="main-menu-mobile">
+      <div class="icon" @click="goToHomePage">
+        <div class="logo-container">
+          <div class="logo">
+            <div class="blue"></div>
+            <div class="yellow">
+              <div class="green-dot"></div>
+            </div>
+            <div class="red">
+              <div class="yellow-dot"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bars-container">
+        <font-awesome-icon
+          class="bars"
+          icon="bars"
+          @click="toggleNavBarMobile(isOpen)"
+        />
+      </div>
+    </div>
   </section>
 </template>
 
@@ -96,6 +119,7 @@ export default {
   data() {
     return {
       // isWorkSpace: false,
+      isOpen: false,
     }
   },
   computed: {
@@ -114,6 +138,10 @@ export default {
     },
     toggleNavBar() {
       this.$store.commit({ type: 'toggleNavBar', bool: true })
+    },
+    toggleNavBarMobile(bool) {
+      this.$store.commit({ type: 'toggleNavBar', bool })
+      this.isOpen = !this.isOpen
     },
     closeModal() {
       this.$store.commit({ type: 'toggleNavBar', bool: true })

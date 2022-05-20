@@ -116,3 +116,35 @@
   margin-right: 5px;
   width: 15px;
 }
+
+@media (max-width: 850px) {
+  .board-toolbar {
+    .integrations-btn-content {
+      div {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 620px) {
+  .board-toolbar {
+    justify-content: center;
+    .toolbar-btns {
+      div {
+        &.add-view-btn {
+          display: none;
+        }
+      }
+    }
+    .collapse-btn {
+      display: none;
+    }
+    .toolbar-btns {
+      // display: none;
+    }
+    .subsets-tab {
+      display: none;
+    }
+  }
+}

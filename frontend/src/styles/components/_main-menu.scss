@@ -1,3 +1,6 @@
+.main-menu-mobile {
+  display: none;
+}
 .main-menu {
   z-index: 15;
   background-color: #292f4c;
@@ -242,5 +245,95 @@
     // font-family:rob;
     font-size: 15px;
     line-height: 22.5px;
+  }
+}
+
+@media (max-width: 620px) {
+  .main-menu {
+    display: none;
+    .toggle-nav-bar {
+      left: 57px;
+    }
+  }
+
+  .main-menu-mobile {
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    background-color: #292f4c;
+    padding: 0 10px;
+    width: 100vw;
+    height: 70px;
+
+    .icon {
+      .logo-container {
+        position: relative;
+        width: 35px;
+        height: 67px;
+        left: 2px;
+        top: 13px;
+        cursor: pointer;
+
+        .logo {
+          font-size: 1.5em;
+          display: flex;
+          position: relative;
+          margin-top: -25px;
+          font-weight: bold;
+
+          .blue {
+            position: absolute;
+            border: 1px solid #00c875;
+            width: 25px;
+            height: 12.5px;
+            top: 30px;
+            left: -3px;
+          }
+          .yellow {
+            position: absolute;
+            width: 12.5px;
+            height: 25px;
+            border: 1px solid #ffcb00;
+            left: 15px;
+            top: 35px;
+
+            .green-dot {
+              width: 1px;
+              height: 1px;
+              background-color: #00c875;
+              left: -1px;
+              position: absolute;
+              top: 5.5px;
+            }
+          }
+          .red {
+            position: absolute;
+            width: 12.5px;
+            height: 12.5px;
+            left: 24px;
+            top: 30px;
+            border: 1px solid #e2435c;
+
+            .yellow-dot {
+              width: 1px;
+              height: 1px;
+              background-color: #ffcb00;
+              left: 1.5px;
+              position: absolute;
+              bottom: -1px;
+            }
+          }
+        }
+      }
+    }
+
+    .bars-container {
+      .bars {
+        color: white;
+        font-size: 25px;
+      }
+    }
   }
 }

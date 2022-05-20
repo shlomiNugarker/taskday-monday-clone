@@ -99,6 +99,7 @@
         background-color: #dcdfec;
       }
       &.sort-btn {
+        margin-top: 4px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -181,4 +182,27 @@ input.nosubmit {
 .filter-person {
   display: flex;
   justify-content: center;
+}
+
+@media (max-width: 620px) {
+  .board-filter {
+    div {
+      flex-wrap: wrap;
+      margin-top: 4px;
+      display: none;
+    }
+    .input-container {
+      input {
+        margin-top: 15px;
+      }
+    }
+    .filter-container-btn {
+      .el-dropdown-link {
+        margin-top: 15px;
+        .filter-btn {
+          margin-bottom: 4px;
+        }
+      }
+    }
+  }
 }

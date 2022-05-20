@@ -19,7 +19,9 @@
       <div class="container-task flex">
         <div class="task-title">
           <span class="side" :style="{ 'background-color': groupColor }"></span>
-          <p v-if="!isEdit">{{ task.title }}</p>
+          <p v-snip="{ lines: 1, mode: 'css' }" v-if="!isEdit">
+            {{ task.title }}
+          </p>
           <input
             ref="input"
             type="text"

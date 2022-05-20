@@ -10,7 +10,7 @@
               class="icon-toolbar"
               src="../styles/icon/table.png"
               alt=""
-            />Main-table
+            />Table
           </button>
         </div>
 
@@ -59,7 +59,7 @@
           </button>
         </div> -->
         <p class="subsets-tab"></p>
-        <div>
+        <div class="add-view-btn">
           <button>+ Add View</button>
         </div>
       </div>

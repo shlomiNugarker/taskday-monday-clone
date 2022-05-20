@@ -11,3 +11,14 @@
   left: 0;
   width: calc(100vw - 340px);
 }
+
+@media (max-width: 620px) {
+  .board-details-header {
+    width: 100vw;
+    margin-top: 70px;
+    // width: calc(100vw - 70px);
+    .subtitle {
+      width: 80vw;
+    }
+  }
+}

@@ -250,3 +250,55 @@
     }
   }
 }
+
+@media (max-width: 650px) {
+  .home-view {
+    // background-color: #5034ff;
+
+    .header-container {
+      padding: 5px;
+      .header {
+        .container-logo {
+          .logo {
+            // padding: 10px;
+          }
+          .logo-txt {
+            display: none;
+          }
+        }
+
+        .nav-bar {
+          .contact-btn {
+            display: none;
+          }
+        }
+      }
+    }
+
+    .title-container {
+      padding: 115px 15px 0 15px;
+      .title {
+        p {
+          font-size: 45px;
+          text-align: center;
+        }
+        span {
+          text-align: center;
+        }
+      }
+    }
+
+    .imgs-container {
+      flex-direction: column;
+
+      .img-container {
+        .img {
+          margin: 10px 0;
+        }
+        .img-2 {
+          width: 75%;
+        }
+      }
+    }
+  }
+}

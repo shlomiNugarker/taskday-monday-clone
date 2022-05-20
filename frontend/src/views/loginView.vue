@@ -31,7 +31,7 @@
       <form class="login-form" @submit.prevent="doLogin">
         <input
           type="text"
-          placeholder="Example@company.com"
+          placeholder="Username"
           v-model="loginCred.username"
         />
         <input

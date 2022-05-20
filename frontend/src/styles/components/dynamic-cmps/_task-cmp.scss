@@ -86,12 +86,11 @@
     }
   }
 }
-
 .left-btn-task {
   // align-items: center;
   // justify-content: center;
   z-index: 5;
-  // min-width: 1200px;
+
   min-width: 375px;
   height: 35px;
   position: sticky;
@@ -115,6 +114,19 @@
       align-items: center;
       justify-content: center;
       margin-left: 11px;
+    }
+  }
+}
+
+@media (max-width: 620px) {
+  .left-btn-task {
+    min-width: 215px;
+    position: relative;
+
+    .btn-down-task-container {
+      display: block;
+    }
+    .task-cmp {
     }
   }
 }

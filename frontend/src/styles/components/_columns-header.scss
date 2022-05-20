@@ -83,8 +83,18 @@
     }
   }
   .el-dropdown-link {
-    margin-left: 10px;
+    margin-left: 9px;
     display: flex;
     color: white;
+  }
+}
+
+@media (max-width: 620px) {
+  .columns-header {
+    .titles {
+      .title {
+        min-width: 190px;
+      }
+    }
   }
 }
