@@ -1,6 +1,5 @@
 .columns-header {
   .titles {
-    // background-color: lightgreen;
     display: flex;
     align-items: center;
     align-content: center;
@@ -17,10 +16,10 @@
       min-width: 350px;
       display: flex;
       justify-content: flex-start;
+      cursor: pointer;
     }
 
     .cmp-title {
-      // margin-left: 32px;
       min-width: 150px;
     }
 
@@ -28,10 +27,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      // min-width: 200px;
       height: 40px;
       margin-left: 2px;
-      //   border: 1px solid;
 
       .input-container {
         input {
@@ -40,13 +37,11 @@
             outline: none !important;
 
             border: 0.5px solid #817f7c;
-            // border: 0.5px solid #7c7c81bb;
           }
         }
       }
 
       .btn-down-task-container {
-        // background-color: chocolate;
         color: white;
         display: flex;
         align-items: center;
@@ -64,22 +59,6 @@
           cursor: pointer;
         }
       }
-
-      // &:first-child {
-      //   // background-color: rgba(209, 209, 209, 0.738);
-
-      //   position: sticky;
-      //   min-width: 700px;
-      //   z-index: 2000;
-      //   left: 30px;
-      //   div {
-      //     cursor: pointer;
-      //     background-color: rgba(255, 255, 255, 0.738);
-      //     justify-content: flex-start;
-      //     //   border: 1px solid;
-      //     width: 100%;
-      //   }
-      // }
     }
   }
   .el-dropdown-link {
@@ -93,7 +72,8 @@
   .columns-header {
     .titles {
       .title {
-        min-width: 190px;
+        // min-width: 190px;
+        min-width: 65vw;
       }
     }
   }

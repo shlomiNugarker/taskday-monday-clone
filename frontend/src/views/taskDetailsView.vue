@@ -8,13 +8,9 @@
 
         <div class="details-input">
           <h1>{{ currTask.title }}</h1>
-          <!-- <input type="text" /> -->
           <div class="add-view-container flex">
             <img src="" alt="" />
-            <!-- <span v-for="member in task.members" :key="member._id"> -->
-            <!-- <el-avatar :src="member.imgUrl" /> -->
-            <!-- <avatar-img></avatar-img> -->
-            <!-- </span> -->
+
             <p class="subset-tab-details"></p>
             <div>
               <font-awesome-icon class="dots" icon="ellipsis" />
@@ -130,8 +126,6 @@
                 </div>
               </div>
             </div> -->
-
-              <!--  -->
             </div>
           </div>
         </div>
@@ -156,8 +150,6 @@ export default {
   created() {
     const taskId = this.$route.params.taskId
     const boardId = this.$route.params.boardId
-    console.log('param-task:', taskId)
-    console.log('param-board:', boardId)
 
     this.$store.dispatch({
       type: 'getCurrTask',
@@ -181,8 +173,6 @@ export default {
     getCurrTask() {
       const taskId = this.$route.params.taskId
       const boardId = this.$route.params.boardId
-      console.log('param-task:', taskId)
-      console.log('param-board:', boardId)
 
       this.$store.dispatch({
         type: 'getCurrTask',
@@ -193,7 +183,6 @@ export default {
     addUpdate() {
       const newUpdete = {
         id: utilService.makeId(),
-        // byUser: this.$store.getters.loggedinUser,
         byUser: {
           _id: 'u10zdf1',
           fullname: 'Shlomi Nugarker',
@@ -204,7 +193,7 @@ export default {
         replies: [],
         likes: [],
       }
-      console.log(newUpdete)
+
       const copyTask = JSON.parse(JSON.stringify(this.currTask))
       copyTask.comments.unshift(newUpdete)
       this.updateTxt = ''

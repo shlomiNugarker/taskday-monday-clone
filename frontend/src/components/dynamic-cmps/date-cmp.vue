@@ -91,7 +91,6 @@ export default {
       )
     },
     styleObject() {
-      // return { "background-color": this.groupColor };
       if (!this.value1) return { 'background-color': this.groupColor }
       const diff = this.value1[1] - this.value1[0]
       const today = Date.now()
@@ -106,13 +105,6 @@ export default {
       }
     },
   },
-  watch: {
-    // '$store.getters.currBoard'() {
-    //   this.startDate = this.task.timeline.startDate
-    //   this.endDate = this.task.timeline.endDate
-    //   if (!this.startDate || !this.endDate) this.value1 = null
-    //   else this.value1 = [this.startDate, this.endDate]
-    // },
-  },
+  watch: {},
 }
 </script>

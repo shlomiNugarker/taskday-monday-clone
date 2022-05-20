@@ -19,6 +19,10 @@
           >
         </div>
       </div>
+      <div class="go-demo-btn" @click="goDemo">
+        <button>See Demo</button>
+        <font-awesome-icon class="arrow-right" icon="arrow-right" />
+      </div>
     </header>
 
     <div class="login-container">
@@ -110,9 +114,8 @@ export default {
       try {
         await this.$store.dispatch({ type: 'login', userCred: this.loginCred })
         this.goDemo()
-        // this.$router.push('/')
       } catch (err) {
-        console.log(err)
+        // console.log(err)
         this.msg = 'Failed to login'
       }
     },

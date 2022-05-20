@@ -1,16 +1,4 @@
 // // COLOR PALETTE
-// https://coolors.co/160f29-246a73-368f8b-f3dfc1-ddbea8
 $clr1: #d0d4e4;
 $blue: #0073ea;
 $border: #d0d4e4;
-
-// $clr4: darken($clr3, 40%);
-// LAYOUT
-$layoutPadding: 20px;
-// LAYOUT BREAKPOINTS
-$break-narrow: 1200px;
-$break-normal: 1360px;
-$break-wide: 1920px;
-$padded-break-narrow: $break-narrow + $layoutPadding * 2;
-$padded-break-normal: $break-normal + $layoutPadding * 2;
-$padded-break-wide: $break-wide + $layoutPadding * 2;

@@ -1,8 +1,11 @@
 <template>
   <div>
     <Container class="container-groups" @drop="onDrop" orientation="vertical">
-      <Draggable v-for="group in groups" :key="group.id">
-        <!-- <div> -->
+      <Draggable
+        class="group-container"
+        v-for="group in groups"
+        :key="group.id"
+      >
         <columns-header
           class="group-list"
           :group="group"
@@ -17,7 +20,6 @@
         />
 
         <add-task :group="group" @addTask="addTask" />
-        <!-- </div> -->
       </Draggable>
     </Container>
   </div>
@@ -55,7 +57,7 @@ export default {
     applyDrag(items, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult
       if (removedIndex === null && addedIndex === null) return items
-      // const result = items;
+
       let itemToAdd = payload
       if (removedIndex !== null) {
         itemToAdd = items.splice(removedIndex, 1)[0]
@@ -67,7 +69,6 @@ export default {
     },
     onDrop(dropResult) {
       this.copyGroups = this.applyDrag(this.copyGroups, dropResult)
-      // this.groups = this.applyDrag(this.groups, dropResult)
 
       this.$store.dispatch({
         type: 'updateGroupsDragDrop',
@@ -83,8 +84,6 @@ export default {
 
       const groupToEdit = JSON.parse(JSON.stringify(this.groups[idx]))
       groupToEdit.title = title
-
-      // console.log(groupToEdit)
 
       this.$store.dispatch({
         type: 'updateGroup',

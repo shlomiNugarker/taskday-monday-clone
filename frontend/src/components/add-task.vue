@@ -53,7 +53,6 @@ export default {
     },
     focusIn() {
       // this.$refs.input.focus()
-      // console.log(this.$refs.input)
     },
     addTask() {
       this.isAdd = false
@@ -62,7 +61,6 @@ export default {
       const newTaskTitle = this.newTaskTitle
       this.newTaskTitle = ''
       this.$emit('addTask', { newTaskTitle, groupId })
-      // this.$emit("addTask", { newTaskTitle, originGroup: this.currGroup });
     },
   },
   components: {},

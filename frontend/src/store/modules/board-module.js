@@ -3,7 +3,6 @@ import { socketService } from '../../services/socket.service'
 
 export default {
   state: {
-    // boards: null,
     currBoard: '',
     boardsList: null,
     filteredBoard: null,
@@ -19,7 +18,7 @@ export default {
       direction: 1,
     },
     isNavBarOpen: false,
-    isLoading: false,
+    isLoading: true,
     currTaskIdx: '',
   },
   getters: {
@@ -32,9 +31,7 @@ export default {
     boardsList(state) {
       return state.boardsList
     },
-    // boards(state) {
-    //   return state.boards
-    // },
+
     board(state) {
       return state.currBoard
     },
@@ -86,14 +83,12 @@ export default {
       state.isLoading = false
     },
     updateFilter(state, { filterBy }) {
-      console.log(filterBy)
       state.filterBy = filterBy
     },
     updateSort(state, { sortBy }) {
       state.sortBy = sortBy
     },
     changeView(state, { view }) {
-      console.log(view)
       state.currView = view
     },
     setCurrTaskIdx(state, { groupIdx, taskIdx }) {
@@ -170,24 +165,20 @@ export default {
     },
     async getCurrTask({ commit, state }, { boardId, taskId }) {
       const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
-      // console.log(copyBoard)
 
       var currTask, groupIdx, taskIdx
 
       for (var i = 0; i < copyBoard.groups.length; i++) {
         for (var j = 0; j < copyBoard.groups[i].tasks.length; j++) {
           if (taskId === copyBoard.groups[i].tasks[j].id) {
-            // console.log('groupIdx:', i)
             groupIdx = i
-            // console.log('taskIdx:', j)
+
             taskIdx = j
-            // currTask = copyBoard.groups[i].tasks[j]
           }
         }
       }
 
       commit({ type: 'setCurrTaskIdx', groupIdx, taskIdx })
-      // console.log(currTask)
     },
     async getBoardById({ state, commit }, { boardId }) {
       try {
@@ -226,7 +217,6 @@ export default {
       await boardService.update(copyBoard)
       socketService.emit('board newUpdateBoard', copyBoard)
       commit({ type: 'setCurrBoard', board: copyBoard })
-      // commit({ type: 'loadGroups', groups: copyBoard.groups }) // <- cancel?
     },
     async updateGroup({ state, commit }, { groupToEdit, idx }) {
       const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
@@ -244,7 +234,7 @@ export default {
       copyBoard.groups[groupIdx].tasks.push(newTask)
       await boardService.update(copyBoard)
       socketService.emit('board newUpdateBoard', copyBoard)
-      commit({ type: 'addTask', newTask, groupIdx }) // <- cancel??
+      commit({ type: 'addTask', newTask, groupIdx })
       commit({ type: 'setCurrBoard', board: copyBoard })
     },
     async removeTask({ state, commit }, { groupId, task }) {
@@ -256,7 +246,6 @@ export default {
       socketService.emit('board newUpdateBoard', copyBoard)
       await boardService.update(copyBoard)
       commit({ type: 'removeTask', groupIdx, taskIdx })
-      // commit({ type: 'filter', filterBy: state.filterBy})
     },
     async addGroup({ state, commit }) {
       const newGroup = boardService.getEmptyGroup()

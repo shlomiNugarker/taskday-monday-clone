@@ -1,5 +1,5 @@
 <template>
-  <section class="text-cmp">
+  <section class="">
     <section
       class="priority-cmp"
       v-bind:style="{ backgroundColor: priorityStyle }"

@@ -1,18 +1,13 @@
 .boards-nav-bar {
   z-index: 1330;
-  // position: ;
+
   height: 100vh;
   width: 260px;
   top: 0;
-  // left: -305px;
   padding: 16px 16px;
   background-color: #f6f7fb;
   border-right: 1px solid #d0d4e4;
   transition: left 0.3s;
-  // margin-left: 70px;
-
-  // position: absolute; // need to fix layout - remove position absolute
-  // left: 70px;
 
   .close {
     font-size: 19px;
@@ -94,6 +89,10 @@
   .items-title {
     margin-top: 10px;
     color: #323338;
+
+    .add-board-btn {
+      cursor: pointer;
+    }
     div {
       display: flex;
       align-items: center;
@@ -101,7 +100,6 @@
       padding: 5px;
       border-radius: 5px;
       height: 35px;
-      cursor: pointer;
 
       span {
         width: 20px;
@@ -184,15 +182,6 @@
 .board-clicked {
   background-color: #cce5ff;
 }
-
-// .boards-nav-bar {
-//   background-color: lightcoral;
-//   width: 300px;
-//   //   position: fixed;
-//   top: 0;
-//   z-index: -14;
-//   height: 100vh;
-// }
 
 @media (max-width: 620px) {
   .el-overlay-message-box {

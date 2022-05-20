@@ -5,10 +5,7 @@
         ><font-awesome-icon class="icon-right" icon="angle-right"
       /></span>
       <div class="seen-plans">
-        <p>
-          <!-- <img src="../../styles/icon/star-shape-big-and-small.png" alt /> -->
-          See plans
-        </p>
+        <p>See plans</p>
       </div>
       <div>
         <div class="icon" @click="goToHomePage">
@@ -22,12 +19,6 @@
             </div>
           </div>
         </div>
-        <!-- <img
-          src="../styles/icon/icon.png"
-          alt=""
-          class="icon"
-          @click="goToHomePage"
-        /> -->
 
         <div class="top-navigation-items-area">
           <div class="menu-icon cliked-btn-nav" @click="toggleNavBar">
@@ -45,8 +36,7 @@
           </div>
         </div>
       </div>
-      <!-- <router-link class="link" to="/">Home</router-link>
-    <router-link class="link" to="/main">Main</router-link>-->
+
       <div class="container-bottom">
         <div class="bottom-navigation-items-area">
           <div>
@@ -93,8 +83,15 @@
       </div>
       <div class="bars-container">
         <font-awesome-icon
+          v-if="!isNavBarOpen"
           class="bars"
           icon="bars"
+          @click="toggleNavBarMobile(isOpen)"
+        />
+        <font-awesome-icon
+          icon="x"
+          v-if="isNavBarOpen"
+          class="bars"
           @click="toggleNavBarMobile(isOpen)"
         />
       </div>
@@ -103,9 +100,6 @@
 </template>
 
 <script>
-// import { toyService } from "../services/toy-service.js";
-// import customToyd from './custom-toyd.vue'
-
 import menuIcon from './icons/menu-icon.vue'
 import notificationIcon from './icons/notification-icon.vue'
 import inboxIcon from './icons/inbox-icon.vue'
@@ -118,7 +112,6 @@ import helpIcon from './icons/help-icon.vue'
 export default {
   data() {
     return {
-      // isWorkSpace: false,
       isOpen: false,
     }
   },
@@ -126,11 +119,6 @@ export default {
     isNavBarOpen() {
       return this.$store.getters.isNavBarOpen
     },
-    // myClass() {
-    //   // console.log('my class', this.currPage);
-    //   if (this.currPage === 'homePage') return true;
-    //   else return false;
-    // },
   },
   methods: {
     goToHomePage() {
@@ -145,7 +133,6 @@ export default {
     },
     closeModal() {
       this.$store.commit({ type: 'toggleNavBar', bool: true })
-      // this.$emit('boardClicked')
     },
   },
   components: {
@@ -159,12 +146,6 @@ export default {
     helpIcon,
   },
   created() {},
-  watch: {
-    // '$store.getters.currPage': {
-    //   handler() {
-    //     this.currPage = this.$store.getters.currPage;
-    //   },
-    // },
-  },
+  watch: {},
 }
 </script>

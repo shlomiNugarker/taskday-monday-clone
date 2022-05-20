@@ -1,6 +1,5 @@
 .task-details {
   z-index: 10;
-  // display: none;
   border-left: 1px solid $clr1;
   box-shadow: 0px 4px 8px rgb(0 0 0 / 20%);
   width: 45vw;
@@ -28,8 +27,6 @@
 
       h1 {
         display: flex;
-        // align-items: center;
-        // font-size: 24px;
       }
 
       .add-view-container {
@@ -56,7 +53,6 @@
       width: 15px;
       height: 15px;
       padding: 5px;
-      // padding-left: 0;
       border-radius: 5px;
       cursor: pointer;
       &:hover {
@@ -71,20 +67,12 @@
   }
 
   .title-container {
-    // background-color: lightcoral;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     min-height: 120px;
     border-bottom: 1px solid $border;
     font-size: 18px;
-
-    // .item-tabs {
-    //   color: #323338;
-
-    //   .tab-btn {
-    //   }
-    // }
 
     .close-details-btn {
       margin: 20px 20px 5px 20px;
@@ -116,10 +104,8 @@
       }
 
       .left-tabs {
-        // background-color: blue;
         display: flex;
         div {
-          // background-color: antiquewhite;
           padding: 10px 16px;
           border-radius: 5px;
 
@@ -130,12 +116,9 @@
       }
 
       .right-tabs {
-        // background-color: burlywood;
         display: flex;
-        // padding: 16px;
 
         div {
-          // background-color: crimson;
           border-radius: 5px;
           padding: 7px 16px;
           border-radius: 5px;
@@ -160,7 +143,6 @@
       overflow-y: auto;
 
       .send-update {
-        // background-color: lightgreen;
         margin-bottom: 40px;
       }
       div {
@@ -176,8 +158,6 @@
         }
       }
       .space-view {
-        // padding: 20px;
-
         .post-component {
           border: 1px solid $clr1;
           border-radius: 5px;
@@ -222,13 +202,10 @@
             }
           }
           .title {
-            // background-color: lightcoral;
             width: 100%;
             margin-left: 8px;
           }
           .post-title {
-            // background-color: #d0d4e4;
-            // position: ;
             top: 0;
             right: 0;
             z-index: 1;
@@ -259,7 +236,6 @@
             .left-btn {
               border-top: 1px solid $clr1;
               border-right: 1px solid $clr1;
-              // border-bottom: 1px solid $clr1;
               cursor: pointer;
 
               &:hover {
@@ -268,8 +244,6 @@
             }
             .right-btn {
               border-top: 1px solid $clr1;
-              // border-right: 1px solid $clr1;
-              // border-bottom: 1px solid $clr1;
 
               cursor: pointer;
 
@@ -288,7 +262,6 @@
         }
 
         .seen-area {
-          // background-color: lightcoral;
           display: flex;
           align-items: center;
           justify-content: flex-end;
@@ -354,7 +327,6 @@
 
 .dots {
   width: 15px;
-  // padding-left: 5px;
 }
 
 .subset-tab-details {
@@ -386,21 +358,15 @@
   width: 15px;
   margin-right: 5px;
 }
-// .tab-btn-clicked {
-//   border-bottom: 1px solid $blue;
-// }
 
 .reply-container {
-  // background-color: #00ca72;
   min-height: 100px;
   padding: 16px;
   display: flex;
 
   .left-side-reply {
-    // height: 100%;
     width: 10%;
     .user-img {
-      // background-color: bisque;
       display: flex;
       align-items: center;
       width: 40px;
@@ -411,7 +377,6 @@
   .right-side-reply {
     height: 100%;
     width: 90%;
-    // background-color: #d0d4e4;
     display: flex;
     flex-direction: column;
 

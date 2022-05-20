@@ -84,12 +84,10 @@ export default {
       }, 1)
     },
     changeGroupTitle($event, title) {
-      // console.log(title)
       setTimeout(() => {
         this.$emit('changeGroupTitle', {
           groupId: this.group.id,
           title: this.groupCopy.title,
-          // title,
         })
       }, 2000)
     },

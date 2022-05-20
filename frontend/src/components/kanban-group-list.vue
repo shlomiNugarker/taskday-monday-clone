@@ -48,7 +48,7 @@ export default {
     applyDrag(items, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult
       if (removedIndex === null && addedIndex === null) return items
-      // const result = items;
+
       let itemToAdd = payload
       if (removedIndex !== null) {
         itemToAdd = items.splice(removedIndex, 1)[0]
@@ -60,7 +60,6 @@ export default {
     },
     onDrop(dropResult) {
       this.copyGroups = this.applyDrag(this.copyGroups, dropResult)
-      // this.groups = this.applyDrag(this.groups, dropResult)
 
       this.$store.dispatch({
         type: 'updateGroupsDragDrop',

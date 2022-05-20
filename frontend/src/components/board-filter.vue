@@ -210,7 +210,6 @@ export default {
     },
     sort(type) {
       if (this.currSortBy.type === type) {
-        console.log(type)
         var type = ''
       }
       this.$emit('sort', type)

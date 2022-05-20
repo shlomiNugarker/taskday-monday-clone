@@ -6,7 +6,6 @@
           <div v-if="!isEdit" @click="focusIn" @change="updateBoard">
             {{ title }}
           </div>
-          <!-- <div> -->
           <input
             v-if="isEdit"
             @keydown.enter="saveTitle"
@@ -17,7 +16,6 @@
             type="text"
             v-model="title"
           />
-          <!-- </div> -->
 
           <span @click="onClickInfo">
             <font-awesome-icon class="info-icon" icon="circle-info" />
@@ -117,7 +115,7 @@ export default {
     updateBoard() {
       setTimeout(() => {
         this.wait = false
-        console.log(this.title)
+
         const boardToEdit = JSON.parse(JSON.stringify(this.board))
         boardToEdit.title = this.title
         boardToEdit.subtitle = this.subTitle

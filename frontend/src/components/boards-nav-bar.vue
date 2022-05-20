@@ -25,7 +25,7 @@
     </div>
 
     <div class="items-title">
-      <div @click="open">
+      <div class="add-board-btn" @click="open">
         <span>
           <plus-icon />
         </span>
@@ -75,8 +75,6 @@
             </el-dropdown-menu>
           </template>
         </el-dropdown>
-
-        <!-- //modal -->
       </div>
     </div>
   </section>
@@ -88,9 +86,7 @@ import filterIcon from '../components/icons/filter-icon.vue'
 import searchIcon from '../components/icons/search-icon.vue'
 import boardIcon from '../components/icons/board-icon.vue'
 export default {
-  props: {
-    // boards: Array,
-  },
+  props: {},
   data() {
     return {
       newBoardName: '',
@@ -112,10 +108,8 @@ export default {
   methods: {
     closeModal() {
       this.$store.commit({ type: 'toggleNavBar', bool: false })
-      // this.$emit('boardClicked')
     },
     moveToBoard(boardId) {
-      console.log('move to board', boardId)
       this.$router.push(`/board/${boardId}`)
       this.$store.dispatch({ type: 'getBoardById', boardId })
       this.closeModal()
@@ -148,7 +142,6 @@ export default {
         })
     },
     removeBoard(boardId) {
-      console.log(boardId)
       this.$store.dispatch({
         type: 'removeBoard',
         boardId,

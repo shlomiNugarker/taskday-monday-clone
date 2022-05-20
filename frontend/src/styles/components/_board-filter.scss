@@ -1,7 +1,7 @@
 .board-filter {
   height: 65px;
   border-top: 1px solid #d0d4e4;
-  // background-color: lightseagreen;
+
   min-height: 35px;
   padding: 16px 0;
   display: flex;
@@ -28,7 +28,7 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border: none;
-    // border-left: ;
+
     height: 36px;
   }
   .icon-img-person {
@@ -45,18 +45,16 @@
     .input-container {
       input {
         width: 115px;
-        // padding: 5px 5px 5px 5px;
+
         border: none;
         transform: width 1s;
         font-size: 14px;
-        // line-height: 24px;
+
         transition: width 0.1s;
-        // margin-top: 3px;
 
         &:hover {
           background-color: #dcdfec;
           border-radius: 5px;
-          // cursor: pointer;
         }
 
         &:focus {
@@ -84,7 +82,7 @@
       font-size: 14px;
       line-height: 24px;
       cursor: pointer;
-      // padding: 3px;
+
       margin-left: 5px;
       height: 34px;
 
@@ -138,7 +136,7 @@ form.nosubmit {
   display: flex;
   justify-content: center;
   align-items: center;
-  // filter: opacity(0.7);
+
   padding: 2px 0;
 
   span {
@@ -149,16 +147,14 @@ form.nosubmit {
 }
 .sort-icon {
   width: 15px;
-  // height: 40px;
-  // margin-top: 5px;
+
   margin-right: 5px;
   color: #68696c;
   filter: opacity(0.6);
 }
 .filter {
   width: 15px;
-  // height: 40px;
-  // margin-top: 7px;
+
   margin-right: 7px;
 }
 

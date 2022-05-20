@@ -1,8 +1,6 @@
 .board-details-header {
   width: calc(100vw - 120px);
   padding: 15px 30px;
-  // transition: all 0.8s;
-  // border-bottom: 1px solid #d0d4e4;
   position: sticky;
   left: 0;
 }
@@ -16,7 +14,7 @@
   .board-details-header {
     width: 100vw;
     margin-top: 70px;
-    // width: calc(100vw - 70px);
+
     .subtitle {
       width: 80vw;
     }

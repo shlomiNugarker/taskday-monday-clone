@@ -1,9 +1,7 @@
 <template>
   <div class="side-bar">
     <main-menu />
-    <!-- <transition name="show"> -->
     <boards-nav-bar />
-    <!-- </transition> -->
   </div>
 </template>
 

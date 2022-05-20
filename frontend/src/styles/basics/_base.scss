@@ -9,12 +9,9 @@ html {
 
 body {
   margin: 0;
-  // padding: 0;
 }
 html,
 body {
-  // overflow-x: hidden;
-  // overflow-y: hidden;
 }
 
 h1,
@@ -35,7 +32,6 @@ p {
 
 .app-container {
   flex: 1;
-  // min-width: 100%;
 }
 
 .blue-symbl {
@@ -45,14 +41,6 @@ p {
   border-bottom-right-radius: 3px;
   background-color: $blue;
 }
-
-// .empty-div {
-//   // position: relative;
-//   width: 30px;
-//   background-color: #f6f7fb;
-//   height: 100vh;
-//   border-right: 1px solid #d0d4e4;
-// }
 
 .toolbar-btn {
   border: 1px solid #facbc9;

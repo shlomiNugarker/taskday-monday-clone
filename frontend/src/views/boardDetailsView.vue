@@ -38,9 +38,7 @@ import { socketService } from '../services/socket.service'
 export default {
   name: 'board-details',
   data() {
-    return {
-      // isShowGroupList: false,
-    }
+    return {}
   },
   computed: {
     currBoard() {
@@ -72,7 +70,6 @@ export default {
   },
   methods: {
     updateBoard(board) {
-      console.log('update board, details page')
       this.$store.commit({ type: 'setCurrBoard', board })
     },
   },
@@ -80,6 +77,7 @@ export default {
   watch: {
     '$route.params.boardId'() {
       const boardId = this.$route.params.boardId
+      if (!boardId) return
       this.$store.dispatch({ type: 'getBoardById', boardId })
     },
   },

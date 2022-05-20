@@ -1,7 +1,6 @@
 // // SETUP
 @import 'setup/variables';
-// @import 'setup/typography';
-// @import '../styles/fonts/monday/monday-icons-html.woff';
+
 // // BASICS
 @import 'basics/helpers';
 @import 'basics/base';
@@ -39,19 +38,3 @@
 @import 'views/task-details';
 @import 'views/HomeView';
 @import 'views/loginView';
-// @import 'components/group-list';
-// @import 'components/item-preview';
-// @import 'components/item-list';
-// @import 'components/board-header-main';
-// @import 'components/board-toolbar';
-// @import 'components/modals/work-space-menu-modal.scss';
-// @import 'components/status-picker';
-// @import 'components/date-picker';
-
-//  VIEWS
-// @import 'views/main-board';
-// @import 'views/home';
-
-// .filter-icon-html {
-//   @include mkIcon('\f333');
-// @import 'components/main-board-media-queries.scss';

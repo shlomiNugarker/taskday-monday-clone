@@ -27,7 +27,6 @@ export default {
     return {
       filterBy: null,
       showHeader: true,
-      // currBoard: this.$store.getters.currBoard,
     }
   },
   computed: {
@@ -54,7 +53,7 @@ export default {
       if (!type) {
         var sortBy = { type: '', direction: 1 }
         this.$store.commit({ type: 'updateSort', sortBy })
-        console.log('this.sortBy', this.sortBy)
+
         return
       }
       var sortBy = JSON.parse(JSON.stringify(this.$store.getters.currSortBy))

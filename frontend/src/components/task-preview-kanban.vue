@@ -4,11 +4,9 @@
       class="status-circle"
       v-bind:style="{ backgroundColor: statusStyle }"
     ></span>
-    <p>
+    <p v-snip="{ lines: 1, mode: 'css' }">
       {{ task.title }}
     </p>
-
-    <!-- <div>person</div> -->
   </div>
 </template>
 <script>

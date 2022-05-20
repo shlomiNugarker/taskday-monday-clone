@@ -46,7 +46,7 @@ async function addBoard(req, res) {
 async function updateBoard(req, res) {
   try {
     var board = req.body
-    // board.byUserId = req.session.user._id
+
     board = await boardService.update(board)
 
     res.send(board)

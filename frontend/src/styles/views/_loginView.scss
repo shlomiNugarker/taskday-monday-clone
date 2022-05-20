@@ -3,6 +3,10 @@
     background-color: #f7f7f7;
     height: 80px;
     border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
 
     .container-logo {
       cursor: pointer;
@@ -13,7 +17,7 @@
         position: relative;
         font-weight: bold;
         left: 30px;
-        top: 9px;
+        top: -13px;
 
         .blue {
           position: absolute;
@@ -58,7 +62,7 @@
       .logo-txt {
         position: relative;
         left: 115px;
-        top: 20px;
+
         font-size: 30px;
         display: inline;
 
@@ -71,6 +75,30 @@
         .red {
           color: #e2435c;
         }
+      }
+    }
+
+    .go-demo-btn {
+      background-color: #f7f7f7;
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border-radius: 25px;
+      cursor: pointer;
+      border: 1px solid;
+
+      &:hover {
+        // background-color: #5a5ad5;
+      }
+
+      button {
+        background-color: #f7f7f7;
+        color: black;
+        cursor: pointer;
+        border: none;
+      }
+      .arrow-right {
+        color: black;
       }
     }
   }
@@ -94,7 +122,6 @@
 
     .login-form {
       display: flex;
-      //   width: 100vw;
       align-items: center;
       flex-direction: column;
       width: 380px;
@@ -141,7 +168,7 @@
       border-radius: 5px;
       padding: 5px;
       margin-bottom: 10px;
-      cursor: pointer;
+
       .social-login-logo {
         height: 16px;
         margin-right: 8px;
@@ -152,7 +179,6 @@
       div {
         span {
           color: #0fa2e2;
-          cursor: pointer;
         }
       }
     }
@@ -171,7 +197,6 @@
       }
 
       .login-form {
-        // width: 100%;
         input {
           width: 75%;
         }
@@ -194,6 +219,21 @@
     .login-container {
       .login-form {
         width: 280px;
+      }
+    }
+  }
+}
+
+@media (max-width: 380px) {
+  .login-view {
+    .header-container {
+      .container-logo {
+        .logo {
+          top: -28px;
+        }
+        .logo-txt {
+          display: none;
+        }
       }
     }
   }

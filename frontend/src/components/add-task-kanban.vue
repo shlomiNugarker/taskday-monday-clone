@@ -34,7 +34,6 @@ export default {
       const newTaskTitle = this.newTaskTitle
       this.newTaskTitle = ''
       this.$emit('addTask', { newTaskTitle, groupId })
-      // this.$emit("addTask", { newTaskTitle, originGroup: this.currGroup });
     },
   },
   components: {},

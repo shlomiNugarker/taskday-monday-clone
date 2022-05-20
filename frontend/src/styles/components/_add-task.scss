@@ -4,14 +4,13 @@
   margin-left: 53px;
   height: 35px;
   margin-top: 1px;
-  // width: 1235px;
+
   margin-bottom: 15px;
 
   .add {
     border: 1px solid rgba(124, 124, 129, 0.1529411765);
     border-left: none;
     border-right: none;
-    // background-color: rgba(255, 160, 122, 0.509);
     z-index: 5;
     min-width: 680px;
     position: sticky;
@@ -32,8 +31,7 @@
         cursor: pointer;
         &:focus {
           outline: none !important;
-          // box-shadow: inset 0px 0px 0px 1px $blue;
-          // border-radius: 0.5px;
+
           border: none;
         }
       }
@@ -48,7 +46,6 @@
     border: 1px solid rgba(124, 124, 129, 0.1529411765);
     border-left: none;
     cursor: pointer;
-    // background-color: aquamarine;
 
     width: 431px;
 
@@ -58,7 +55,6 @@
       display: flex;
       flex-direction: row-reverse;
       position: relative;
-      // left: 50px;
       width: 100%;
       button {
         z-index: 5;
@@ -77,7 +73,6 @@
     margin-left: 2px;
 
     div {
-      // background-color: #d0d4e4;
       width: 10px;
       background-color: #d0d4e4;
       width: 10px;
@@ -88,13 +83,15 @@
 @media (max-width: 620px) {
   .add-task {
     margin-left: 10px;
+    margin-bottom: 45px;
 
     .right-side {
-      width: 314px;
+      width: 755px;
     }
     .add {
-      position: relative;
+      position: sticky;
       z-index: 4;
+      min-width: 213px;
     }
   }
 }

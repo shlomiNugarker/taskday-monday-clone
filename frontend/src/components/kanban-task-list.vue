@@ -10,15 +10,6 @@
     >
       <Draggable v-for="task in tasksToShow" :key="task.id">
         <task-preview-kanban :task="task" :groupId="groupId" />
-        <!-- <div class="task-container">
-          <span
-            class="status-circle"
-            v-bind:style="{ backgroundColor: statusStyle }"
-          ></span>
-          <p>
-            {{ task.title }}
-          </p>
-        </div> -->
       </Draggable>
     </Container>
   </section>
@@ -117,7 +108,6 @@ export default {
     },
   },
   created() {
-    console.log('created')
     this.copyTasks = JSON.parse(JSON.stringify(this.tasks))
     this.copyGroup = JSON.parse(JSON.stringify(this.group))
   },

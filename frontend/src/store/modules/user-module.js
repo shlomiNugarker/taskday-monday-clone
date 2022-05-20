@@ -61,7 +61,7 @@ export default {
         commit({ type: 'setLoggedinUser', user })
         return user
       } catch (err) {
-        console.log('userStore: Error in signup', err)
+        // console.log('userStore: Error in signup', err)
         throw err
       }
     },
@@ -70,7 +70,7 @@ export default {
         await userService.logout()
         commit({ type: 'setLoggedinUser', user: null })
       } catch (err) {
-        console.log('userStore: Error in logout', err)
+        // console.log('userStore: Error in logout', err)
         throw err
       }
     },
@@ -78,10 +78,10 @@ export default {
       // TODO: loading
       try {
         const users = await userService.getUsers()
-        console.log(users)
+
         commit({ type: 'setUsers', users })
       } catch (err) {
-        console.log('userStore: Error in loadUsers', err)
+        // console.log('userStore: Error in loadUsers', err)
         throw err
       }
     },
@@ -95,7 +95,7 @@ export default {
           commit({ type: 'setWatchedUser', user })
         })
       } catch (err) {
-        console.log('userStore: Error in loadAndWatchUser', err)
+        // console.log('userStore: Error in loadAndWatchUser', err)
         throw err
       }
     },
@@ -104,7 +104,7 @@ export default {
         await userService.remove(userId)
         commit({ type: 'removeUser', userId })
       } catch (err) {
-        console.log('userStore: Error in removeUser', err)
+        // console.log('userStore: Error in removeUser', err)
         throw err
       }
     },
@@ -113,7 +113,7 @@ export default {
         user = await userService.update(user)
         commit({ type: 'setUser', user })
       } catch (err) {
-        console.log('userStore: Error in updateUser', err)
+        // console.log('userStore: Error in updateUser', err)
         throw err
       }
     },
@@ -122,7 +122,7 @@ export default {
         const score = await userService.changeScore(100)
         commit({ type: 'setUserScore', score })
       } catch (err) {
-        console.log('userStore: Error in increaseScore', err)
+        // console.log('userStore: Error in increaseScore', err)
         throw err
       }
     },

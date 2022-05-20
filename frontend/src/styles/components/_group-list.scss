@@ -1,9 +1,5 @@
 .container-groups {
-  // height: calc(100vh - 227px);
-  // overflow-x: auto;
   background-color: rgb(255, 255, 255);
-  // background-color: lightcoral;
-  // width: calc(100vw - 120px);
   padding-bottom: 12px;
 
   .smooth-dnd-container.vertical > .smooth-dnd-draggable-wrapper {
@@ -21,5 +17,13 @@
 @media (max-width: 620px) {
   .group-list {
     padding: 0;
+    margin-top: 30px;
+  }
+
+  .group-container {
+    border: 1px solid rgb(213, 213, 213);
+    // background-color: #dedede5e;
+    border-radius: 10px;
+    margin: 3px;
   }
 }

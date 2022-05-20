@@ -5,7 +5,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  // border-top: 1px solid #7c7c81;
   border: 1px solid #7c7c8127;
   border-left: none;
 
@@ -18,7 +17,6 @@
   }
 
   .task-title {
-    // background-color: #f5f6f8e0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -34,10 +32,7 @@
       }
       &:focus {
         outline: none !important;
-        // box-shadow: inset 0px 0px 0px 1px $blue;
-        // border-radius: 0.5px;
         border: none;
-        // border: 0.5px solid #7c7c81bb;
         background-color: #f5f6f800;
       }
     }
@@ -60,7 +55,6 @@
       width: 7px;
       height: 35px;
       margin-right: 5px;
-      // background-color: rgb(172, 30, 30);
     }
   }
   .add-comment-container {
@@ -87,8 +81,6 @@
   }
 }
 .left-btn-task {
-  // align-items: center;
-  // justify-content: center;
   z-index: 5;
 
   min-width: 375px;
@@ -120,13 +112,20 @@
 
 @media (max-width: 620px) {
   .left-btn-task {
-    min-width: 215px;
-    position: relative;
+    // width: 270px;
+    width: 70vw;
+    min-width: unset;
+    position: sticky;
 
     .btn-down-task-container {
       display: block;
     }
     .task-cmp {
+    }
+
+    .svg-inline--fa {
+      margin-left: -9px;
+      margin-top: 1px;
     }
   }
 }

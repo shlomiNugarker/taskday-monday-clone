@@ -22,3 +22,32 @@
     width: 30px;
   }
 }
+
+@media (max-width: 620px) {
+  .task-preview {
+    margin-bottom: 60px;
+    .status-cmp,
+    .person-cmp,
+    .priority-cmp,
+    .timeline-picker,
+    .text-cmp,
+    .end-cmps {
+      position: relative;
+      top: 40px;
+      left: -115px;
+    }
+
+    .left-btn-task {
+    }
+  }
+
+  .columns-header {
+    .titles {
+      .cmp-title {
+        position: relative;
+        left: -115px;
+        top: -30px;
+      }
+    }
+  }
+}

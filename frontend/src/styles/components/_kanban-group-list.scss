@@ -1,6 +1,5 @@
 .kanban-group-list {
   .groups-container-kanban {
-    // background-color: lightcoral;
     display: flex;
     width: 100%;
     margin: 15px;
@@ -38,6 +37,16 @@
           }
         }
       }
+    }
+  }
+}
+
+@media (max-width: 620px) {
+  .kanban-group-list {
+    .groups-container-kanban {
+      margin: 0;
+      flex-direction: column;
+      align-items: center;
     }
   }
 }

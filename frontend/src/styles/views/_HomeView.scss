@@ -236,7 +236,6 @@
       }
 
       .img-1 {
-        // margin-left: 68%;
         width: 75%;
       }
       .img-2 {
@@ -244,7 +243,6 @@
         z-index: 5;
       }
       .img-3 {
-        // margin-right: 68%;
         width: 75%;
       }
     }
@@ -253,14 +251,11 @@
 
 @media (max-width: 650px) {
   .home-view {
-    // background-color: #5034ff;
-
     .header-container {
       padding: 5px;
       .header {
         .container-logo {
           .logo {
-            // padding: 10px;
           }
           .logo-txt {
             display: none;
@@ -300,5 +295,8 @@
         }
       }
     }
+  }
+  .hidden {
+    visibility: visible;
   }
 }

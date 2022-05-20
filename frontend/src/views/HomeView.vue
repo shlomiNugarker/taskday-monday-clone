@@ -1,6 +1,5 @@
 <template>
   <section class="home-view">
-    <!-- <h1 @click="goDemo">Hello home go</h1> -->
     <div class="header-container">
       <header class="header">
         <div class="container-logo">
@@ -59,13 +58,6 @@
       </button>
     </div>
 
-    <!-- <div class="carrousel-container">
-      <el-carousel :interval="4000" type="card" height="200px">
-        <el-carousel-item v-for="url in imgs" :key="url">
-          <img :src="url" alt="" />
-        </el-carousel-item>
-      </el-carousel>
-    </div> -->
     <div class="imgs-container">
       <div class="img-container">
         <img class="img img-1" src="../styles/images/1.png" alt="" />
@@ -104,12 +96,12 @@ export default {
   methods: {
     goDemo() {
       var boardId = this.boardsList[0].boardId
-      console.log(boardId)
+
       this.$router.push(`/board/${boardId}`)
     },
     goLogin() {
       var boardId = this.boardsList[0].boardId
-      console.log(boardId)
+
       this.$router.push(`/login/`)
     },
     loadUsers() {

@@ -1,5 +1,4 @@
 .board-header-main {
-  // background-color: #facbc9;
   min-height: 40px;
   display: flex;
   justify-content: space-between;
@@ -25,7 +24,6 @@
     transition: width 0.1s;
     cursor: pointer;
     color: #323338;
-    // left: 60px;
 
     &:hover {
       background-color: $blue;
@@ -49,18 +47,16 @@
 
   .right-side-header {
     display: none;
-    // display: flex;
+
     align-items: center;
     color: #3d3e43;
-    // height: 40px;
 
     .add-to-board {
       border: 1px solid #c3c6d4;
       margin-left: 10px;
       padding: 7px 10px;
       color: #3d3e43;
-      // padding: 8px;
-      // border-radius: 5px;
+
       &:hover {
         background-color: #dcdfec;
       }
@@ -81,7 +77,6 @@
 
     div {
       border-radius: 5px;
-      // padding: 7px;
 
       button {
         background-color: white;
@@ -94,9 +89,6 @@
           background-color: #dcdfec;
         }
       }
-      // &:hover {
-      //   background-color: #dcdfec;
-      // }
     }
     .dots-icon {
       width: 20px;
@@ -110,12 +102,14 @@
     align-items: center;
     font-size: 35px;
     color: #323338;
+    div {
+      cursor: pointer;
+    }
 
     span {
       display: flex;
       justify-content: center;
       margin-left: 5px;
-      cursor: pointer;
     }
 
     .input-title {
