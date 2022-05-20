@@ -20,3 +20,12 @@
     width: 145px;
   }
 }
+
+@media (max-width: 620px) {
+  .text-cmp {
+    .text-icon {
+      position: relative;
+      position: unset;
+    }
+  }
+}

@@ -86,12 +86,18 @@
     margin-bottom: 45px;
 
     .right-side {
-      width: 755px;
+      width: 667px;
     }
     .add {
       position: sticky;
       z-index: 4;
-      min-width: 213px;
+      min-width: 70vw;
+
+      .input-container {
+        input {
+          width: 80%;
+        }
+      }
     }
   }
 }
