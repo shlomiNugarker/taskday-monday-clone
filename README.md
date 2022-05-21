@@ -13,5 +13,5 @@ Socket.IO
 Vuejs
 Vuex
 Sass
-Drag&drop
+
 
