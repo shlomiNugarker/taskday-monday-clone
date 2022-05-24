@@ -11,6 +11,7 @@
 
   .container {
     padding: 20px;
+    border-bottom: 1px solid $clr1;
 
     .add-view-container {
       align-items: center;
@@ -236,19 +237,48 @@
             .left-btn {
               border-top: 1px solid $clr1;
               border-right: 1px solid $clr1;
+              border-bottom: 1px solid $clr1;
+              transition: font-size 0.1s;
+
+              &:active {
+                font-size: 16px;
+              }
+
+              cursor: pointer;
+
+              &:hover {
+                background-color: #dcdfec;
+              }
+
+              .liked {
+                color: #0073ea;
+              }
+            }
+            .right-btn {
+              border-top: 1px solid $clr1;
+              border-bottom: 1px solid $clr1;
+
               cursor: pointer;
 
               &:hover {
                 background-color: #dcdfec;
               }
             }
-            .right-btn {
-              border-top: 1px solid $clr1;
+          }
 
-              cursor: pointer;
-
-              &:hover {
-                background-color: #dcdfec;
+          .replies-container {
+            .curr-replay {
+              border: 1px solid $clr1;
+              display: flex;
+              height: 50px;
+              align-items: center;
+              margin: 1px;
+              padding: 5px;
+              border-radius: 5px;
+              .user-icon {
+                margin-right: 7px;
+                width: 30px;
+                height: 30px;
               }
             }
           }
@@ -369,8 +399,8 @@
     .user-img {
       display: flex;
       align-items: center;
-      width: 40px;
-      height: 40px;
+      width: 35px;
+      height: 35px;
       border-radius: 50%;
     }
   }
@@ -391,12 +421,12 @@
 
       div {
         input {
-          height: 40px;
+          min-height: 40px;
           transition: height 0.1s;
           margin-bottom: 5px;
 
           &:focus {
-            height: 80px;
+            // height: 80px;
             border: #0073ea;
             outline: none !important;
             box-shadow: inset 0px 0px 0px 1px $blue;
@@ -450,12 +480,20 @@
     border: none;
     color: white;
     font-size: 14px;
+    cursor: pointer;
+  }
+}
+
+@media (max-width: 880px) {
+  .task-details {
+    height: 100%;
+    width: 60vw;
   }
 }
 
 @media (max-width: 620px) {
   .task-details {
     height: 100%;
-    width: 100%;
+    width: 100vw;
   }
 }

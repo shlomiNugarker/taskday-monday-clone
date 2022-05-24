@@ -116,7 +116,12 @@ export default {
       isLogin: true,
       msg: '',
       loginCred: { username: 'user1', password: '123' },
-      signupCred: { username: '', password: '', fullname: '' },
+      signupCred: {
+        username: '',
+        password: '',
+        fullname: '',
+        imgUrl: 'https://cdn1.monday.com/dapulse_default_photo.png',
+      },
     }
   },
   computed: {

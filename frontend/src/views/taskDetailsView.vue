@@ -29,7 +29,7 @@
               @keyup.enter="addUpdate"
             />
             <div>
-              <button @click="addUpdate">update</button>
+              <button class="update-btn" @click="addUpdate">update</button>
             </div>
           </div>
           <div class="send-update">
@@ -83,49 +83,70 @@
               </div>
 
               <div class="post-actions">
-                <div class="left-btn">
+                <div class="left-btn" @click="addLike(comment.id)">
                   <span>
-                    <font-awesome-icon class="like-icon" icon="thumbs-up" />
+                    <font-awesome-icon
+                      :class="{ liked: comment.isLike }"
+                      class="like-icon"
+                      icon="thumbs-up"
+                    />
                   </span>
-                  <p>like</p>
+                  <p :class="{ liked: comment.isLike }">Like</p>
                 </div>
 
-                <div class="right-btn">
+                <div class="right-btn" @click="showReplay(comment.id)">
                   <span>
                     <font-awesome-icon class="reply-icon" icon="reply" />
                   </span>
-
                   <p>Reply</p>
                 </div>
               </div>
               <!-- Replay -->
-
-              <!-- <div class="reply-container">
-              <div class="left-side-reply">
-                <div>
-                  <img class="user-img" src="" alt="" />
+              <div class="replies-container" v-if="!comment.replies.lenght">
+                <div
+                  class="curr-replay"
+                  v-for="reply in comment.replies"
+                  :key="reply"
+                >
+                  <img
+                    class="user-icon"
+                    src="../styles/icon/def-user.png"
+                    alt=""
+                  />
+                  <p class="replaies">{{ reply.txt }}xxxxxxxx</p>
                 </div>
               </div>
-              <div class="right-side-reply">
-                <div class="input-btns-container">
+
+              <div v-if="comment.id === replayToShow" class="reply-container">
+                <div class="left-side-reply">
                   <div>
-                    <input type="text" />
+                    <img
+                      class="user-img"
+                      src="../styles/icon/def-user.png"
+                      alt=""
+                    />
                   </div>
-
-                  <div class="btns-container-reply">
+                </div>
+                <div class="right-side-reply">
+                  <div class="input-btns-container">
                     <div>
-                      <span>
-                        <font-awesome-icon icon="file" />
-                        <a href>Add files</a>
-                      </span>
+                      <input type="text" v-model="replayTxt" />
                     </div>
-                    <div class="reply-btn">
-                      <button>Reply</button>
+
+                    <div class="btns-container-reply">
+                      <div>
+                        <span>
+                          <font-awesome-icon icon="file" />
+                          <a href>Add files</a>
+                        </span>
+                      </div>
+                      <div class="reply-btn" @click="addReplay(comment.id)">
+                        <button>Reply</button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div> -->
             </div>
           </div>
         </div>
@@ -144,6 +165,8 @@ export default {
   data() {
     return {
       updateTxt: '',
+      replayTxt: '',
+      replayToShow: '',
     }
   },
   components: {},
@@ -159,6 +182,9 @@ export default {
   },
   unmounted() {},
   computed: {
+    loggedinUser() {
+      return this.$store.getters.loggedinUser
+    },
     currTask() {
       return this.$store.getters.currTask
     },
@@ -169,6 +195,53 @@ export default {
   methods: {
     handleClose() {
       this.$router.push('/board/' + this.$store.getters.currBoard._id)
+    },
+    addLike(commentId) {
+      const copyTask = JSON.parse(JSON.stringify(this.currTask))
+      var commentIdx = copyTask.comments.findIndex((comment) => {
+        return comment.id === commentId
+      })
+      copyTask.comments[commentIdx].isLike = true
+
+      this.$store.dispatch({
+        type: 'editTask',
+        task: copyTask,
+        groupId: this.groupId,
+      })
+    },
+    addReplay(commentId) {
+      var newReplay = {
+        id: utilService.makeId(),
+        byUser: {
+          id: this.loggedinUser?._id || utilService.makeId(),
+          fullname: this.loggedinUser?.fullname || 'Guest',
+          imgUrl:
+            this.loggedinUser?.imgUrl ||
+            'https://cdn1.monday.com/dapulse_default_photo.png',
+        },
+        txt: this.replayTxt,
+        time: Date.now(),
+        likes: [],
+      }
+
+      const copyTask = JSON.parse(JSON.stringify(this.currTask))
+      var commentIdx = copyTask.comments.findIndex((comment) => {
+        return comment.id === commentId
+      })
+
+      copyTask.comments[commentIdx].replies.push(newReplay)
+
+      this.$store.dispatch({
+        type: 'editTask',
+        task: copyTask,
+        groupId: this.groupId,
+      })
+
+      this.replayTxt = ''
+    },
+    showReplay(commentId) {
+      console.log(commentId)
+      this.replayToShow = commentId
     },
     getCurrTask() {
       const taskId = this.$route.params.taskId
@@ -181,13 +254,15 @@ export default {
       })
     },
     addUpdate() {
+      if (!this.updateTxt.length) return
       const newUpdete = {
         id: utilService.makeId(),
         byUser: {
-          _id: 'u10zdf1',
-          fullname: 'Shlomi Nugarker',
+          id: this.loggedinUser?._id || utilService.makeId(),
+          fullname: this.loggedinUser?.fullname || 'Guest',
           imgUrl:
-            'https://media-exp1.licdn.com/dms/image/C4E03AQEnH6Lj0aymwg/profile-displayphoto-shrink_800_800/0/1650388602421?e=1657152000&v=beta&t=tsNDkf7ek1ei69b1_aAQFIQjeJiAvYnPdW-RiK2TaZA',
+            this.loggedinUser?.imgUrl ||
+            'https://cdn1.monday.com/dapulse_default_photo.png',
         },
         txt: this.updateTxt,
         replies: [],

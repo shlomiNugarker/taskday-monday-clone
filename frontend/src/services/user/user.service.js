@@ -49,14 +49,14 @@ async function login(userCred) {
   // return _saveLocalUser(user)
 
   const user = await httpService.post('auth/login', userCred)
-  // socketService.emit('set-user-socket', user._id);
+
   if (user) return _saveLocalUser(user)
 }
 async function signup(userCred) {
   // userCred.score = 10000;
   // const user = await storageService.post('user', userCred)
   const user = await httpService.post('auth/signup', userCred)
-  // socketService.emit('set-user-socket', user._id);
+
   return _saveLocalUser(user)
 }
 async function logout() {
@@ -84,9 +84,10 @@ function getLoggedinUser() {
 
 // ;(async () => {
 //   await userService.signup({
-//     fullname: 'Puki Norma',
-//     username: 'user1',
+//     fullname: 'shlomi nug',
+//     username: 'shlomi',
 //     password: '123',
+//     imgUrl: 'imgUrlll',
 //     score: 10000,
 //     isAdmin: false,
 //   })
