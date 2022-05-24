@@ -1,10 +1,19 @@
 <template>
   <div>
-    <Container class="container-groups" @drop="onDrop" orientation="vertical">
+    <Container
+      class="container-groups"
+      @drop="onDrop($event)"
+      orientation="vertical"
+      :drag-begin-delay="200"
+      :drag-class="'isInDrag'"
+      :drop-placeholder="dropPlaceholderOptions"
+      @click="groupClicked"
+    >
       <Draggable
         class="group-container"
         v-for="group in groups"
         :key="group.id"
+        :drag-begin-delay="200"
       >
         <columns-header
           class="group-list"
@@ -43,6 +52,12 @@ export default {
     return {
       waitToUpdate: false,
       copyGroups: JSON.parse(JSON.stringify(this.groups)),
+
+      dropPlaceholderOptions: {
+        className: 'drop-preview',
+        animationDuration: '150',
+        showOnTop: false,
+      },
     }
   },
   computed: {},
@@ -98,6 +113,9 @@ export default {
     removeGroup(groupId) {
       this.$store.dispatch({ type: 'removeGroup', groupId })
     },
+    groupClicked() {
+      console.log('group clicked')
+    },
   },
   components: {
     taskList,
@@ -111,12 +129,16 @@ export default {
 <style>
 .ooo {
   /* background-color: rgba(228, 225, 225,0.5); */
-  border: 1px gray dashed;
+  border: 1px rgb(78, 22, 22) dashed;
   z-index: -20;
   margin: 5px;
 }
-.isInDrag {
+/* .isInDrag {
   z-index: 55555555;
   transform: rotate(2deg);
+} */
+.drop-preview {
+  border: 1px dashed #c4c4c4;
+  margin: 0 20px;
 }
 </style>

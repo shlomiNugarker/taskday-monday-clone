@@ -7,6 +7,7 @@
       :non-drag-area-selector="'.none-drag-input'"
       :drag-class="'isInDrag'"
       orientation="vertical"
+      :drop-placeholder="dropPlaceholderOptions"
     >
       <Draggable v-for="task in tasksToShow" :key="task.id">
         <task-preview
@@ -39,6 +40,11 @@ export default {
     return {
       copyTasks: null,
       copyGroup: null,
+      dropPlaceholderOptions: {
+        className: 'drop-preview',
+        animationDuration: '150',
+        showOnTop: false,
+      },
     }
   },
   computed: {
@@ -157,11 +163,12 @@ export default {
   z-index: -20;
   margin: 5px;
 }
-.isInDrag {
-  z-index: 55555555;
-  transform: rotate(1deg);
-}
+
 .smooth-dnd-container.horizontal {
   display: flex !important;
+}
+.drop-preview {
+  border: 1px dashed;
+  border-radius: 5px;
 }
 </style>

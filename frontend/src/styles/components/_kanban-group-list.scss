@@ -12,10 +12,24 @@
 
       border-radius: 10px;
 
+      &:active {
+        cursor: -webkit-grabbing;
+      }
+
+      .grip-icon {
+        transform: rotate(90deg);
+        margin: 5px;
+        cursor: move;
+        position: absolute;
+        color: #eaebef;
+      }
+
       .title {
         min-height: 30px;
         color: white;
-        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         cursor: move;
       }
 

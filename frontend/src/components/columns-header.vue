@@ -20,6 +20,7 @@
             </template>
           </el-dropdown>
         </span>
+        <font-awesome-icon class="grip-icon" icon="grip" />
         <div
           class="title"
           :style="{ color: group.color }"

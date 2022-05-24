@@ -9,11 +9,17 @@
     .container-first-title {
       position: sticky;
       left: 3px;
+
+      .grip-icon {
+        transform: rotate(90deg);
+        margin: 5px;
+        cursor: move;
+      }
     }
 
     .title {
       background-color: #ffffffe0;
-      min-width: 350px;
+      min-width: 325px;
       display: flex;
       justify-content: flex-start;
       cursor: pointer;

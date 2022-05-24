@@ -8,6 +8,11 @@
   color: white;
 
   .container-icon {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-items: center;
   }
 
   .text-icon {

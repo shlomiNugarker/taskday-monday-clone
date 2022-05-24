@@ -41,11 +41,8 @@
         </div>
       </div>
       <span class="add-comment-container">
-        <add-comment-btn
-          @click="openDetails(groupId)"
-          class="add-comment-icon"
-        />
-        <span v-if="commentsNum" class="msgs" @click="openDetails(groupId)">{{
+        <add-comment-btn @click="openDetails()" class="add-comment-icon" />
+        <span v-if="commentsNum" class="msgs" @click="openDetails()">{{
           commentsNum
         }}</span>
       </span>
@@ -89,9 +86,25 @@ export default {
     this.taskCopy = JSON.parse(JSON.stringify(this.task))
   },
   methods: {
-    openDetails(groupId) {
+    openDetails() {
+      if (this.$route.params.taskId) {
+        this.$router.back()
+        setTimeout(() => {
+          this.$router.push(
+            {
+              path: this.$store.getters.currBoard._id + '/task/' + this.task.id,
+            },
+            200
+          )
+        })
+        return
+      }
+
       this.$router.push(
-        this.$store.getters.currBoard._id + '/task/' + this.task.id
+        {
+          path: this.$store.getters.currBoard._id + '/task/' + this.task.id,
+        }
+        // this.$store.getters.currBoard._id + '/task/' + this.task.id
       )
     },
     onEdit() {

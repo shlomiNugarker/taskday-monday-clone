@@ -5,3 +5,10 @@
     }
   }
 }
+
+.task-list {
+  .isInDrag {
+    z-index: 55555555;
+    transform: rotate(1deg);
+  }
+}

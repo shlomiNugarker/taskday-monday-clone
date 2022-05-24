@@ -4,9 +4,13 @@
       class="groups-container-kanban"
       @drop="onDrop"
       :orientation="'horizontal'"
+      :drag-begin-delay="200"
+      :drag-class="'isInDrag'"
+      :drop-placeholder="dropPlaceholderOptions"
     >
       <Draggable v-for="group in groups" :key="group.id">
         <div class="group-kanban" :style="{ 'background-color': group.color }">
+          <font-awesome-icon class="grip-icon" icon="grip" />
           <p class="title">
             {{ group.title }}
           </p>
@@ -39,6 +43,11 @@ export default {
   data() {
     return {
       copyGroups: JSON.parse(JSON.stringify(this.groups)),
+      dropPlaceholderOptions: {
+        className: 'drop-preview',
+        animationDuration: '150',
+        showOnTop: false,
+      },
     }
   },
   computed: {},

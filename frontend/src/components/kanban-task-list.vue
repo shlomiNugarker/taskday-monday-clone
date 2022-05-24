@@ -7,6 +7,8 @@
       :non-drag-area-selector="'.none-drag-input'"
       :drag-class="'isInDrag'"
       orientation="vertical"
+      :drag-begin-delay="200"
+      :drop-placeholder="dropPlaceholderOptions"
     >
       <Draggable v-for="task in tasksToShow" :key="task.id">
         <task-preview-kanban :task="task" :groupId="groupId" />
@@ -35,6 +37,11 @@ export default {
     return {
       copyTasks: this.tasks,
       copyGroup: this.group,
+      dropPlaceholderOptions: {
+        className: 'drop-preview',
+        animationDuration: '150',
+        showOnTop: false,
+      },
     }
   },
   computed: {
@@ -151,10 +158,7 @@ export default {
   z-index: -20;
   margin: 5px;
 }
-.isInDrag {
-  z-index: 55555555;
-  transform: rotate(1deg);
-}
+
 .smooth-dnd-container.horizontal {
   display: flex !important;
 }

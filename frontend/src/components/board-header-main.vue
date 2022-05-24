@@ -52,7 +52,12 @@
         </div>
       </div>
     </div>
-    <p class="subtitle" v-if="!isEditSub" @click="focusSub">
+    <p
+      class="subtitle"
+      v-if="!isEditSub"
+      @click="focusSub"
+      v-snip="{ lines: 1, mode: 'css' }"
+    >
       {{ board.subtitle }}
     </p>
     <p class="subtitle" v-if="isEditSub">

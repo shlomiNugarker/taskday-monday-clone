@@ -2,6 +2,15 @@
   background-color: rgb(255, 255, 255);
   padding-bottom: 12px;
 
+  .isInDrag {
+    z-index: 55555555;
+    // transform: rotate(1deg);
+
+    .task-list {
+      background-color: lightseagreen;
+    }
+  }
+
   .smooth-dnd-container.vertical > .smooth-dnd-draggable-wrapper {
     overflow: inherit;
   }
