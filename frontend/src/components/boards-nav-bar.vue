@@ -142,10 +142,13 @@ export default {
         })
     },
     removeBoard(boardId) {
+      if (boardId === this.boardsList[0].boardId) return
       this.$store.dispatch({
         type: 'removeBoard',
         boardId,
       })
+      if (!this.boardsList.length) this.$router.push('/')
+      this.$router.push('/board/' + this.boardsList[0].boardId)
     },
     mouseleave() {
       setTimeout(() => this.closeModal(), 1000)

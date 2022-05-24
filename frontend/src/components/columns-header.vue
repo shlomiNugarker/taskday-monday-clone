@@ -8,7 +8,7 @@
         >
           <el-dropdown class="side-drop-down" trigger="click">
             <span class="el-dropdown-link">
-              <font-awesome-icon icon="caret-down" />
+              <font-awesome-icon class="down-icon" icon="caret-down" />
               <el-icon class="el-icon2"> </el-icon>
             </span>
             <template #dropdown>

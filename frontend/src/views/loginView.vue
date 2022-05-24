@@ -25,14 +25,23 @@
       </div>
     </header>
 
-    <div class="login-container">
+    <div class="loggedin-user" v-if="loggedinUser">
+      <h3>
+        Loggedin User:
+        {{ loggedinUser.username }}
+      </h3>
+      <button @click="doLogout">Logout</button>
+    </div>
+
+    <div v-if="!loggedinUser" class="login-container">
       <div class="title">
-        <p>Log in to your account</p>
+        <p v-if="isLogin">Log in to your account</p>
+        <p v-if="!isLogin">Sign up in to your account</p>
       </div>
 
       <p>Enter your work user name and password</p>
 
-      <form class="login-form" @submit.prevent="doLogin">
+      <form v-if="isLogin" class="login-form" @submit.prevent="doLogin">
         <input
           type="text"
           placeholder="Username"
@@ -45,6 +54,25 @@
         />
         <button>Login</button>
       </form>
+
+      <form v-if="!isLogin" class="login-form" @submit.prevent="doSignup">
+        <input
+          type="text"
+          v-model="signupCred.fullname"
+          placeholder="Your full name"
+        />
+        <input
+          type="text"
+          placeholder="Username"
+          v-model="signupCred.username"
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          v-model="signupCred.password"
+        />
+        <button>Signup</button>
+      </form>
       <p>{{ msg }}</p>
 
       <div class="login-separator-component split-line">
@@ -56,7 +84,7 @@
       <button type="button" class="social-login-provider">
         <img
           class="social-login-logo"
-          src="https://cdn.monday.com/images/logo_google_v2.svg"
+          src="../styles/icon/logo-google.svg"
           aria-hidden="true"
           alt=""
         />
@@ -65,8 +93,16 @@
         </div>
       </button>
 
-      <div class="switch-login">
-        <div>Don't have an account yet? <span>Sign up</span></div>
+      <div v-if="isLogin" class="switch-login">
+        <div>
+          Don't have an account yet?
+          <span @click="isLogin = false">Sign up</span>
+        </div>
+      </div>
+      <div v-if="!isLogin" class="switch-login">
+        <div>
+          Already have an account? <span @click="isLogin = true">Login</span>
+        </div>
       </div>
     </div>
   </section>
@@ -77,6 +113,7 @@ export default {
   name: 'login-signup',
   data() {
     return {
+      isLogin: true,
       msg: '',
       loginCred: { username: 'user1', password: '123' },
       signupCred: { username: '', password: '', fullname: '' },
@@ -131,8 +168,15 @@ export default {
         this.msg = 'Please fill up the form'
         return
       }
-      await this.$store.dispatch({ type: 'signup', userCred: this.signupCred })
-      this.$router.push('/')
+      try {
+        await this.$store.dispatch({
+          type: 'signup',
+          userCred: this.signupCred,
+        })
+        this.$router.push('/')
+      } catch (err) {
+        this.msg = 'Failed to signup'
+      }
     },
     loadUsers() {
       this.$store.dispatch({ type: 'loadUsers' })

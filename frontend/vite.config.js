@@ -12,7 +12,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: '../back/public',
+    outDir: '../backend/public',
     chunkSizeWarningLimit: 3000,
     emptyOutDir: true,
   },

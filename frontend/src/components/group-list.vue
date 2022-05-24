@@ -139,6 +139,6 @@ export default {
 } */
 .drop-preview {
   border: 1px dashed #c4c4c4;
-  margin: 0 20px;
+  margin: 10px 0 0px 10px;
 }
 </style>

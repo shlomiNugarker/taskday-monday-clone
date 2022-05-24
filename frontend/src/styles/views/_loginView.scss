@@ -103,6 +103,23 @@
     }
   }
 
+  .loggedin-user {
+    margin-top: 60px;
+    text-align: center;
+
+    button {
+      // width: 100%;
+      margin: 15px 0;
+      background-color: #0073ea;
+      color: white;
+      border: none;
+      padding: 5px;
+      border-radius: 5px;
+      height: 45px;
+      cursor: pointer;
+    }
+  }
+
   .login-container {
     display: flex;
     flex-direction: column;
@@ -179,6 +196,7 @@
       div {
         span {
           color: #0fa2e2;
+          cursor: pointer;
         }
       }
     }

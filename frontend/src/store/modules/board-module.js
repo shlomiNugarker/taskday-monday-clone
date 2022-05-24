@@ -199,9 +199,13 @@ export default {
         console.log('cannot get board..')
       }
     },
-    async removeBoard({ commit }, { boardId }) {
+    async removeBoard({ dispatch, commit }, { boardId }) {
       await boardService.remove(boardId)
       commit({ type: 'removeBoard', boardId })
+
+      dispatch({
+        type: 'getBoardsList',
+      })
     },
     async editTask({ state, commit }, { task, groupId }) {
       const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
