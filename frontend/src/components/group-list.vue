@@ -63,6 +63,7 @@ export default {
   computed: {},
   watch: {
     '$store.getters.currBoard'() {
+      // console.log('curr')
       var currBoard = this.$store.getters.currBoard
       this.copyGroups = JSON.parse(JSON.stringify(currBoard.groups))
     },

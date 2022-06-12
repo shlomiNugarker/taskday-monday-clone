@@ -26,9 +26,9 @@
             ref="input"
             type="text"
             v-if="isEdit"
-            v-model="taskCopy.title"
+            v-model="copyTask.title"
             @focusout="isEdit = false"
-            @keyup="changeTitle($event, taskCopy.title)"
+            @keyup="changeTitle()"
           />
           <button
             class="edit-btn"
@@ -69,7 +69,8 @@ export default {
   data() {
     return {
       isEdit: false,
-      taskCopy: '',
+      title: '',
+      copyTask: null,
     }
   },
   computed: {
@@ -81,9 +82,34 @@ export default {
       return this.task.comments.length
     },
   },
-  watch: {},
+  watch: {
+    '$store.getters.currBoard'() {
+      console.log('curr')
+      var boardToEdit = this.$store.getters.currBoard
+
+      // var groupIdx = currBoard.groups.findIndex(
+      //   (currGroup) => currGroup.id === this.groupId
+      // )
+      // this.$store.dispatch({
+      //   type: 'updateBoard',
+      //   boardToEdit,
+      // })
+      // console.log('groupIdx', groupIdx)
+      // if (groupIdx === -1) return
+      // var taskIdx = currBoard.groups[groupIdx]?.tasks.findIndex(
+      //   (currTask) => currTask.id === this.task.id
+      // )
+      // console.log('taskIdx', taskIdx)
+      // if (taskIdx === -1) return
+
+      // this.copyTask.title = JSON.parse(
+      //   JSON.stringify(currBoard.groups[groupIdx]?.tasks[taskIdx].title)
+      // )
+      // console.log(this.copyTask)
+    },
+  },
   created() {
-    this.taskCopy = JSON.parse(JSON.stringify(this.task))
+    this.copyTask = JSON.parse(JSON.stringify(this.task))
   },
   methods: {
     openDetails() {
@@ -113,12 +139,12 @@ export default {
         this.$refs.input.focus()
       }, 1)
     },
-    changeTitle(event, title) {
+    changeTitle() {
       setTimeout(() => {
         this.$emit('changeTitle', {
-          groupId: this.groupId,
-          taskId: this.task.id,
-          title,
+          // groupId: this.groupId,
+          // taskId: this.task.id,
+          title: this.copyTask.title,
         })
       }, 2000)
     },

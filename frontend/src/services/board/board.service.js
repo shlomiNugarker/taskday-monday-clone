@@ -54,7 +54,7 @@ async function getBoardsList() {
 
 function getEmptyTask(groupToEditTitle) {
   const newTask = {
-    id: 'i_' + utilService.makeId(),
+    id: 't_' + utilService.makeId(),
     title: groupToEditTitle,
     createdAt: new Date().getTime(),
     date: '',
@@ -126,10 +126,22 @@ function getEmptyBoard(boardName) {
     },
     members: [
       {
-        _id: 'u' + utilService.makeId(), // fix to correct user
+        _id: 'u101',
         fullname: 'Shlomi Nugarker',
         imgUrl:
-          'https://files.monday.com/use1/photos/26222916/thumb_small/26222916-user_photo_2021_11_30_09_26_11.png?1638264371',
+          'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
+      },
+      {
+        _id: 'u102',
+        fullname: 'Nadia Blum',
+        imgUrl:
+          'https://media-exp1.licdn.com/dms/image/C4E03AQEnH6Lj0aymwg/profile-displayphoto-shrink_800_800/0/1650388602421?e=1657152000&v=beta&t=tsNDkf7ek1ei69b1_aAQFIQjeJiAvYnPdW-RiK2TaZA',
+      },
+      {
+        _id: 'u103',
+        fullname: 'dana Israeli',
+        imgUrl:
+          'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80',
       },
     ],
     cmpsOrder: [

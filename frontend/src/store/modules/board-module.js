@@ -120,8 +120,8 @@ export default {
       state.currBoard = boardToEdit
     },
 
-    addGroup(state, { newGroup }) {
-      state.currBoard.groups.unshift(newGroup)
+    addGroup(state, { copyBoard }) {
+      state.currBoard = copyBoard
     },
 
     //tasks
@@ -259,7 +259,7 @@ export default {
 
       await boardService.update(copyBoard)
 
-      commit({ type: 'addGroup', newGroup })
+      commit({ type: 'addGroup', copyBoard })
       socketService.emit('board newUpdateBoard', copyBoard)
     },
     async removeGroup({ state, commit }, { groupId }) {

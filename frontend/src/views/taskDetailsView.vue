@@ -113,7 +113,10 @@
                     src="../styles/icon/def-user.png"
                     alt=""
                   />
-                  <p class="replaies">{{ reply.txt }}xxxxxxxx</p>
+                  <div class="replay-area">
+                    <p class="name">{{ reply.byUser.fullname }}</p>
+                    <p class="replaies">{{ reply.txt }}</p>
+                  </div>
                 </div>
               </div>
 
