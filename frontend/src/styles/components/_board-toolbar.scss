@@ -1,0 +1,145 @@
+.board-toolbar {
+  height: 45px;
+  display: flex;
+  justify-content: space-between;
+
+  .icon-toolbar {
+    width: 15px;
+    margin-right: 5px;
+  }
+  .toolbar-btns {
+    display: flex;
+    color: #90919d;
+    height: 47px;
+
+    div {
+      min-width: 100px;
+      padding: 5px;
+
+      :hover {
+        background-color: #dcdfec;
+      }
+
+      button {
+        background-color: white;
+        color: #68696c;
+        border: none;
+        border-radius: 5px;
+        width: 100%;
+        height: 100%;
+        font-size: 14px;
+        line-height: 24px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &.kanban-btn,
+        &.main-table-btn {
+          cursor: pointer;
+        }
+      }
+    }
+    .blue-bottom {
+      //for clicked btn
+      border-bottom: 2px solid $blue;
+    }
+  }
+
+  .integrations-btn-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    div {
+      margin-left: 25px;
+    }
+  }
+}
+.robot-icon {
+  margin-right: 10px;
+}
+
+.integrate-icon {
+  width: 25px;
+  filter: opacity(0.5);
+  &:hover {
+    filter: opacity(1);
+  }
+}
+.collapse-btn {
+  position: relative;
+  margin-left: 15px;
+  background-color: #ffffff;
+  border-radius: 45%;
+  border: 1px solid;
+  width: 25px;
+  height: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: height 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $blue;
+    color: white;
+    height: 32px;
+    width: 28px;
+    color: white;
+  }
+}
+
+.chart-icon {
+  width: 20px;
+  margin-right: 5px;
+}
+
+.subsets-tab {
+  background-color: #90919d;
+  width: 1px;
+  margin: 12px 8px;
+  height: 23px;
+}
+
+.arrow-up {
+  width: 10px;
+  margin: 0px;
+}
+
+.integrate-2 {
+  color: #68696c;
+  margin-right: 5px;
+  width: 15px;
+}
+
+@media (max-width: 850px) {
+  .board-toolbar {
+    .integrations-btn-content {
+      div {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 620px) {
+  .board-toolbar {
+    justify-content: center;
+    .toolbar-btns {
+      div {
+        &.add-view-btn {
+          display: none;
+        }
+      }
+    }
+    .collapse-btn {
+      display: none;
+    }
+    .toolbar-btns {
+    }
+    .subsets-tab {
+      display: none;
+    }
+  }
+}
