@@ -2,10 +2,7 @@
 
 Taskday !
 
-For the project hosted in heroku: https://fast-eyrie-76140.herokuapp.com/
-
-
-
+For the project hosted in heroku: https://taskday-sprint-4.onrender.com/
 
 # Technologies Used
 
@@ -18,10 +15,6 @@ For the project hosted in heroku: https://fast-eyrie-76140.herokuapp.com/
 - Vuex
 - SASS
 
-
 # Screenshot
 
  <img src="https://res.cloudinary.com/duajg3ah1/image/upload/v1660916126/myPortfolio/qdtzolm9ldd5qlquq2aj.png" width="100%" title="">
-
-
-
