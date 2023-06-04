@@ -2,7 +2,7 @@
 
 Taskday !
 
-For the project hosted in onrender: https://taskday-sprint-4.onrender.com/
+For the project hosted in railway: https://taskday-monday-production.up.railway.app/
 
 # Technologies Used
 
