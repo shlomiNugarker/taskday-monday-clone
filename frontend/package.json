@@ -20,7 +20,7 @@
     "element-plus": "^2.1.11",
     "esbuild": "^0.14.28",
     "lodash": "^4.17.21",
-    "node-sass": "^7.0.1",
+    "node-sass": "^9.0.0",
     "sass": "^1.49.9",
     "socket.io": "^4.4.1",
     "socket.io-client": "^4.4.1",
