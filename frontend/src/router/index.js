@@ -3,7 +3,6 @@ import HomeView from '../views/HomeView.vue'
 import loginView from '../views/loginView.vue'
 import boardDetails from '../views/boardDetailsView.vue'
 import taskDetails from '../views/taskDetailsView.vue'
-import TailwindTest from '../components/TailwindTest.vue'
 
 import boardView from '../views/boardView.vue'
 
@@ -21,11 +20,7 @@ const router = createRouter({
       name: 'Login',
       component: loginView,
     },
-    {
-      path: '/tailwind-test',
-      name: 'TailwindTest',
-      component: TailwindTest,
-    },
+
     {
       path: '/board',
       name: 'boardApp',

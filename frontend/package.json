@@ -2,13 +2,10 @@
   "name": "frontend",
   "version": "0.0.0",
   "scripts": {
-    "dev": "npm run tailwind:build && vite",
-    "dev:full": "concurrently \"npm run tailwind:watch\" \"vite\"",
+    "dev": "vite",
     "build": "vite build",
     "preview": "vite preview --port 5050",
-    "test:unit": "vitest --environment jsdom",
-    "tailwind:watch": "tailwindcss -i ./src/styles/tailwind.css -o ./src/styles/tailwind.output.css --watch",
-    "tailwind:build": "tailwindcss -i ./src/styles/tailwind.css -o ./src/styles/tailwind.output.css"
+    "test:unit": "vitest --environment jsdom"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^1.1.4",
@@ -23,6 +20,7 @@
     "element-plus": "^2.1.11",
     "esbuild": "^0.14.28",
     "lodash": "^4.17.21",
+    "node-sass": "^9.0.0",
     "sass": "^1.49.9",
     "socket.io": "^4.4.1",
     "socket.io-client": "^4.4.1",
@@ -36,14 +34,10 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.2.2",
     "@vue/test-utils": "^2.0.0-rc.18",
-    "autoprefixer": "^10.4.21",
-    "concurrently": "^9.1.2",
     "jsdom": "^19.0.0",
-    "postcss": "^8.4.31",
-    "tailwindcss": "^3.3.5",
     "unplugin-auto-import": "^0.6.6",
     "unplugin-vue-components": "^0.18.4",
-    "vite": "^2.9.18",
+    "vite": "^2.8.4",
     "vitest": "^0.5.0"
   }
 }
