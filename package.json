@@ -1,0 +1,20 @@
+{
+  "name": "taskday-monday-clone",
+  "version": "1.0.0",
+  "description": "TaskDay is a clone of the popular project management tool, Monday.com. This project is built using a full-stack approach, featuring a Node.js backend and a Vue.js frontend. The goal of this project is to offer a task management platform where users can create, manage, and collaborate on tasks and boards seamlessly.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shlomiNugarker/taskday-monday-clone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shlomiNugarker/taskday-monday-clone/issues"
+  },
+  "homepage": "https://github.com/shlomiNugarker/taskday-monday-clone#readme"
+}
