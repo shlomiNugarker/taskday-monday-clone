@@ -15,7 +15,25 @@ function createSocketService() {
   var socket = null
   const socketService = {
     async setup() {
-      socket = io(baseUrl)
+      try {
+        socket = io(baseUrl, {
+          reconnectionAttempts: 3,
+          timeout: 10000, // 10 second timeout
+          transports: ['websocket', 'polling'] // Try WebSocket first, fall back to polling
+        })
+        
+        // Add connection error handling
+        socket.on('connect_error', (error) => {
+          console.error('Socket connection error:', error)
+        })
+        
+        // Add timeout error handling
+        socket.on('connect_timeout', () => {
+          console.error('Socket connection timeout')
+        })
+      } catch (err) {
+        console.error('Failed to setup socket:', err)
+      }
     },
     on(eventName, cb) {
       socket.on(eventName, cb)

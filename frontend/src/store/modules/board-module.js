@@ -195,8 +195,18 @@ export default {
           type: 'setCurrBoard',
           board,
         })
-      } catch {
-        console.log('cannot get board..')
+        
+        return board
+      } catch (error) {
+        console.error('Error loading board:', error)
+        // Ensure loading state is set to false even if there's an error
+        commit({
+          type: 'setLoading',
+          bool: false,
+        })
+        
+        // Re-throw to allow component-level error handling
+        throw error
       }
     },
     async removeBoard({ dispatch, commit }, { boardId }) {

@@ -8,24 +8,50 @@ function connectSockets(http, session) {
     cors: {
       origin: '*',
     },
+    pingTimeout: 60000, // 60 seconds timeout on ping
+    pingInterval: 25000 // ping every 25 seconds
   })
+  
   gIo.on('connection', (socket) => {
-    console.log('New socket', socket.id)
-
-    socket.on('disconnect', (socket) => {
-      console.log('Someone disconnected')
+    console.log('New socket connection:', socket.id)
+    
+    socket.on('disconnect', () => {
+      console.log('Socket disconnected:', socket.id)
     })
+    
+    socket.on('error', (err) => {
+      console.error('Socket error:', err)
+    })
+    
     socket.on('open board', (boardId) => {
-      console.log('on open board')
-      if (socket.myBoard === boardId) return
-      if (socket.myBoard) {
-        socket.leave(socket.myBoard)
+      if (!boardId) {
+        console.error('Invalid boardId received in open board event')
+        return
       }
-      socket.join(boardId)
-      socket.myBoard = boardId
+      
+      try {
+        if (socket.myBoard === boardId) return
+        if (socket.myBoard) {
+          socket.leave(socket.myBoard)
+        }
+        socket.join(boardId)
+        socket.myBoard = boardId
+      } catch (err) {
+        console.error('Error in open board socket handler:', err)
+      }
     })
+    
     socket.on('board newUpdateBoard', (board) => {
-      socket.broadcast.to(socket.myBoard).emit('board updateBoard', board)
+      if (!board || !board._id) {
+        console.error('Invalid board object received in newUpdateBoard event')
+        return
+      }
+      
+      try {
+        socket.broadcast.to(board._id).emit('board updateBoard', board)
+      } catch (err) {
+        console.error('Error in board newUpdateBoard socket handler:', err)
+      }
     })
   })
 }
