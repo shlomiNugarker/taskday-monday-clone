@@ -147,7 +147,6 @@
   </section>
 </template>
 
-
 <script>
 export default {
   name: 'login-signup',
