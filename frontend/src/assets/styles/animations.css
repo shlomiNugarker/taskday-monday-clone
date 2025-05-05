@@ -1,0 +1,439 @@
+/* Animations and Effects */
+
+/* Fade In */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn var(--transition-normal) forwards;
+}
+
+/* Fade In Up */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp var(--transition-normal) forwards;
+}
+
+/* Fade In Down */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-down {
+  animation: fadeInDown var(--transition-normal) forwards;
+}
+
+/* Scale In */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.scale-in {
+  animation: scaleIn var(--transition-normal) forwards;
+}
+
+/* Slide In Left */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-left {
+  animation: slideInLeft var(--transition-normal) forwards;
+}
+
+/* Slide In Right */
+@keyframes slideInRight {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-right {
+  animation: slideInRight var(--transition-normal) forwards;
+}
+
+/* Pulse */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pulse {
+  animation: pulse 1.5s infinite;
+}
+
+/* Bounce */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.bounce {
+  animation: bounce 0.6s ease-in-out;
+}
+
+/* Spin */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Shimmer (loading skeleton) */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0) 0%, 
+    rgba(255, 255, 255, 0.6) 50%, 
+    rgba(255, 255, 255, 0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Hover Effects */
+.hover-elevate {
+  transition: transform var(--transition-fast) ease, 
+    box-shadow var(--transition-fast) ease;
+}
+
+.hover-elevate:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+/* Transitions */
+.transition-all {
+  transition: all var(--transition-normal) ease;
+}
+
+.transition-transform {
+  transition: transform var(--transition-normal) ease;
+}
+
+.transition-opacity {
+  transition: opacity var(--transition-normal) ease;
+}
+
+.transition-colors {
+  transition: background-color var(--transition-normal) ease,
+    color var(--transition-normal) ease,
+    border-color var(--transition-normal) ease;
+}
+
+/* Focus Effects */
+.focus-ring {
+  transition: box-shadow var(--transition-fast) ease;
+}
+
+.focus-ring:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-primary-light);
+}
+
+/* Utility Classes */
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.perspective {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Enhanced Animations for TaskDay Application */
+
+/* ===== Basic Transitions ===== */
+.fade-transition {
+  transition: opacity var(--transition-normal) ease;
+}
+
+.scale-transition {
+  transition: transform var(--transition-normal) ease;
+}
+
+.color-transition {
+  transition: background-color var(--transition-normal) ease, 
+              color var(--transition-normal) ease, 
+              border-color var(--transition-normal) ease;
+}
+
+/* ===== Fade Animations ===== */
+.fade-out {
+  animation: fadeOut var(--transition-normal) forwards;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* ===== Slide Animations ===== */
+.slide-up {
+  animation: slideUp var(--transition-normal) forwards;
+}
+
+.slide-down {
+  animation: slideDown var(--transition-normal) forwards;
+}
+
+.slide-left {
+  animation: slideLeft var(--transition-normal) forwards;
+}
+
+.slide-right {
+  animation: slideRight var(--transition-normal) forwards;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideLeft {
+  from { transform: translateX(20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideRight {
+  from { transform: translateX(-20px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* ===== Scale Animations ===== */
+.scale-out {
+  animation: scaleOut var(--transition-normal) forwards;
+}
+
+@keyframes scaleOut {
+  from { transform: scale(1); opacity: 1; }
+  to { transform: scale(0.9); opacity: 0; }
+}
+
+/* ===== Exit Animations ===== */
+.fade-out-up {
+  animation: fadeOutUp var(--transition-normal) forwards;
+}
+
+.fade-out-down {
+  animation: fadeOutDown var(--transition-normal) forwards;
+}
+
+.fade-out-left {
+  animation: fadeOutLeft var(--transition-normal) forwards;
+}
+
+.fade-out-right {
+  animation: fadeOutRight var(--transition-normal) forwards;
+}
+
+@keyframes fadeOutUp {
+  from { 
+    transform: translateY(0); 
+    opacity: 1; 
+  }
+  to { 
+    transform: translateY(-20px); 
+    opacity: 0; 
+  }
+}
+
+@keyframes fadeOutDown {
+  from { 
+    transform: translateY(0); 
+    opacity: 1; 
+  }
+  to { 
+    transform: translateY(20px); 
+    opacity: 0; 
+  }
+}
+
+@keyframes fadeOutLeft {
+  from { 
+    transform: translateX(0); 
+    opacity: 1; 
+  }
+  to { 
+    transform: translateX(-20px); 
+    opacity: 0; 
+  }
+}
+
+@keyframes fadeOutRight {
+  from { 
+    transform: translateX(0); 
+    opacity: 1; 
+  }
+  to { 
+    transform: translateX(20px); 
+    opacity: 0; 
+  }
+}
+
+/* ===== Vue Transition Classes ===== */
+/* Fade transition */
+.v-fade-enter-active,
+.v-fade-leave-active {
+  transition: opacity var(--transition-normal) ease;
+}
+
+.v-fade-enter-from,
+.v-fade-leave-to {
+  opacity: 0;
+}
+
+/* Slide up transition */
+.v-slide-up-enter-active,
+.v-slide-up-leave-active {
+  transition: all var(--transition-normal) ease;
+}
+
+.v-slide-up-enter-from,
+.v-slide-up-leave-to {
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+/* Slide down transition */
+.v-slide-down-enter-active,
+.v-slide-down-leave-active {
+  transition: all var(--transition-normal) ease;
+}
+
+.v-slide-down-enter-from,
+.v-slide-down-leave-to {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+/* Scale transition */
+.v-scale-enter-active,
+.v-scale-leave-active {
+  transition: all var(--transition-normal) ease;
+}
+
+.v-scale-enter-from,
+.v-scale-leave-to {
+  transform: scale(0.95);
+  opacity: 0;
+}
+
+/* ===== Rotate Animations ===== */
+.spin-slow {
+  animation: spin 2s linear infinite;
+}
+
+/* ===== Entrance Animations ===== */
+.fade-in-left {
+  animation: fadeInLeft var(--transition-normal) forwards;
+}
+
+.fade-in-right {
+  animation: fadeInRight var(--transition-normal) forwards;
+}
+
+@keyframes fadeInLeft {
+  from { 
+    transform: translateX(-20px); 
+    opacity: 0; 
+  }
+  to { 
+    transform: translateX(0); 
+    opacity: 1; 
+  }
+}
+
+@keyframes fadeInRight {
+  from { 
+    transform: translateX(20px); 
+    opacity: 0; 
+  }
+  to { 
+    transform: translateX(0); 
+    opacity: 1; 
+  }
+} 

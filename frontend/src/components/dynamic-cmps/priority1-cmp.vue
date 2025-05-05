@@ -1,22 +1,59 @@
 <template>
-  <section class="dynamic-priority relative" @click="toggleDropdown">
-    <div class="dynamic-priority-indicator"
-      :style="{ backgroundColor: priorityStyle }">
-      {{ task.priority || '-' }}
+  <section class="dynamic-component" @click="openModal">
+    <div class="dynamic-priority">
+      <span 
+        v-if="task.priority && task.priority !== '-'" 
+        class="dynamic-badge"
+        :class="priorityClass"
+      >
+        {{ task.priority || '-' }}
+      </span>
+      <span v-else class="text-gray-400">-</span>
     </div>
     
-    <!-- Options dropdown -->
-    <div v-if="isOpen" 
-      class="dynamic-dropdown-menu"
-      @click.stop>
-      <div v-for="(opt, idx) in opts" 
-        :key="idx"
-        class="dynamic-status-option"
-        :style="{ backgroundColor: opt.color }"
-        @click="changePriority(opt.priority)">
-        {{ opt.priority }}
+    <!-- Priority Dropdown -->
+    <Transition name="fade">
+      <div 
+        v-if="showDropdown"
+        class="dynamic-priority-options"
+        @click.stop
+      >
+        <div 
+          class="dynamic-priority-option"
+          @click="changePriority('Critical')"
+        >
+          <span class="mr-2 px-2 py-0.5 rounded-full bg-red-100 text-red-700 text-xs">Critical</span>
+        </div>
+        
+        <div 
+          class="dynamic-priority-option"
+          @click="changePriority('High')"
+        >
+          <span class="mr-2 px-2 py-0.5 rounded-full bg-orange-100 text-orange-700 text-xs">High</span>
+        </div>
+        
+        <div 
+          class="dynamic-priority-option"
+          @click="changePriority('Medium')"
+        >
+          <span class="mr-2 px-2 py-0.5 rounded-full bg-yellow-100 text-yellow-700 text-xs">Medium</span>
+        </div>
+        
+        <div 
+          class="dynamic-priority-option"
+          @click="changePriority('Low')"
+        >
+          <span class="mr-2 px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 text-xs">Low</span>
+        </div>
+        
+        <div 
+          class="dynamic-priority-option border-t border-gray-100"
+          @click="changePriority('-')"
+        >
+          <span class="mr-2 text-gray-400">Clear</span>
+        </div>
       </div>
-    </div>
+    </Transition>
   </section>
 </template>
 
@@ -30,63 +67,49 @@ export default {
     boardId: String,
     groupId: String,
   },
-  name: 'priority-selector',
+  name: 'priority1-cmp',
   data() {
     return {
-      isOpen: false,
-      opts: [
-        { priority: 'High', color: '#e44258' },
-        { priority: 'Medium', color: '#ffa500' },
-        { priority: 'Low', color: '#69bd45' },
-        { priority: '-', color: '#c4c4c4' },
-      ],
+      showDropdown: false
+    }
+  },
+  computed: {
+    priorityClass() {
+      if (this.task.priority === 'Critical') return 'bg-red-100 text-red-700'
+      if (this.task.priority === 'High') return 'bg-orange-100 text-orange-700'
+      if (this.task.priority === 'Medium') return 'bg-yellow-100 text-yellow-700'
+      if (this.task.priority === 'Low') return 'bg-blue-100 text-blue-700'
+      return 'bg-gray-100 text-gray-700'
     }
   },
   mounted() {
-    document.addEventListener('click', this.closeDropdown);
+    document.addEventListener('click', this.closeDropdown)
   },
-  beforeDestroy() {
-    document.removeEventListener('click', this.closeDropdown);
-  },
-  computed: {
-    priorityStyle() {
-      const priority = this.task.priority;
-      const priorityMap = {
-        'High': '#e44258',
-        'Medium': '#ffa500',
-        'Low': '#69bd45',
-        '-': '#c4c4c4'
-      };
-      
-      return priorityMap[priority] || '#c4c4c4';
-    },
+  beforeUnmount() {
+    document.removeEventListener('click', this.closeDropdown)
   },
   methods: {
-    toggleDropdown(event) {
-      if (event) event.stopPropagation();
-      this.isOpen = !this.isOpen;
+    openModal() {
+      this.showDropdown = !this.showDropdown
     },
     closeDropdown(event) {
-      if (!this.$el.contains(event.target)) {
-        this.isOpen = false;
+      if (this.showDropdown && !event.target.closest('.dynamic-priority')) {
+        this.showDropdown = false
       }
     },
     changePriority(priority) {
-      this.isOpen = false;
-      
-      if (priority === this.task.priority) return;
+      this.showDropdown = false
       
       this.$emit('changePriority', {
         groupId: this.groupId,
         taskId: this.task.id,
-        priority,
-        boardId: this.boardId
-      });
+        priority
+      })
     }
-  },
+  }
 }
 </script>
 
 <style scoped>
-/* All styling moved to common.css */
+/* Styles are imported from dynamic-components.css */
 </style>

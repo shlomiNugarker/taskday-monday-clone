@@ -1,19 +1,24 @@
 <template>
-  <section class="dynamic-text">
-    <div v-if="!isEditing" @click="startEditing" class="h-full w-full flex items-center">
-      <p class="truncate text-neutral-black text-sm">{{ task.text || 'Click to add text' }}</p>
-    </div>
-    
-    <div v-else class="w-full h-full flex items-center">
+  <section class="dynamic-component">
+    <div class="dynamic-text-component" @click="onEdit">
+      <p 
+        v-if="!isEdit" 
+        class="dynamic-text truncate text-gray-600"
+        :title="task.text || '-'"
+      >
+        {{ task.text || '-' }}
+      </p>
+      
       <input
-        ref="textInput"
-        v-model="editedText"
+        ref="input"
         type="text"
-        class="dynamic-text-input"
-        placeholder="Add text"
-        @blur="saveText"
+        v-if="isEdit"
+        v-model="text"
+        @focusout="saveText"
         @keyup.enter="saveText"
         @keyup.esc="cancelEdit"
+        class="dynamic-text-input"
+        placeholder="Add text"
       />
     </div>
   </section>
@@ -29,42 +34,52 @@ export default {
     boardId: String,
     groupId: String,
   },
+  name: 'text-cmp',
   data() {
     return {
-      isEditing: false,
-      editedText: '',
+      isEdit: false,
+      text: this.task.text || ''
     }
   },
   methods: {
-    startEditing() {
-      this.editedText = this.task.text || '';
-      this.isEditing = true;
-      
+    onEdit() {
+      this.isEdit = true
       this.$nextTick(() => {
-        this.$refs.textInput.focus();
-      });
+        if (this.$refs.input) {
+          this.$refs.input.focus()
+          this.$refs.input.select()
+        }
+      })
     },
+    
     saveText() {
-      if (this.task.text === this.editedText) {
-        this.isEditing = false;
-        return;
-      }
+      const newText = this.text.trim()
+      this.isEdit = false
       
-      this.isEditing = false;
+      if (newText === this.task.text) return
       
       this.$emit('changeText', {
-        taskId: this.task.id,
         groupId: this.groupId,
-        text: this.editedText
-      });
+        taskId: this.task.id,
+        text: newText
+      })
     },
+    
     cancelEdit() {
-      this.isEditing = false;
+      this.text = this.task.text || ''
+      this.isEdit = false
+    }
+  },
+  watch: {
+    'task.text': {
+      handler(newVal) {
+        this.text = newVal || ''
+      }
     }
   }
 }
 </script>
 
 <style scoped>
-/* All styling moved to common.css */
+/* Styles are imported from dynamic-components.css */
 </style>

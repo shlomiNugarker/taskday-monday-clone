@@ -1,20 +1,20 @@
 <template>
-  <div>
+  <div class="group-list-container">
     <Container
       class="relative"
       @drop="onDrop($event)"
       orientation="vertical"
       :drag-begin-delay="200"
-      :drag-class="'shadow-md z-50'"
+      :drag-class="'shadow-lg z-50 group-drag-item'"
       :drop-placeholder="{
-        className: 'border border-dashed border-[#c4c4c4] my-[10px] ml-[10px]',
+        className: 'group-drop-placeholder',
         animationDuration: '150',
         showOnTop: false
       }"
       @click="groupClicked"
     >
       <Draggable
-        class="mb-8"
+        class="group-item mb-8"
         v-for="group in groups"
         :key="group.id"
         :drag-begin-delay="200"
@@ -24,12 +24,20 @@
           :group="group"
           @changeGroupTitle="changeGroupTitle"
           @removeGroup="removeGroup"
+          @duplicateGroup="duplicateGroup"
+          @toggleGroupCollapse="toggleGroupCollapse"
+          @sortGroup="sortGroup"
+          @openColorPicker="openColorPicker"
         />
         <task-list
           :tasks="group.tasks"
           :groupId="group.id"
           :boardId="boardId"
           :group="group"
+          @update="updateTask"
+          @removeTask="removeTask"
+          @duplicateTask="duplicateTask"
+          @addComment="addComment"
         />
 
         <add-task :group="group" @addTask="addTask" />
@@ -111,6 +119,33 @@ export default {
     removeGroup(groupId) {
       this.$store.dispatch({ type: 'removeGroup', groupId })
     },
+    duplicateGroup(groupId) {
+      this.$store.dispatch({ type: 'duplicateGroup', groupId })
+    },
+    updateTask(payload) {
+      this.$store.dispatch({ type: 'updateTask', ...payload })
+    },
+    removeTask(payload) {
+      this.$store.dispatch({ type: 'removeTask', ...payload })
+    },
+    duplicateTask(payload) {
+      this.$store.dispatch({ type: 'duplicateTask', ...payload })
+    },
+    addComment(payload) {
+      this.$store.dispatch({ type: 'openTaskDetails', ...payload })
+    },
+    toggleGroupCollapse(payload) {
+      // Handle group collapse toggling
+      console.log('Toggle group collapse', payload)
+    },
+    sortGroup(payload) {
+      // Handle group sorting
+      console.log('Sort group', payload)
+    },
+    openColorPicker(groupId) {
+      // Handle color picker opening
+      console.log('Open color picker for group', groupId)
+    },
     groupClicked() {
       console.log('group clicked')
     },
@@ -124,3 +159,33 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.group-list-container {
+  padding-bottom: var(--spacing-xl);
+}
+
+.group-item {
+  transition: all var(--transition-normal) ease;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.group-drag-item {
+  opacity: 0.8;
+  transform: scale(0.98);
+  background-color: white;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-large);
+}
+
+.group-drop-placeholder {
+  border: 2px dashed var(--color-light-gray);
+  background-color: rgba(240, 240, 240, 0.4);
+  margin: var(--spacing-md) 0;
+  border-radius: var(--radius-lg);
+  height: 70px;
+  transition: all var(--transition-fast) ease;
+}
+</style>

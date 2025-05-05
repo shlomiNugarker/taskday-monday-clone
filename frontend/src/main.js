@@ -12,6 +12,10 @@ import UiComponents from './components/ui'
 // Styles
 import '../src/styles/tailwind.css'
 import 'element-plus/dist/index.css'
+import './assets/styles/variables.css'
+import './assets/styles/dynamic-components.css'
+import './assets/styles/animations.css'
+import './assets/styles/tables.css'
 
 // Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'

@@ -32,6 +32,7 @@
           @changeText="changeText"
           @duplicateTask="duplicateTask"
           @deleteTask="deleteTask"
+          @removeTask="deleteTask"
         />
       </Draggable>
       <div v-if="!tasksToShow.length" class="py-6 px-4 text-center">
@@ -170,6 +171,7 @@ export default {
       return (index) => this.copyGroup.tasks[index]
     },
     changeTitle(updateObj) {
+      console.log("Task list - change title", updateObj)
       this.$store.dispatch({ 
         type: 'updateTask', 
         updateType: 'title',
@@ -179,6 +181,7 @@ export default {
       })
     },
     changeStatus(updateObj) {
+      console.log("Task list - change status", updateObj)
       this.$store.dispatch({ 
         type: 'updateTask', 
         updateType: 'status',
@@ -188,6 +191,7 @@ export default {
       })
     },
     removeAssignedMember(updateObj) {
+      console.log("Task list - remove member", updateObj)
       this.$store.dispatch({ 
         type: 'updateTask', 
         updateType: 'removeMember',
@@ -197,6 +201,7 @@ export default {
       })
     },
     addAssignedMember(updateObj) {
+      console.log("Task list - add member", updateObj)
       this.$store.dispatch({ 
         type: 'updateTask', 
         updateType: 'addMember',
@@ -206,6 +211,7 @@ export default {
       })
     },
     changePriority(updateObj) {
+      console.log("Task list - change priority", updateObj)
       this.$store.dispatch({ 
         type: 'updateTask', 
         updateType: 'priority',
@@ -214,7 +220,18 @@ export default {
         data: updateObj.priority
       })
     },
+    changePerson(updateObj) {
+      console.log("Task list - change person", updateObj)
+      this.$store.dispatch({ 
+        type: 'updateTask', 
+        updateType: 'addMember',
+        groupId: updateObj.groupId,
+        taskId: updateObj.taskId,
+        data: updateObj.person
+      })
+    },
     changeTimeline(updateObj) {
+      console.log("Task list - change timeline", updateObj)
       this.$store.dispatch({ 
         type: 'updateTask', 
         updateType: 'timeline',
@@ -224,6 +241,7 @@ export default {
       })
     },
     changeText(updateObj) {
+      console.log("Task list - change text", updateObj)
       this.$store.dispatch({ 
         type: 'updateTask', 
         updateType: 'text',
@@ -233,6 +251,7 @@ export default {
       })
     },
     duplicateTask(updateObj) {
+      console.log("Task list - duplicate task", updateObj)
       this.$store.dispatch({ 
         type: 'duplicateTask',
         groupId: updateObj.groupId,
@@ -240,10 +259,11 @@ export default {
       })
     },
     deleteTask(updateObj) {
+      console.log("Task list - delete task", updateObj)
       this.$store.dispatch({ 
         type: 'removeTask',
         groupId: updateObj.groupId,
-        taskId: updateObj.taskId
+        task: { id: updateObj.taskId }
       })
     }
   },

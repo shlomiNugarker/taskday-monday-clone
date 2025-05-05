@@ -1,9 +1,9 @@
 <template>
-  <section class="w-full py-2 px-4 border-b border-[#d0d4e4] bg-white shadow-sm sticky top-0 z-10 overflow-x-auto">
+  <section class="table-header w-full py-2 px-4 border-b border-[var(--color-border)] bg-white overflow-x-auto">
     <div class="flex items-center">
       <div class="flex items-center flex-1">
         <span
-          class="w-6 h-6 rounded-md flex items-center justify-center cursor-pointer transition-all duration-200 hover:shadow-md relative group"
+          class="group-color-indicator w-6 h-6 rounded-md flex items-center justify-center cursor-pointer transition-all duration-200 hover:shadow-md relative group"
           :style="{ 'background-color': group.color }"
         >
           <el-dropdown class="flex" trigger="click">
@@ -11,21 +11,21 @@
               <font-awesome-icon class="text-white text-xs transform transition-transform duration-200 hover:scale-110" icon="caret-down" />
             </span>
             <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item @click="changeGroupColor" class="flex items-center space-x-2">
-                  <div class="flex -space-x-1">
+              <el-dropdown-menu class="dynamic-dropdown-menu">
+                <el-dropdown-item @click="changeGroupColor" class="dynamic-dropdown-item">
+                  <div class="flex -space-x-1 mr-2">
                     <span class="w-4 h-4 rounded-full bg-blue-500"></span>
                     <span class="w-4 h-4 rounded-full bg-green-500"></span>
                     <span class="w-4 h-4 rounded-full bg-yellow-500"></span>
                   </div>
                   <span>Change color</span>
                 </el-dropdown-item>
-                <el-dropdown-item @click="duplicateGroup" class="flex items-center space-x-2">
-                  <font-awesome-icon icon="clone" class="text-gray-600" />
+                <el-dropdown-item @click="duplicateGroup" class="dynamic-dropdown-item">
+                  <font-awesome-icon icon="clone" class="mr-2" />
                   <span>Duplicate</span>
                 </el-dropdown-item>
-                <el-dropdown-item @click="removeGroup()" class="flex items-center space-x-2 text-red-500 hover:text-red-600">
-                  <font-awesome-icon icon="trash-can" />
+                <el-dropdown-item @click="removeGroup()" class="dynamic-dropdown-item-danger">
+                  <font-awesome-icon icon="trash-can" class="mr-2" />
                   <span>Delete</span>
                 </el-dropdown-item>
               </el-dropdown-menu>
@@ -37,7 +37,7 @@
           </div>
         </span>
         
-        <div class="mx-2 text-gray-500 cursor-move hover:text-gray-700 transition-colors duration-200 group">
+        <div class="group-action mx-2 text-gray-500 cursor-move hover:text-gray-700 group">
           <font-awesome-icon icon="grip" />
           <div class="absolute mt-1 hidden group-hover:block bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap z-20">
             Drag to reorder
@@ -45,7 +45,7 @@
         </div>
         
         <div
-          class="font-medium text-sm group"
+          class="group-title"
           :style="{ color: group.color }"
           v-if="!isEdit"
           @click="onEdit"
@@ -54,7 +54,7 @@
             {{ group.title }}
             <span class="ml-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-xs text-gray-500">(edit)</span>
             <div v-if="isSaving" class="ml-2">
-              <div class="animate-spin rounded-full h-3 w-3 border-t-2 border-b-2" :style="{ 'border-color': group.color }"></div>
+              <div class="spin rounded-full h-3 w-3 border-t-2 border-b-2" :style="{ 'border-color': group.color }"></div>
             </div>
           </span>
         </div>
@@ -68,62 +68,62 @@
             @focusout="saveGroupTitle"
             @keyup.enter="saveGroupTitle"
             @keyup.esc="cancelEdit"
-            class="border border-gray-300 rounded px-2 py-1 w-full focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent transition-all duration-200"
+            class="border border-gray-300 rounded px-2 py-1 w-full focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent focus-ring transition-all duration-200"
           />
         </div>
         
         <div class="ml-2 flex items-center">
           <span 
             v-if="group.tasks && group.tasks.length > 0" 
-            class="text-xs font-medium px-2 py-0.5 rounded-full bg-gray-100 text-gray-600"
+            class="dynamic-badge bg-gray-100 text-gray-600"
           >
             {{ group.tasks.length }} items
           </span>
         </div>
       </div>
       
-      <div class="task-grid grid-cols-[2fr,1fr,1fr,1fr,1fr,0.5fr] min-h-[48px] h-[48px] w-full">
-        <div class="flex items-center justify-start border-r border-gray-100 pr-2 h-full text-right px-2">
+      <div class="task-grid w-full">
+        <div class="task-cell title-cell">
           <span class="font-medium text-sm text-gray-600">Task</span>
         </div>
         
-        <div class="flex items-center justify-center min-w-0 px-2 border-r border-gray-100 h-full text-right">
+        <div class="task-cell">
           <div class="font-medium text-sm text-gray-600 flex items-center whitespace-nowrap cursor-pointer">
             Status
-            <button @click="sortByStatus" class="ml-1 text-gray-400 hover:text-gray-600 focus:outline-none">
+            <button @click="sortByStatus" class="sort-button">
               <font-awesome-icon icon="sort" class="text-xs" />
             </button>
           </div>
         </div>
         
-        <div class="flex items-center justify-center min-w-0 px-2 border-r border-gray-100 h-full text-right">
+        <div class="task-cell">
           <div class="font-medium text-sm text-gray-600 flex items-center whitespace-nowrap cursor-pointer">
             Person
-            <button @click="sortByPerson" class="ml-1 text-gray-400 hover:text-gray-600 focus:outline-none">
+            <button @click="sortByPerson" class="sort-button">
               <font-awesome-icon icon="sort" class="text-xs" />
             </button>
           </div>
         </div>
         
-        <div class="flex items-center justify-center min-w-0 px-2 border-r border-gray-100 h-full text-right">
+        <div class="task-cell">
           <div class="font-medium text-sm text-gray-600 flex items-center whitespace-nowrap cursor-pointer">
             Priority
-            <button @click="sortByPriority" class="ml-1 text-gray-400 hover:text-gray-600 focus:outline-none">
+            <button @click="sortByPriority" class="sort-button">
               <font-awesome-icon icon="sort" class="text-xs" />
             </button>
           </div>
         </div>
         
-        <div class="flex items-center justify-center min-w-0 px-2 border-r border-gray-100 h-full text-right">
+        <div class="task-cell">
           <div class="font-medium text-sm text-gray-600 flex items-center whitespace-nowrap cursor-pointer">
             Date
-            <button @click="sortByDate" class="ml-1 text-gray-400 hover:text-gray-600 focus:outline-none">
+            <button @click="sortByDate" class="sort-button">
               <font-awesome-icon icon="sort" class="text-xs" />
             </button>
           </div>
         </div>
         
-        <div class="flex items-center justify-center min-w-0 px-2 h-full text-right">
+        <div class="task-cell">
           <span class="font-medium text-sm text-gray-600">Text</span>
         </div>
       </div>
@@ -131,11 +131,11 @@
       <div class="ml-2">
         <button 
           @click="collapseGroup" 
-          class="w-6 h-6 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors duration-200 focus:outline-none"
+          class="group-action"
         >
           <font-awesome-icon 
             :icon="isCollapsed ? 'chevron-down' : 'chevron-up'" 
-            class="text-gray-500 text-xs"
+            class="text-xs"
           />
         </button>
       </div>
@@ -271,27 +271,174 @@ export default {
 /* Tooltip hover effect */
 .group:hover .group-hover\:block {
   display: block;
-  animation: fadeIn 0.2s ease-in-out;
+  animation: fadeIn var(--transition-fast) ease-in-out;
 }
 
+/* Custom animations */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-5px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Ensure text truncation */
-.min-w-0 {
-  min-width: 0;
+/* Group color indicator */
+.group-color-indicator {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all var(--transition-normal) ease;
 }
 
-.whitespace-nowrap {
-  white-space: nowrap;
+.group-color-indicator:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
+/* Group title styling */
+.group-title {
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-normal) ease;
+}
+
+.group-title:hover {
+  opacity: 0.9;
+}
+
+/* Sorting buttons */
+.sort-button {
+  margin-left: var(--spacing-xs);
+  opacity: 0.6;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast) ease;
+}
+
+.sort-button:hover {
+  background-color: var(--color-background-hover);
+  opacity: 1;
+}
+
+/* Dynamic badge */
+.dynamic-badge {
+  padding: var(--spacing-xxs) var(--spacing-xs);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  transition: all var(--transition-fast) ease;
+}
+
+.dynamic-badge:hover {
+  background-color: var(--color-background-hover);
+}
+
+/* Group action buttons */
+.group-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast) ease;
+  cursor: pointer;
+}
+
+.group-action:hover {
+  background-color: var(--color-background-hover);
+  transform: scale(1.05);
+}
+
+/* Spinning animation */
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Dropdown menu animations */
+.dynamic-dropdown-menu {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-medium);
+  animation: dropdown-fade-in var(--transition-fast) ease forwards;
+}
+
+@keyframes dropdown-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.dynamic-dropdown-item {
+  transition: all var(--transition-fast) ease;
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.dynamic-dropdown-item:hover {
+  background-color: var(--color-background-hover);
+}
+
+.dynamic-dropdown-item-danger {
+  transition: all var(--transition-fast) ease;
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--color-priority-critical);
+}
+
+.dynamic-dropdown-item-danger:hover {
+  background-color: rgba(226, 68, 92, 0.08);
+}
+
+/* Grid styles */
 .task-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr 1fr 0.5fr;
-  min-height: 48px;
-  height: 48px;
+  gap: 0;
+  align-items: center;
+  text-align: right;
+}
+
+/* Cell styling */
+.task-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--spacing-sm);
+  position: relative;
+}
+
+.title-cell {
+  justify-content: flex-start;
+  padding-left: var(--spacing-md);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .task-grid {
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .task-grid {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .task-grid {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
 }
 </style>

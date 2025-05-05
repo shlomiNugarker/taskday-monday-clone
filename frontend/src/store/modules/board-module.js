@@ -361,5 +361,56 @@ export default {
       boardService.update(copyBoard)
       commit({ type: 'setCurrBoard', board: copyBoard })
     },
+    async updateTask({ state, commit }, { updateType, groupId, taskId, data }) {
+      try {
+        const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
+        const groupIdx = copyBoard.groups.findIndex(g => g.id === groupId)
+        
+        if (groupIdx === -1) return
+        
+        const taskIdx = copyBoard.groups[groupIdx].tasks.findIndex(t => t.id === taskId)
+        if (taskIdx === -1) return
+        
+        const task = copyBoard.groups[groupIdx].tasks[taskIdx]
+        
+        // Update based on the update type
+        switch (updateType) {
+          case 'title':
+            task.title = data
+            break
+          case 'status':
+            task.status = data
+            break
+          case 'priority':
+            task.priority = data
+            break
+          case 'text':
+            task.text = data
+            break
+          case 'timeline':
+            task.timeline = {
+              startDate: data?.[0] || null,
+              endDate: data?.[1] || null
+            }
+            break
+          case 'removeMember':
+            task.person = task.person.filter(p => p._id !== data)
+            break
+          case 'addMember':
+            if (!task.person) task.person = []
+            task.person.push(data)
+            break
+          default:
+            console.warn('Unknown update type:', updateType)
+            return
+        }
+        
+        await boardService.update(copyBoard)
+        socketService.emit('board newUpdateBoard', copyBoard)
+        commit({ type: 'setCurrBoard', board: copyBoard })
+      } catch (error) {
+        console.error('Failed to update task:', error)
+      }
+    },
   },
 }
