@@ -4,19 +4,23 @@
       class="priority-cmp"
       v-bind:style="{ backgroundColor: priorityStyle }"
     >
-      <el-dropdown class="side-drop-down" trigger="click">
-        <span class="el-dropdown-link">
+      <el-dropdown 
+        class="side-drop-down w-full" 
+        trigger="click" 
+        placement="bottom" 
+        :teleported="true"
+        popper-class="priority-dropdown"
+      >
+        <span class="el-dropdown-link w-full">
           <div class="currOpt" @click="openModal">
             {{ task.priority }}
           </div>
         </span>
-        <template #dropdown v-bind:style="{}">
-          <el-dropdown-menu
-            v-for="(opt, idx) in opts"
-            :key="idx"
-            v-bind:style="{ padding: '5px' }"
-          >
+        <template #dropdown>
+          <el-dropdown-menu>
             <el-dropdown-item
+              v-for="(opt, idx) in opts"
+              :key="idx"
               class="opt"
               @click="changePriority(opt.priority)"
               v-bind:style="{
@@ -74,6 +78,9 @@ export default {
         priority,
       })
     },
+    openModal() {
+      // הפונקציה מוגדרת אבל ריקה כדי למנוע שגיאות
+    }
   },
   components: {},
 }
@@ -81,5 +88,18 @@ export default {
 <style>
 .el-dropdown-link {
   margin-left: 0px;
+  display: block;
+  width: 100%;
+}
+
+.priority-dropdown {
+  min-width: 150px !important;
+  width: 150px !important;
+  margin-top: 5px !important;
+  transform-origin: center top !important;
+}
+
+.el-dropdown__popper {
+  max-width: none !important;
 }
 </style>

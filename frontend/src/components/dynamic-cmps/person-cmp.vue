@@ -1,8 +1,15 @@
 <template>
   <section class="flex items-center justify-center min-w-[150px] h-[35px] pt-[5px] bg-[#f5f6f8d8]" @mouseover="mouseOver" @mouseleave="mouseLeave">
-    <el-dropdown class="side-drop-down" trigger="click">
-      <span class="el-dropdown-link relative">
+    <el-dropdown 
+      class="side-drop-down w-full" 
+      trigger="click" 
+      placement="bottom"
+      :teleported="true"
+      popper-class="person-dropdown"
+    >
+      <span class="el-dropdown-link relative w-full flex justify-center items-center">
         <font-awesome-icon icon="plus" class="absolute -left-6 top-2 z-10 text-white text-[13px] rounded-full p-[2px] bg-[#0073ea]" :class="{'invisible': !isOver}" />
+        
         <div v-if="assignedMembers.length" class="relative flex justify-center items-center" :style="{ minWidth: (assignedMembers.length - 1) * 20 + 30 + 'px', height: '30px' }">
           <div class="absolute left-1/2 -translate-x-1/2 flex" :style="{ width: (assignedMembers.length - 1) * 20 + 30 + 'px', height: '30px' }">
             <img
@@ -15,7 +22,8 @@
             />
           </div>
         </div>
-        <div v-else>
+        
+        <div v-else class="flex justify-center items-center">
           <img
             class="w-[30px] h-[30px] rounded-full object-cover border-2 border-white shadow-sm"
             src="https://cdn.monday.com/icons/dapulse-person-column.svg"
@@ -23,7 +31,7 @@
           />
         </div>
 
-        <el-icon class="el-icon2 ml-2"> </el-icon>
+        <el-icon class="el-icon2 ml-2 absolute right-2"> </el-icon>
       </span>
       <template #dropdown>
         <el-dropdown-menu>
@@ -117,3 +125,16 @@ export default {
   components: {},
 }
 </script>
+
+<style>
+.person-dropdown {
+  min-width: 150px !important;
+  width: fit-content !important;
+  margin-top: 5px !important;
+  transform-origin: center top !important;
+}
+
+.el-dropdown__popper {
+  max-width: none !important;
+}
+</style>

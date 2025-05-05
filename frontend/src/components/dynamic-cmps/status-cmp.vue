@@ -1,28 +1,31 @@
 <template>
-  <section class="status-cmp" v-bind:style="{ backgroundColor: statusStyle }">
-    <el-dropdown class="side-drop-down" trigger="click">
-      <span class="el-dropdown-link">
-        <div class="currOptDone" v-if="isDone && isPlay">
-          <img src="../../styles/images/done.gif" alt="" />
+  <section
+    class="flex items-center justify-center min-w-[150px] ml-[22px] text-white h-[35px]"
+    :style="{ backgroundColor: statusStyle }"
+  >
+    <el-dropdown 
+      class="h-full w-full" 
+      trigger="click" 
+      placement="bottom"
+      :teleported="true"
+      popper-class="status-dropdown"
+    >
+      <span class="flex items-center w-full relative">
+        <div v-if="isDone && isPlay" class="absolute left-1/2 -translate-x-1/2 z-10 flex items-center justify-center">
+          <img src="../../styles/images/done.gif" alt="" class="w-8 h-8" />
         </div>
-        <div class="currOpt" @click="openModal">
-          {{ task.status }}
+        <div class="flex items-center justify-center w-full h-[35px] cursor-pointer relative" @click="openModal">
+          <span class="block w-full text-center relative z-20 select-none">{{ task.status }}</span>
         </div>
       </span>
-      <template #dropdown v-bind:style="{}">
-        <el-dropdown-menu
-          v-for="(opt, idx) in opts"
-          :key="idx"
-          v-bind:style="{ padding: '5px' }"
-        >
+      <template #dropdown>
+        <el-dropdown-menu class="p-0 w-[150px]">
           <el-dropdown-item
-            class="opt"
+            v-for="(opt, idx) in opts"
+            :key="idx"
+            class="flex items-center justify-center text-white cursor-pointer"
+            :style="{ backgroundColor: opt.color }"
             @click="changeStatus(opt.status)"
-            v-bind:style="{
-              backgroundColor: opt.color,
-              justifyContent: 'center',
-              color: 'white',
-            }"
           >
             {{ opt.status }}
           </el-dropdown-item>
@@ -79,9 +82,27 @@ export default {
         status,
       })
     },
+    openModal() {
+      // הפונקציה מוגדרת אבל ריקה כדי למנוע שגיאות
+    }
   },
   components: {},
 }
 </script>
 
-<style></style>
+<style>
+.status-dropdown {
+  min-width: 150px !important;
+  width: 150px !important;
+  margin-top: 5px !important;
+  transform-origin: center top !important;
+}
+
+.el-dropdown {
+  width: 100%;
+}
+
+.el-dropdown__popper {
+  max-width: none !important;
+}
+</style>

@@ -18,7 +18,13 @@
       </div>
 
       <div class="filter-container-btn">
-        <el-dropdown class="side-drop-down" trigger="click">
+        <el-dropdown 
+          class="side-drop-down" 
+          trigger="click" 
+          placement="bottom" 
+          :teleported="true"
+          popper-class="filter-dropdown"
+        >
           <span class="el-dropdown-link">
             <button class="filter-btn" :class="isFilter">
               <span>
@@ -89,7 +95,13 @@
         </el-dropdown>
       </div>
       <button :class="isSort" class="sort-btn">
-        <el-dropdown class="side-drop-down" trigger="click">
+        <el-dropdown 
+          class="side-drop-down" 
+          trigger="click" 
+          placement="bottom"
+          :teleported="true"
+          popper-class="sort-dropdown"
+        >
           <span class="el-dropdown-link">
             <span>
               <img class="sort-icon" src="../styles/icon/sort.svg" alt="" />
@@ -239,5 +251,15 @@ export default {
   border-radius: 5px;
   padding: 3px;
   margin: 3px;
+}
+
+.filter-dropdown, .sort-dropdown {
+  min-width: fit-content !important;
+  margin-top: 5px !important;
+  transform-origin: center top !important;
+}
+
+.el-dropdown__popper {
+  max-width: none !important;
 }
 </style>
