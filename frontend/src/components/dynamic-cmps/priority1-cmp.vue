@@ -1,8 +1,8 @@
 <template>
-  <section class="">
+  <section>
     <section
-      class="priority-cmp"
-      v-bind:style="{ backgroundColor: priorityStyle }"
+      class="min-w-[150px]"
+      :style="{ backgroundColor: priorityStyle }"
     >
       <el-dropdown 
         class="side-drop-down w-full" 
@@ -11,8 +11,8 @@
         :teleported="true"
         popper-class="priority-dropdown"
       >
-        <span class="el-dropdown-link w-full">
-          <div class="currOpt" @click="openModal">
+        <span class="el-dropdown-link w-full block ml-0">
+          <div class="flex items-center justify-center w-[150px] h-[35px] cursor-pointer text-white" @click="openModal">
             {{ task.priority }}
           </div>
         </span>
@@ -21,11 +21,10 @@
             <el-dropdown-item
               v-for="(opt, idx) in opts"
               :key="idx"
-              class="opt"
+              class="flex justify-center"
               @click="changePriority(opt.priority)"
-              v-bind:style="{
+              :style="{
                 backgroundColor: opt.color,
-                justifyContent: 'center',
                 color: 'white',
               }"
             >
@@ -85,21 +84,18 @@ export default {
   components: {},
 }
 </script>
-<style>
-.el-dropdown-link {
-  margin-left: 0px;
-  display: block;
-  width: 100%;
-}
 
+<style>
 .priority-dropdown {
-  min-width: 150px !important;
-  width: 150px !important;
-  margin-top: 5px !important;
+  @apply min-w-[150px] w-[150px] mt-[5px];
   transform-origin: center top !important;
 }
 
 .el-dropdown__popper {
   max-width: none !important;
+}
+
+:deep(.el-tooltip__trigger) {
+  @apply w-[150px] flex justify-center items-center ml-0;
 }
 </style>
