@@ -22,6 +22,17 @@
       <div class="details-container">
         <div class="update-details-page detail-page">
           <div class="input-update">
+            <div class="user-avatar-container">
+              <img 
+                v-if="loggedinUser && loggedinUser.imgUrl" 
+                class="user-img" 
+                :src="loggedinUser.imgUrl" 
+                :alt="loggedinUser.fullname"
+              />
+              <div v-else class="user-img-fallback">
+                {{ getUserInitials(loggedinUser?.fullname || 'User') }}
+              </div>
+            </div>
             <input
               type="text"
               placeholder="Write an update"
@@ -45,12 +56,20 @@
               <div class="post-header">
                 <div class="left-side-post">
                   <div class="img-user-container">
-                    <img class="user-img" :src="comment.byUser.imgUrl" />
+                    <img 
+                      v-if="comment.byUser && comment.byUser.imgUrl" 
+                      class="user-img" 
+                      :src="comment.byUser.imgUrl" 
+                      :alt="comment.byUser.fullname"
+                    />
+                    <div v-else class="user-img-fallback">
+                      {{ getUserInitials(comment.byUser?.fullname || 'User') }}
+                    </div>
                   </div>
-                  <div class="title">{{ comment.byUser.fullname }}</div>
+                  <div class="title">{{ comment.byUser?.fullname || 'User' }}</div>
 
                   <div>
-                    <p class="green logged-in"></p>
+                    <p class="green logged-in" v-if="comment.byUser && comment.byUser.id === loggedinUser?._id"></p>
                   </div>
                 </div>
                 <div class="post-title">
@@ -109,12 +128,16 @@
                   :key="reply"
                 >
                   <img
+                    v-if="reply.byUser && reply.byUser.imgUrl"
                     class="user-icon"
-                    src="../styles/icon/def-user.png"
-                    alt=""
+                    :src="reply.byUser.imgUrl"
+                    :alt="reply.byUser.fullname"
                   />
+                  <div v-else class="user-icon-fallback">
+                    {{ getUserInitials(reply.byUser?.fullname || 'User') }}
+                  </div>
                   <div class="replay-area">
-                    <p class="name">{{ reply.byUser.fullname }}</p>
+                    <p class="name">{{ reply.byUser?.fullname || 'User' }}</p>
                     <p class="replaies">{{ reply.txt }}</p>
                   </div>
                 </div>
@@ -124,10 +147,14 @@
                 <div class="left-side-reply">
                   <div>
                     <img
+                      v-if="loggedinUser && loggedinUser.imgUrl"
                       class="user-img"
-                      src="../styles/icon/def-user.png"
-                      alt=""
+                      :src="loggedinUser.imgUrl"
+                      :alt="loggedinUser.fullname"
                     />
+                    <div v-else class="user-img-fallback">
+                      {{ getUserInitials(loggedinUser?.fullname || 'User') }}
+                    </div>
                   </div>
                 </div>
                 <div class="right-side-reply">
@@ -282,8 +309,51 @@ export default {
         groupId: this.groupId,
       })
     },
+    getUserInitials(fullname) {
+      return fullname.split(' ').map(word => word[0]).join('').toUpperCase()
+    },
   },
 }
 </script>
 
-<style></style>
+<style scoped>
+.user-img-fallback,
+.user-icon-fallback {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #0073ea;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.user-icon-fallback {
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
+}
+
+/* Indication that a comment is from the current user */
+.green.logged-in {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #00ca72;
+  margin-left: 5px;
+}
+
+.user-avatar-container {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.input-update {
+  display: flex;
+  align-items: center;
+}
+</style>
