@@ -3,6 +3,7 @@ export const utilService = {
   getRandomInt,
   makeId,
   getRandomPredefinedColor,
+  getRandomColor,
 }
 
 function delay(ms = 1500) {
@@ -42,4 +43,14 @@ function getRandomPredefinedColor() {
   ]
   const idx = getRandomInt(0, predefineColors.length)
   return predefineColors[idx]
+}
+
+function getRandomColor() {
+  // מייצר צבע אקראי בפורמט HEX
+  const letters = '0123456789ABCDEF'
+  let color = '#'
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)]
+  }
+  return color
 }

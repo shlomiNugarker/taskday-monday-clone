@@ -2,7 +2,7 @@ import UiButton from './Button.vue';
 import UiAvatar from './Avatar.vue';
 import UiBadge from './Badge.vue';
 import UiCard from './Card.vue';
-import DesignTokens from './ColorVariables';
+import DesignTokens from './DesignTokens';
 
 export {
   UiButton,

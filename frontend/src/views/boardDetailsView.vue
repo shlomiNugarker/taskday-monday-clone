@@ -1,9 +1,9 @@
 <template>
-  <section class="container-details-view">
+  <section class="w-full h-full">
     <main
-      class="boardDetails"
+      class="min-h-screen"
       v-if="!isLoading"
-      :class="[{ 'nav-bar-open': isNavBarOpen }]"
+      :class="{ 'ml-0': isNavBarOpen }"
     >
       <router-view></router-view>
       <board-details-header />
@@ -21,11 +21,11 @@
     </main>
 
     <div
-      class="loading"
+      class="flex justify-center items-center h-screen"
       v-if="isLoading"
-      :class="[{ 'nav-bar-open': isNavBarOpen }]"
+      :class="{ 'ml-0': isNavBarOpen }"
     >
-      <img src="../styles/images/Loader.gif" alt="" />
+      <img src="../styles/images/Loader.gif" alt="" class="w-[100px]" />
     </div>
   </section>
 </template>
@@ -88,29 +88,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.container-details-view {
-  width: 100%;
-  height: 100%;
-}
-
-.boardDetails {
-  min-height: 100vh;
-}
-
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.loading img {
-  width: 100px;
-}
-
-.nav-bar-open {
-  margin-left: 0;
-}
-</style>

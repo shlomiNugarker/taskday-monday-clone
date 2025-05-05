@@ -1,7 +1,7 @@
 <template>
   <section
-    class="board-details-header"
-    :class="[{ 'nav-bar-open': isNavBarOpen }]"
+    class="w-[calc(100vw-120px)] sticky left-0 bg-white z-10 shadow-board px-[30px] py-[15px]"
+    :class="{ 'w-[calc(100vw-340px)]': isNavBarOpen, 'w-screen mt-[70px] max-[620px]:block': $store.getters.isMobile }"
   >
     <board-header-main :board="currBoard" v-if="showHeader" />
     <board-toolbar
@@ -72,32 +72,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.board-details-header {
-  width: calc(100vw - 120px);
-  padding: 15px 30px;
-  position: sticky;
-  left: 0;
-  background-color: white;
-  z-index: 10;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.nav-bar-open {
-  position: sticky;
-  left: 0;
-  width: calc(100vw - 340px);
-}
-
-@media (max-width: 620px) {
-  .board-details-header {
-    width: 100vw;
-    margin-top: 70px;
-  }
-  
-  .board-details-header .subtitle {
-    width: 80vw;
-  }
-}
-</style>

@@ -1,52 +1,65 @@
 <template>
-  <div class="left-btn-task flex">
-    <span class="btn-down-task-container" :class="isHoverStyle">
+  <div class="flex flex-1 min-w-0 group h-full">
+    <span class="flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
       <el-dropdown class="side-drop-down" trigger="click">
-        <span class="el-dropdown-link">
-          <font-awesome-icon icon="caret-down" />
-          <el-icon class="el-icon2"> </el-icon>
+        <span class="ml-1 p-1 hover:bg-gray-100 rounded-full transition-colors duration-200">
+          <font-awesome-icon icon="caret-down" class="text-[#676879] hover:text-[#0073ea] text-xs" />
         </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item @click="removeTask()">
-              <font-awesome-icon icon="trash-can" />Delete
+            <el-dropdown-item @click="removeTask()" class="hover:bg-red-50 transition-colors duration-200">
+              <font-awesome-icon icon="trash-can" class="text-red-500 mr-2" />
+              <span class="text-red-500">Delete</span>
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
     </span>
-    <section class="task-cmp">
-      <div class="container-task flex">
-        <div class="task-title">
-          <span class="side" :style="{ 'background-color': groupColor }"></span>
-          <p v-snip="{ lines: 1, mode: 'css' }" v-if="!isEdit">
-            {{ task.title }}
-          </p>
-          <input
-            ref="input"
-            type="text"
-            v-if="isEdit"
-            v-model="copyTask.title"
-            @focusout="isEdit = false"
-            @keyup="changeTitle()"
-          />
-          <button
-            class="edit-btn"
-            :class="isHoverStyle"
-            @click="onEdit"
-            v-if="!isEdit"
-          >
-            Edit
-          </button>
+    
+    <div class="flex-1 min-w-0 flex items-center h-full">
+      <div class="relative flex items-center w-full min-w-0 h-full">
+        <span class="w-[3px] h-[18px] absolute left-0 rounded-l-md" :style="{ 'background-color': groupColor }"></span>
+        
+        <div class="w-full min-w-0 flex justify-between items-center pl-2 h-full">
+          <!-- Task Title -->
+          <div class="min-w-0 flex-1">
+            <p 
+              v-if="!isEdit" 
+              @click="onEdit"
+              class="text-sm text-gray-800 font-medium truncate cursor-pointer hover:text-gray-900 transition-colors duration-200"
+            >
+              {{ task.title }}
+            </p>
+            
+            <input
+              ref="input"
+              type="text"
+              v-if="isEdit"
+              v-model="copyTask.title"
+              @focusout="saveTitle"
+              @keyup.enter="saveTitle"
+              @keyup.esc="cancelEdit"
+              class="text-sm text-gray-800 font-medium w-full border-b border-blue-500 focus:outline-none focus:ring-0 bg-blue-50/50 px-1 py-0.5 rounded transition-all duration-200"
+            />
+          </div>
+          
+          <!-- Comments -->
+          <div class="flex items-center ml-2 shrink-0">
+            <add-comment-btn 
+              @click="openDetails()" 
+              class="cursor-pointer hover:scale-110 transition-transform duration-200 text-gray-500 hover:text-blue-500" 
+            />
+            <span 
+              v-if="commentsNum" 
+              class="bg-[#0073ea] text-white text-[10px] rounded-full w-[18px] h-[18px] flex items-center justify-center ml-1 cursor-pointer hover:bg-[#0060d9] transition-colors duration-200 shadow-sm"
+              @click="openDetails()"
+            >
+              {{ commentsNum }}
+            </span>
+          </div>
         </div>
       </div>
-      <span class="add-comment-container">
-        <add-comment-btn @click="openDetails()" class="add-comment-icon" />
-        <span v-if="commentsNum" class="msgs" @click="openDetails()">{{
-          commentsNum
-        }}</span>
-      </span>
-    </section>
+    </div>
   </div>
 </template>
 
@@ -57,6 +70,7 @@ export default {
   props: {
     task: {
       type: Object,
+      required: true
     },
     isHover: {
       type: Boolean,
@@ -71,45 +85,26 @@ export default {
       isEdit: false,
       title: '',
       copyTask: null,
+      isSaving: false
     }
   },
   computed: {
     isHoverStyle() {
       if (this.isHover) return ''
-      return 'hidden'
+      return 'invisible'
     },
     commentsNum() {
-      return this.task.comments.length
+      return this.task.comments?.length || 0
     },
   },
   watch: {
-    '$store.getters.currBoard'() {
-      console.log('curr')
-      var boardToEdit = this.$store.getters.currBoard
-
-      // var groupIdx = currBoard.groups.findIndex(
-      //   (currGroup) => currGroup.id === this.groupId
-      // )
-      // this.$store.dispatch({
-      //   type: 'updateBoard',
-      //   boardToEdit,
-      // })
-      // console.log('groupIdx', groupIdx)
-      // if (groupIdx === -1) return
-      // var taskIdx = currBoard.groups[groupIdx]?.tasks.findIndex(
-      //   (currTask) => currTask.id === this.task.id
-      // )
-      // console.log('taskIdx', taskIdx)
-      // if (taskIdx === -1) return
-
-      // this.copyTask.title = JSON.parse(
-      //   JSON.stringify(currBoard.groups[groupIdx]?.tasks[taskIdx].title)
-      // )
-      // console.log(this.copyTask)
-    },
-  },
-  created() {
-    this.copyTask = JSON.parse(JSON.stringify(this.task))
+    task: {
+      handler(newVal) {
+        this.copyTask = JSON.parse(JSON.stringify(newVal));
+      },
+      deep: true,
+      immediate: true
+    }
   },
   methods: {
     openDetails() {
@@ -130,44 +125,70 @@ export default {
         {
           path: this.$store.getters.currBoard._id + '/task/' + this.task.id,
         }
-        // this.$store.getters.currBoard._id + '/task/' + this.task.id
       )
     },
     onEdit() {
       this.isEdit = true
       setTimeout(() => {
-        this.$refs.input.focus()
-      }, 1)
+        if (this.$refs.input) {
+          this.$refs.input.focus()
+          this.$refs.input.select()
+        }
+      }, 10)
     },
-    changeTitle() {
-      setTimeout(() => {
+    saveTitle() {
+      if (this.copyTask.title.trim() === '') {
+        this.copyTask.title = this.task.title; // Revert to original if empty
+        this.isEdit = false;
+        return;
+      }
+      
+      if (this.copyTask.title !== this.task.title) {
+        this.isSaving = true;
+        this.isEdit = false;
+        
         this.$emit('changeTitle', {
-          // groupId: this.groupId,
-          // taskId: this.task.id,
           title: this.copyTask.title,
+          taskId: this.task.id,
+          groupId: this.groupId
         })
-      }, 2000)
+        
+        setTimeout(() => {
+          this.isSaving = false;
+        }, 800);
+      } else {
+        this.isEdit = false;
+      }
+    },
+    cancelEdit() {
+      this.copyTask.title = this.task.title; // Revert changes
+      this.isEdit = false;
     },
     removeTask() {
-      const groupId = this.groupId
-      const task = this.task
-
-      this.$store.dispatch({ type: 'removeTask', groupId, task })
+      this.$confirm('Are you sure you want to delete this task?', 'Warning', {
+        confirmButtonText: 'Delete',
+        cancelButtonText: 'Cancel',
+        type: 'warning'
+      }).then(() => {
+        this.$emit('removeTask', {
+          taskId: this.task.id,
+          groupId: this.groupId
+        });
+      }).catch(() => {
+        // User cancelled
+      })
     },
   },
-  mounted() {},
   components: {
     addCommentBtn,
   },
 }
 </script>
 
-<style>
-.hidden {
-  visibility: hidden;
-}
-
-.el-dropdown-link {
-  margin-left: 15px;
+<style scoped>
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 </style>

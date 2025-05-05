@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const { colors } = require('./src/components/ui/ColorVariables');
+const designSystem = require('./src/components/ui/DesignTokens');
 
 module.exports = {
   content: [
@@ -9,21 +9,25 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: colors.primary,
-        neutral: colors.neutral,
-        status: colors.status,
-        bg: colors.background,
+        primary: designSystem.colors.primary,
+        secondary: designSystem.colors.secondary,
+        neutral: designSystem.colors.neutral,
+        status: designSystem.colors.status,
+        bg: designSystem.colors.background,
       },
-      boxShadow: {
-        'task': '0 1px 2px rgba(0, 0, 0, 0.07)',
-        'board': '0 2px 4px rgba(0, 0, 0, 0.05)',
-        'header': '0 2px 10px rgba(0, 0, 0, 0.1)',
-        'modal': '0 4px 20px rgba(0, 0, 0, 0.15)',
-        'dropdown': '0 3px 8px rgba(0, 0, 0, 0.12)',
-      },
+      boxShadow: designSystem.shadows,
       fontFamily: {
-        'sans': ['sofia-pro', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+        'sans': [designSystem.typography.fontFamily.base],
+        'mono': [designSystem.typography.fontFamily.monospace],
       },
+      fontSize: designSystem.typography.fontSizes,
+      fontWeight: designSystem.typography.fontWeights,
+      lineHeight: designSystem.typography.lineHeights,
+      letterSpacing: designSystem.typography.letterSpacing,
+      borderRadius: designSystem.borderRadius,
+      zIndex: designSystem.zIndex,
+      spacing: designSystem.spacing,
+      screens: designSystem.breakpoints,
       transitionProperty: {
         'width': 'width',
         'height': 'height',

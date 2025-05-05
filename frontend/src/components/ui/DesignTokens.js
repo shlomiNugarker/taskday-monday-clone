@@ -217,4 +217,4 @@ export default {
   typography,
   spacing,
   breakpoints
-};
+}; 

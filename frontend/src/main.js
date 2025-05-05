@@ -11,7 +11,6 @@ import UiComponents from './components/ui'
 
 // Styles
 import '../src/styles/tailwind.css'
-import '../src/styles/styles.scss'
 import 'element-plus/dist/index.css'
 
 // Font Awesome

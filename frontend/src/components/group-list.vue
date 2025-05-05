@@ -1,22 +1,26 @@
 <template>
   <div>
     <Container
-      class="container-groups"
+      class="relative"
       @drop="onDrop($event)"
       orientation="vertical"
       :drag-begin-delay="200"
-      :drag-class="'isInDrag'"
-      :drop-placeholder="dropPlaceholderOptions"
+      :drag-class="'shadow-md z-50'"
+      :drop-placeholder="{
+        className: 'border border-dashed border-[#c4c4c4] my-[10px] ml-[10px]',
+        animationDuration: '150',
+        showOnTop: false
+      }"
       @click="groupClicked"
     >
       <Draggable
-        class="group-container"
+        class="mb-8"
         v-for="group in groups"
         :key="group.id"
         :drag-begin-delay="200"
       >
         <columns-header
-          class="group-list"
+          class="relative"
           :group="group"
           @changeGroupTitle="changeGroupTitle"
           @removeGroup="removeGroup"
@@ -52,12 +56,6 @@ export default {
     return {
       waitToUpdate: false,
       copyGroups: JSON.parse(JSON.stringify(this.groups)),
-
-      dropPlaceholderOptions: {
-        className: 'drop-preview',
-        animationDuration: '150',
-        showOnTop: false,
-      },
     }
   },
   computed: {},
@@ -126,15 +124,3 @@ export default {
   },
 }
 </script>
-
-<style>
-.drop-preview {
-  border: 1px dashed #c4c4c4;
-  margin: 10px 0 0px 10px;
-}
-
-.isInDrag {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 50;
-}
-</style>

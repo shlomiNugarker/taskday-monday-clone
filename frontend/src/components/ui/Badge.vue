@@ -1,66 +1,86 @@
 <template>
   <span
     :class="[
-      'inline-flex items-center justify-center font-medium',
+      'inline-flex items-center',
       sizeClasses,
       variantClasses,
-      { 'rounded-full': pill },
-      { 'rounded': !pill },
+      roundedClasses,
       className
     ]"
   >
     <slot name="icon-left"></slot>
-    <slot></slot>
+    <span>
+      <slot></slot>
+    </span>
     <slot name="icon-right"></slot>
   </span>
 </template>
 
 <script>
+import { computed } from 'vue';
+import { borderRadius } from './DesignTokens';
+
 export default {
   name: 'UiBadge',
   props: {
     variant: {
       type: String,
       default: 'primary',
-      validator: (value) => [
-        'primary', 'secondary', 'success', 'danger', 
-        'warning', 'info', 'light', 'dark'
-      ].includes(value)
+      validator: (value) => ['primary', 'secondary', 'success', 'error', 'warning', 'info', 'neutral', 'outline'].includes(value)
     },
     size: {
       type: String,
       default: 'md',
       validator: (value) => ['sm', 'md', 'lg'].includes(value)
     },
-    pill: {
-      type: Boolean,
-      default: false
+    rounded: {
+      type: String,
+      default: 'full',
+      validator: (value) => ['none', 'sm', 'md', 'lg', 'xl', 'full'].includes(value)
     },
     className: {
       type: String,
       default: ''
     }
   },
-  computed: {
-    sizeClasses() {
+  setup(props) {
+    const sizeClasses = computed(() => {
       return {
-        'sm': 'px-1.5 py-0.5 text-xs',
-        'md': 'px-2 py-1 text-xs',
-        'lg': 'px-2.5 py-1.5 text-sm'
-      }[this.size];
-    },
-    variantClasses() {
+        'sm': 'text-xs px-2 py-0.5',
+        'md': 'text-xs px-2.5 py-1',
+        'lg': 'text-sm px-3 py-1.5'
+      }[props.size];
+    });
+
+    const variantClasses = computed(() => {
       return {
-        'primary': 'bg-blue-100 text-blue-800',
-        'secondary': 'bg-gray-100 text-gray-800',
-        'success': 'bg-green-100 text-green-800',
-        'danger': 'bg-red-100 text-red-800',
-        'warning': 'bg-yellow-100 text-yellow-800',
-        'info': 'bg-blue-100 text-blue-800',
-        'light': 'bg-gray-100 text-gray-800',
-        'dark': 'bg-gray-800 text-white'
-      }[this.variant];
-    }
+        'primary': 'bg-primary-500 text-white',
+        'secondary': 'bg-secondary-indigo-500 text-white',
+        'success': 'bg-status-success text-white',
+        'error': 'bg-status-error text-white',
+        'warning': 'bg-status-warning text-neutral-black',
+        'info': 'bg-status-info text-white',
+        'neutral': 'bg-neutral-lightGray text-neutral-darkGray',
+        'outline': 'bg-transparent border border-neutral-lightGray text-neutral-darkGray'
+      }[props.variant];
+    });
+
+    const roundedClasses = computed(() => {
+      return {
+        'none': 'rounded-none',
+        'sm': 'rounded-sm',
+        'md': 'rounded-md',
+        'lg': 'rounded-lg',
+        'xl': 'rounded-xl',
+        'full': 'rounded-full'
+      }[props.rounded];
+    });
+
+    return {
+      sizeClasses,
+      variantClasses,
+      roundedClasses
+    };
   }
 };
 </script>

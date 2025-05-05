@@ -1,34 +1,36 @@
 <template>
-  <section class="status-cmp" v-bind:style="{ backgroundColor: statusStyle }">
-    <el-dropdown class="side-drop-down" trigger="click">
-      <span class="el-dropdown-link">
-        <div class="currOptDone" v-if="isDone && isPlay">
-          <img src="../../styles/images/done.gif" alt="" />
-        </div>
-        <div class="currOpt" @click="openModal">
-          {{ task.status }}
-        </div>
-      </span>
-      <template #dropdown v-bind:style="{}">
-        <el-dropdown-menu
-          v-for="(opt, idx) in opts"
-          :key="idx"
-          v-bind:style="{ padding: '5px' }"
-        >
-          <el-dropdown-item
-            class="opt"
-            @click="changeStatus(opt.status)"
-            v-bind:style="{
-              backgroundColor: opt.color,
-              justifyContent: 'center',
-              color: 'white',
-            }"
-          >
-            {{ opt.status }}
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </template>
-    </el-dropdown>
+  <section 
+    class="w-full h-full flex items-center justify-center rounded-md cursor-pointer relative group transition-all duration-200"
+    @click="openModal"
+  >
+    <div 
+      class="w-full py-1.5 px-3 flex items-center justify-center text-white text-xs font-medium rounded transition-all duration-200 hover:shadow-sm" 
+      :style="{ backgroundColor: statusStyle }"
+    >
+      <div v-if="isDone && isPlay" class="mr-1 flex items-center">
+        <svg class="w-4 h-4 text-white animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+      </div>
+      <div class="truncate">{{ task.status || '-' }}</div>
+    </div>
+    
+    <!-- Status Dropdown -->
+    <div 
+      v-if="showDropdown"
+      class="absolute z-50 top-full left-0 mt-1 bg-white rounded shadow-lg border border-gray-200 p-1.5 min-w-[150px] animate-fadeIn"
+      @click.stop
+    >
+      <div 
+        v-for="(opt, idx) in opts" 
+        :key="idx"
+        class="flex justify-center text-white text-xs font-medium py-2 px-3 rounded mb-1 cursor-pointer transition-all duration-200 hover:opacity-90 hover:shadow-sm"
+        :style="{ backgroundColor: opt.color }"
+        @click="changeStatus(opt.status)"
+      >
+        {{ opt.status }}
+      </div>
+    </div>
   </section>
 </template>
 
@@ -37,6 +39,7 @@ export default {
   props: {
     task: {
       type: Object,
+      required: true
     },
     boardId: String,
     groupId: String,
@@ -51,7 +54,7 @@ export default {
         { status: '-', color: '#c4c4c4' },
       ],
       isPlay: false,
-      isEditStatus: false,
+      showDropdown: false
     }
   },
   computed: {
@@ -62,26 +65,71 @@ export default {
       return '#c4c4c4'
     },
     isDone() {
-      return this.task.status === 'Done' ? true : false
+      return this.task.status === 'Done'
     },
   },
-  watch: {},
-  created() {},
+  mounted() {
+    document.addEventListener('click', this.closeDropdown)
+  },
+  beforeDestroy() {
+    document.removeEventListener('click', this.closeDropdown)
+  },
   methods: {
+    openModal() {
+      this.showDropdown = !this.showDropdown
+    },
+    closeDropdown(event) {
+      if (this.showDropdown && !event.target.closest('.status-popup')) {
+        this.showDropdown = false
+      }
+    },
     changeStatus(status) {
-      this.isEditStatus = false
-      this.isPlay = true
-      setTimeout(() => (this.isPlay = false), 2500)
+      if (status === this.task.status) {
+        this.showDropdown = false
+        return
+      }
+      
+      this.showDropdown = false
+      
+      if (status === 'Done') {
+        this.isPlay = true
+        setTimeout(() => (this.isPlay = false), 1500)
+      }
 
       this.$emit('changeStatus', {
         groupId: this.groupId,
         taskId: this.task.id,
         status,
       })
-    },
+    }
   },
   components: {},
 }
 </script>
 
-<style></style>
+<style scoped>
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.animate-bounce {
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(-10%); }
+  50% { transform: translateY(10%); }
+}
+</style>
+
