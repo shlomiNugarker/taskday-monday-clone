@@ -1,7 +1,7 @@
 <template>
   <section
-    class="w-[calc(100vw-120px)] sticky left-0 bg-white z-10 shadow-board px-[30px] py-[15px]"
-    :class="{ 'w-[calc(100vw-340px)]': isNavBarOpen, 'w-screen mt-[70px] max-[620px]:block': $store.getters.isMobile }"
+    class="board-details-header"
+    :class="[{ 'nav-bar-open': isNavBarOpen }]"
   >
     <board-header-main :board="currBoard" v-if="showHeader" />
     <board-toolbar

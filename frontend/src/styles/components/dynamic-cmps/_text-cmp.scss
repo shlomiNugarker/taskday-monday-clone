@@ -1,0 +1,36 @@
+.text-cmp {
+  min-width: 150px;
+  background-color: #c4c4c4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: white;
+
+  .container-icon {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+  }
+
+  .text-icon {
+    color: white;
+    position: absolute;
+    left: -10px;
+  }
+
+  input {
+    width: 145px;
+  }
+}
+
+@media (max-width: 620px) {
+  .text-cmp {
+    .text-icon {
+      position: relative;
+      position: unset;
+    }
+  }
+}

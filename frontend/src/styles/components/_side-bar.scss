@@ -1,0 +1,19 @@
+.side-bar {
+  z-index: 5;
+  display: flex;
+
+  .empty-div {
+    width: 30px;
+    background-color: #f6f7fb;
+    height: 100vh;
+    border-right: 1px solid #d0d4e4;
+  }
+}
+
+@media (max-width: 620px) {
+  .side-bar {
+    .empty-div {
+      display: none;
+    }
+  }
+}

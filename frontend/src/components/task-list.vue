@@ -1,43 +1,22 @@
 <template>
-  <section class="w-full">
+  <section class="task-list">
     <Container
       group-name="tasksForDrop"
       :get-child-payload="getItemPayload(group)"
       @drop="onDrop($event, 'tasksForDrop')"
       :non-drag-area-selector="'.none-drag-input'"
-      :drag-class="'shadow-lg z-50 opacity-90'"
+      :drag-class="'isInDrag'"
       orientation="vertical"
-      :drop-placeholder="{
-        className: 'border-2 border-dashed border-blue-300 rounded-md my-2 bg-blue-50 bg-opacity-30',
-        animationDuration: '200',
-        showOnTop: false
-      }"
+      :drop-placeholder="dropPlaceholderOptions"
     >
-      <Draggable 
-        v-for="(task, index) in tasksToShow" 
-        :key="task.id"
-        class="task-item mb-2 last:mb-0"
-      >
+      <Draggable v-for="task in tasksToShow" :key="task.id">
         <task-preview
           :task="task"
           :groupId="groupId"
           :boardId="boardId"
           :group="group"
-          @changeTitle="changeTitle"
-          @changeStatus="changeStatus"
-          @removeAssignedMember="removeAssignedMember"
-          @addAssignedMember="addAssignedMember"
-          @changePriority="changePriority"
-          @changeTimeline="changeTimeline"
-          @changeText="changeText"
-          @duplicateTask="duplicateTask"
-          @deleteTask="deleteTask"
-          @removeTask="deleteTask"
         />
       </Draggable>
-      <div v-if="!tasksToShow.length" class="py-6 px-4 text-center">
-        <p class="text-gray-500 text-sm">No tasks in this group. Add one below.</p>
-      </div>
     </Container>
   </section>
 </template>
@@ -49,26 +28,23 @@ export default {
   props: {
     tasks: {
       type: Array,
-      required: true
     },
     group: {
       type: Object,
-      required: true
     },
-    boardId: {
-      type: String,
-      required: true
-    },
-    groupId: {
-      type: String,
-      required: true
-    },
+    boardId: String,
+    groupId: String,
   },
   name: 'task-list-cmp',
   data() {
     return {
       copyTasks: null,
       copyGroup: null,
+      dropPlaceholderOptions: {
+        className: 'drop-preview',
+        animationDuration: '150',
+        showOnTop: false,
+      },
     }
   },
   computed: {
@@ -100,10 +76,12 @@ export default {
               break
             case 'date':
               sortIndicator = i1.createdAt > i2.createdAt
+
               break
             case 'timeline':
               sortIndicator = i1.timeline.startDate > i2.timeline.startDate
               break
+
             case 'title':
               sortIndicator = i1.title > i2.title
               break
@@ -170,102 +148,6 @@ export default {
     getItemPayload(group) {
       return (index) => this.copyGroup.tasks[index]
     },
-    changeTitle(updateObj) {
-      console.log("Task list - change title", updateObj)
-      this.$store.dispatch({ 
-        type: 'updateTask', 
-        updateType: 'title',
-        groupId: updateObj.groupId,
-        taskId: updateObj.taskId,
-        data: updateObj.title
-      })
-    },
-    changeStatus(updateObj) {
-      console.log("Task list - change status", updateObj)
-      this.$store.dispatch({ 
-        type: 'updateTask', 
-        updateType: 'status',
-        groupId: updateObj.groupId,
-        taskId: updateObj.taskId,
-        data: updateObj.status
-      })
-    },
-    removeAssignedMember(updateObj) {
-      console.log("Task list - remove member", updateObj)
-      this.$store.dispatch({ 
-        type: 'updateTask', 
-        updateType: 'removeMember',
-        groupId: updateObj.groupId,
-        taskId: updateObj.taskId,
-        data: updateObj.memberId
-      })
-    },
-    addAssignedMember(updateObj) {
-      console.log("Task list - add member", updateObj)
-      this.$store.dispatch({ 
-        type: 'updateTask', 
-        updateType: 'addMember',
-        groupId: updateObj.groupId,
-        taskId: updateObj.taskId,
-        data: updateObj.person
-      })
-    },
-    changePriority(updateObj) {
-      console.log("Task list - change priority", updateObj)
-      this.$store.dispatch({ 
-        type: 'updateTask', 
-        updateType: 'priority',
-        groupId: updateObj.groupId,
-        taskId: updateObj.taskId,
-        data: updateObj.priority
-      })
-    },
-    changePerson(updateObj) {
-      console.log("Task list - change person", updateObj)
-      this.$store.dispatch({ 
-        type: 'updateTask', 
-        updateType: 'addMember',
-        groupId: updateObj.groupId,
-        taskId: updateObj.taskId,
-        data: updateObj.person
-      })
-    },
-    changeTimeline(updateObj) {
-      console.log("Task list - change timeline", updateObj)
-      this.$store.dispatch({ 
-        type: 'updateTask', 
-        updateType: 'timeline',
-        groupId: updateObj.groupId,
-        taskId: updateObj.taskId,
-        data: updateObj.dates
-      })
-    },
-    changeText(updateObj) {
-      console.log("Task list - change text", updateObj)
-      this.$store.dispatch({ 
-        type: 'updateTask', 
-        updateType: 'text',
-        groupId: updateObj.groupId,
-        taskId: updateObj.taskId,
-        data: updateObj.text
-      })
-    },
-    duplicateTask(updateObj) {
-      console.log("Task list - duplicate task", updateObj)
-      this.$store.dispatch({ 
-        type: 'duplicateTask',
-        groupId: updateObj.groupId,
-        task: updateObj.task
-      })
-    },
-    deleteTask(updateObj) {
-      console.log("Task list - delete task", updateObj)
-      this.$store.dispatch({ 
-        type: 'removeTask',
-        groupId: updateObj.groupId,
-        task: { id: updateObj.taskId }
-      })
-    }
   },
   components: {
     taskPreview,
@@ -274,19 +156,19 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-/* Transitions for task items */
-.task-item {
-  transition: all 0.2s ease-in-out;
+<style>
+.ooo {
+  /* background-color: rgba(228, 225, 225,0.5); */
+  border: 1px gray dashed;
+  z-index: -20;
+  margin: 5px;
 }
 
-/* Necessary styles for smooth-dnd */
-:deep(.smooth-dnd-container.horizontal) {
+.smooth-dnd-container.horizontal {
   display: flex !important;
 }
-
-:deep(.smooth-dnd-draggable-wrapper) {
-  transition: transform 0.2s ease;
+.drop-preview {
+  border: 1px dashed;
+  border-radius: 5px;
 }
 </style>

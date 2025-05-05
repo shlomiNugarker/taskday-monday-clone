@@ -1,12 +1,11 @@
 <template>
-  <div class="mt-2">
+  <div class="input-container">
     <input
       type="text"
       placeholder="+ Add task"
       ref="input"
       v-model="newTaskTitle"
       @keyup.enter="addTask(group.id)"
-      class="w-full p-2 text-sm border border-gray-200 rounded focus:outline-none focus:border-blue-500 bg-white"
     />
   </div>
 </template>

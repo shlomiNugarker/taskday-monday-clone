@@ -1,5 +1,5 @@
 <template>
-  <main class="flex">
+  <main class="boardView">
     <side-bar></side-bar>
     <router-view />
   </main>
@@ -24,3 +24,4 @@ export default {
   },
 }
 </script>
+<style></style>

@@ -1,183 +1,110 @@
 <template>
-  <section class="dynamic-component" @click="openDatePicker">
-    <div class="dynamic-date">
-      <div 
-        v-if="task.timeline?.startDate" 
-        class="dynamic-date-badge" 
-        :class="dateStatusClasses"
-      >
-        {{ formattedDate }}
+  <section
+    class="timeline-picker"
+    @mouseover="isHover = true"
+    @mouseleave="isHover = false"
+  >
+    <div class="block flex">
+      <div class="time-to-show" :style="styleObject">
+        <span v-if="!isHover" class="date-to-show">{{ datesToShow }}</span>
+        <span v-if="isHover" class="days-count-to-show">{{
+          daysCountToshow
+        }}</span>
       </div>
-      <div v-else class="text-gray-400">-</div>
+
+      <el-date-picker
+        v-model="value1"
+        class="timeline"
+        size="small"
+        type="daterange"
+        range-separator="To"
+        start-placeholder="Start date"
+        end-placeholder="End date"
+        @change="changeTimeline"
+      >
+      </el-date-picker>
     </div>
-    
-    <!-- Date Picker Dropdown -->
-    <Transition name="fade">
-      <div 
-        v-if="showDatePicker"
-        class="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 bg-white rounded-md shadow-lg z-30 p-2"
-        @click.stop
-      >
-        <el-date-picker
-          v-model="selectedDates"
-          type="daterange"
-          range-separator="To"
-          start-placeholder="Start date"
-          end-placeholder="End date"
-          format="MMM D, YYYY"
-          :clearable="true"
-          :editable="false"
-          @change="setDates"
-          class="w-full"
-        />
-        
-        <div class="flex justify-between mt-2">
-          <button 
-            @click="clearDates"
-            class="text-sm py-1 px-3 bg-gray-100 hover:bg-gray-200 rounded text-gray-700 transition-colors duration-200"
-          >
-            Clear
-          </button>
-          
-          <button 
-            @click="applyDates"
-            class="text-sm py-1 px-3 bg-primary-500 hover:bg-primary-600 rounded text-white transition-colors duration-200"
-            :disabled="!selectedDates"
-          >
-            Apply
-          </button>
-        </div>
-      </div>
-    </Transition>
   </section>
 </template>
 
 <script>
-import { format, isAfter, isBefore, isToday } from 'date-fns'
-
 export default {
-  props: {
-    task: {
-      type: Object,
-      required: true
-    },
-    boardId: String,
-    groupId: String,
-    groupColor: String,
-  },
-  name: 'date-cmp',
+  name: 'timelinePicker',
+  props: ['task', 'groupId', 'groupColor'],
   data() {
     return {
-      showDatePicker: false,
-      selectedDates: null
+      startDate: this.task.timeline.startDate,
+      endDate: this.task.timeline.endDate,
+      value1: '',
+      isHover: false,
     }
+  },
+  created() {
+    if (!this.startDate || !this.endDate) this.value1 = null
+    else this.value1 = [this.startDate, this.endDate]
+  },
+  mounted() {},
+  methods: {
+    changeTimeline() {
+      const newDates = []
+      if (this.value1) {
+        newDates[0] = this.value1[0].getTime()
+        newDates[1] = this.value1[1].getTime()
+      }
+      this.$emit('changeTimeline', {
+        dates: [newDates[0], newDates[1]],
+        taskId: this.task.id,
+        groupId: this.groupId,
+      })
+    },
   },
   computed: {
-    formattedDate() {
-      if (!this.task.timeline?.startDate) return '-'
-      
-      const startDate = new Date(this.task.timeline.startDate)
-      const endDate = this.task.timeline.endDate ? new Date(this.task.timeline.endDate) : null
-      
-      if (endDate) {
-        return `${format(startDate, 'MMM d')} - ${format(endDate, 'MMM d')}`
-      }
-      
-      return format(startDate, 'MMM d')
-    },
-    dateStatusClasses() {
-      if (!this.task.timeline?.startDate) return {}
-      
-      const today = new Date()
-      const startDate = new Date(this.task.timeline.startDate)
-      const endDate = this.task.timeline.endDate ? new Date(this.task.timeline.endDate) : null
-      
-      // If only start date is set and it's in the past
-      if (!endDate && isBefore(startDate, today) && !isToday(startDate)) {
-        return {
-          'bg-red-100 text-red-700': true
-        }
-      }
-      
-      // If range and end date is in the past
-      if (endDate && isBefore(endDate, today) && !isToday(endDate)) {
-        return {
-          'bg-red-100 text-red-700': true
-        }
-      }
-      
-      // If today is within the range or is the start date
-      if (isToday(startDate) || (endDate && isAfter(today, startDate) && isBefore(today, endDate)) || isToday(endDate)) {
-        return {
-          'bg-green-100 text-green-700': true
-        }
-      }
-      
-      // If start date is in the future
-      return {
-        'bg-blue-100 text-blue-700': true
-      }
-    }
-  },
-  watch: {
-    'task.timeline': {
-      handler(newVal) {
-        if (newVal?.startDate) {
-          const startDate = new Date(newVal.startDate)
-          const endDate = newVal.endDate ? new Date(newVal.endDate) : null
-          
-          this.selectedDates = endDate ? [startDate, endDate] : [startDate, null]
+    datesToShow() {
+      if (!this.value1) return '-'
+      var dates = this.value1.map((date) => {
+        var month = new Date(date).toString().slice(4, 7)
+        var day = new Date(date).toString().slice(8, 11)
+        return `${month} ${day} `
+      })
+      var datesToShowStr = dates[0] + ' - ' + dates[1]
+      if (dates[0].slice(0, 3) === dates[1].slice(0, 3)) {
+        if (dates[0].slice(4, 6) === dates[1].slice(4, 6)) {
+          datesToShowStr = datesToShowStr.slice(0, 6)
         } else {
-          this.selectedDates = null
+          datesToShowStr =
+            datesToShowStr.slice(0, 7) + ' - ' + datesToShowStr.slice(11, 20)
         }
-      },
-      immediate: true,
-      deep: true
-    }
-  },
-  mounted() {
-    document.addEventListener('click', this.closeDatePicker)
-  },
-  beforeUnmount() {
-    document.removeEventListener('click', this.closeDatePicker)
-  },
-  methods: {
-    openDatePicker() {
-      this.showDatePicker = !this.showDatePicker
+      }
+      return datesToShowStr
     },
-    closeDatePicker(event) {
-      if (this.showDatePicker && !event.target.closest('.dynamic-date') && !event.target.closest('.el-picker-panel')) {
-        this.showDatePicker = false
+    daysCountToshow() {
+      if (!this.value1) return 'Set Dates'
+      return (
+        Math.floor(
+          (new Date(this.value1[1]) - new Date(this.value1[0])) /
+            1000 /
+            60 /
+            60 /
+            24 +
+            1
+        ) + 'd'
+      )
+    },
+    styleObject() {
+      if (!this.value1) return { 'background-color': this.groupColor }
+      const diff = this.value1[1] - this.value1[0]
+      const today = Date.now()
+      if (!this.value1[1] || today > this.value1[1])
+        return { 'background-color': this.groupColor }
+      else if (!this.value1[0] || today < this.value1[0])
+        return { 'background-color': 'rgb(31, 31, 31)' }
+      const startPrecent = diff / (today - this.value1[0])
+      const degPrecent = 100 - Math.floor(100 / startPrecent)
+      return {
+        background: `linear-gradient(to left, rgb(31, 31, 31) 0% ${degPrecent}%, ${this.groupColor} ${degPrecent}% 100%)`,
       }
     },
-    setDates(dates) {
-      this.selectedDates = dates
-    },
-    clearDates() {
-      this.selectedDates = null
-      this.showDatePicker = false
-      
-      this.$emit('changeTimeline', {
-        groupId: this.groupId,
-        taskId: this.task.id,
-        dates: null
-      })
-    },
-    applyDates() {
-      this.showDatePicker = false
-      
-      if (!this.selectedDates) return
-      
-      this.$emit('changeTimeline', {
-        groupId: this.groupId,
-        taskId: this.task.id,
-        dates: this.selectedDates
-      })
-    }
-  }
+  },
+  watch: {},
 }
 </script>
-
-<style scoped>
-/* Styles are imported from dynamic-components.css */
-</style>

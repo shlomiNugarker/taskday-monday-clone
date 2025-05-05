@@ -4,43 +4,31 @@ import router from './router'
 import ElementPlus from 'element-plus'
 import store from './store'
 import VueSnip from 'vue-snip'
+
 import DropdownMenu from '@innologica/vue-dropdown-menu'
 
-// UI Components
-import UiComponents from './components/ui'
-
-// Styles
 import '../src/styles/tailwind.css'
+import '../src/styles/styles.scss'
 import 'element-plus/dist/index.css'
-import './assets/styles/variables.css'
-import './assets/styles/dynamic-components.css'
-import './assets/styles/animations.css'
-import './assets/styles/tables.css'
 
-// Font Awesome
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
+library.add(fas)
 import { fab } from '@fortawesome/free-brands-svg-icons'
+library.add(fab)
 import { far } from '@fortawesome/free-regular-svg-icons'
-import { dom } from '@fortawesome/fontawesome-svg-core'
+library.add(far)
 
-// Add all icons
-library.add(fas, fab, far)
+import { dom } from '@fortawesome/fontawesome-svg-core'
 dom.watch()
 
 const app = createApp(App)
 
-// Use plugins
 app.use(VueSnip)
 app.use(ElementPlus)
 app.use(DropdownMenu)
-app.use(UiComponents)
-
-// Global components
 app.component('font-awesome-icon', FontAwesomeIcon)
-
-// Core plugins
 app.use(router)
 app.use(store)
 

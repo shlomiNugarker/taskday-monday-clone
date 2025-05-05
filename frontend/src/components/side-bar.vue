@@ -1,5 +1,5 @@
 <template>
-  <div class="z-5 flex">
+  <div class="side-bar">
     <main-menu />
     <boards-nav-bar />
   </div>
@@ -16,3 +16,5 @@ export default {
   },
 }
 </script>
+
+<style></style>

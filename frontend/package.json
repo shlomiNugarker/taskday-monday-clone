@@ -17,7 +17,6 @@
     "@innologica/vue-dropdown-menu": "^0.1.4",
     "axios": "^0.26.1",
     "chart.js": "^3.7.1",
-    "date-fns": "^4.1.0",
     "element-plus": "^2.1.11",
     "esbuild": "^0.14.28",
     "lodash": "^4.17.21",

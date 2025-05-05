@@ -90,9 +90,7 @@ function getEmptyGroup() {
   return {
     id: 'g_' + utilService.makeId(),
     title: 'New Group',
-    style: {
-      color: utilService.getRandomPredefinedColor()
-    },
+    color: utilService.getRandomPredefinedColor(),
     createdAt: new Date().getTime(),
     tasks: [getEmptyTask('New Task')],
   }

@@ -248,169 +248,65 @@ export default {
       var taskIdx = group.tasks.findIndex((reqTask) => reqTask.id === task.id)
       copyBoard.groups[groupIdx].tasks.splice(taskIdx, 1)
       socketService.emit('board newUpdateBoard', copyBoard)
+      await boardService.update(copyBoard)
       commit({ type: 'removeTask', groupIdx, taskIdx })
-      commit({ type: 'setCurrBoard', board: copyBoard })
     },
-    async moveTaskBetweenGroups({ state, commit }, { task, toGroupId, atIdx }) {
-      const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
-      
-      // Find source group and remove task
-      let foundSourceGroup = false
-      for (let i = 0; i < copyBoard.groups.length; i++) {
-        const group = copyBoard.groups[i]
-        const taskIdx = group.tasks.findIndex(t => t.id === task.id)
-        
-        if (taskIdx !== -1) {
-          // Found the task, remove it from current group
-          group.tasks.splice(taskIdx, 1)
-          foundSourceGroup = true
-          break
-        }
-      }
-      
-      // If this is a new task being added, not moved
-      if (!foundSourceGroup) {
-        task.groupId = toGroupId
-      }
-      
-      // Find target group and add task
-      const targetGroupIdx = copyBoard.groups.findIndex(g => g.id === toGroupId)
-      if (targetGroupIdx !== -1) {
-        if (atIdx !== undefined) {
-          copyBoard.groups[targetGroupIdx].tasks.splice(atIdx, 0, task)
-        } else {
-          copyBoard.groups[targetGroupIdx].tasks.push(task)
-        }
-      }
-      
-      await boardService.update(copyBoard)
-      socketService.emit('board newUpdateBoard', copyBoard)
-      commit({ type: 'setCurrBoard', board: copyBoard })
-    },
-    
-    async updateTasksOrder({ state, commit }, { tasks, groupId }) {
-      const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
-      const groupIdx = copyBoard.groups.findIndex(g => g.id === groupId)
-      
-      if (groupIdx !== -1) {
-        copyBoard.groups[groupIdx].tasks = [...tasks]
-        await boardService.update(copyBoard)
-        socketService.emit('board newUpdateBoard', copyBoard)
-        commit({ type: 'setCurrBoard', board: copyBoard })
-      }
-    },
-    
-    async updateGroupsOrder({ state, commit }, { groups, boardId }) {
-      const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
-      copyBoard.groups = [...groups]
-      
-      await boardService.update(copyBoard)
-      socketService.emit('board newUpdateBoard', copyBoard)
-      commit({ type: 'setCurrBoard', board: copyBoard })
-    },
-    
-    async addTaskToGroup({ state, commit }, { groupId, task }) {
-      const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
-      const groupIdx = copyBoard.groups.findIndex(g => g.id === groupId)
-      
-      if (groupIdx !== -1) {
-        copyBoard.groups[groupIdx].tasks.push(task)
-        await boardService.update(copyBoard)
-        socketService.emit('board newUpdateBoard', copyBoard)
-        commit({ type: 'setCurrBoard', board: copyBoard })
-      }
-    },
-    
     async addGroup({ state, commit }) {
-      const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
       const newGroup = boardService.getEmptyGroup()
-      copyBoard.groups.push(newGroup)
+      const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
+
+      copyBoard.groups.unshift(newGroup)
+
       await boardService.update(copyBoard)
-      socketService.emit('board newUpdateBoard', copyBoard)
+
       commit({ type: 'addGroup', copyBoard })
+      socketService.emit('board newUpdateBoard', copyBoard)
     },
     async removeGroup({ state, commit }, { groupId }) {
       const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
-      const groupIdx = copyBoard.groups.findIndex(
+      var groupIdx = copyBoard.groups.findIndex(
         (currGroup) => currGroup.id === groupId
       )
       copyBoard.groups.splice(groupIdx, 1)
-      await boardService.update(copyBoard)
       socketService.emit('board newUpdateBoard', copyBoard)
+      await boardService.update(copyBoard)
       commit({ type: 'setCurrBoard', board: copyBoard })
     },
     async updateBoard({ dispatch, commit }, { boardToEdit }) {
-      const updatedBoard = await boardService.update(boardToEdit)
-      socketService.emit('board newUpdateBoard', updatedBoard)
-      commit({ type: 'updateBoard', boardToEdit: updatedBoard })
+      await boardService.update(boardToEdit)
+      socketService.emit('board newUpdateBoard', boardToEdit)
+      commit({ type: 'updateBoard', boardToEdit })
+      dispatch({
+        type: 'getBoardsList',
+      })
     },
     async updateTaskDragDrop({ commit, state }, { group }) {
       const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
-      const groupIdx = copyBoard.groups.findIndex(
+      var groupIdx = state.currBoard.groups.findIndex(
         (currGroup) => currGroup.id === group.id
       )
+
+      commit({
+        type: 'setCurrBoard',
+        board: copyBoard,
+      })
       copyBoard.groups.splice(groupIdx, 1, group)
+
+      await boardService.update(copyBoard)
       socketService.emit('board newUpdateBoard', copyBoard)
-      boardService.update(copyBoard)
-      commit({ type: 'setCurrBoard', board: copyBoard })
     },
+
     async updateGroupsDragDrop({ commit, state }, { groups }) {
       const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
+
       copyBoard.groups = groups
+
+      commit({
+        type: 'setCurrBoard',
+        board: copyBoard,
+      })
+      await boardService.update(copyBoard)
       socketService.emit('board newUpdateBoard', copyBoard)
-      boardService.update(copyBoard)
-      commit({ type: 'setCurrBoard', board: copyBoard })
-    },
-    async updateTask({ state, commit }, { updateType, groupId, taskId, data }) {
-      try {
-        const copyBoard = JSON.parse(JSON.stringify(state.currBoard))
-        const groupIdx = copyBoard.groups.findIndex(g => g.id === groupId)
-        
-        if (groupIdx === -1) return
-        
-        const taskIdx = copyBoard.groups[groupIdx].tasks.findIndex(t => t.id === taskId)
-        if (taskIdx === -1) return
-        
-        const task = copyBoard.groups[groupIdx].tasks[taskIdx]
-        
-        // Update based on the update type
-        switch (updateType) {
-          case 'title':
-            task.title = data
-            break
-          case 'status':
-            task.status = data
-            break
-          case 'priority':
-            task.priority = data
-            break
-          case 'text':
-            task.text = data
-            break
-          case 'timeline':
-            task.timeline = {
-              startDate: data?.[0] || null,
-              endDate: data?.[1] || null
-            }
-            break
-          case 'removeMember':
-            task.person = task.person.filter(p => p._id !== data)
-            break
-          case 'addMember':
-            if (!task.person) task.person = []
-            task.person.push(data)
-            break
-          default:
-            console.warn('Unknown update type:', updateType)
-            return
-        }
-        
-        await boardService.update(copyBoard)
-        socketService.emit('board newUpdateBoard', copyBoard)
-        commit({ type: 'setCurrBoard', board: copyBoard })
-      } catch (error) {
-        console.error('Failed to update task:', error)
-      }
     },
   },
 }

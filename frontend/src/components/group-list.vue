@@ -1,43 +1,31 @@
 <template>
-  <div class="group-list-container">
+  <div>
     <Container
-      class="relative"
+      class="container-groups"
       @drop="onDrop($event)"
       orientation="vertical"
       :drag-begin-delay="200"
-      :drag-class="'shadow-lg z-50 group-drag-item'"
-      :drop-placeholder="{
-        className: 'group-drop-placeholder',
-        animationDuration: '150',
-        showOnTop: false
-      }"
+      :drag-class="'isInDrag'"
+      :drop-placeholder="dropPlaceholderOptions"
       @click="groupClicked"
     >
       <Draggable
-        class="group-item mb-8"
+        class="group-container"
         v-for="group in groups"
         :key="group.id"
         :drag-begin-delay="200"
       >
         <columns-header
-          class="relative"
+          class="group-list"
           :group="group"
           @changeGroupTitle="changeGroupTitle"
           @removeGroup="removeGroup"
-          @duplicateGroup="duplicateGroup"
-          @toggleGroupCollapse="toggleGroupCollapse"
-          @sortGroup="sortGroup"
-          @openColorPicker="openColorPicker"
         />
         <task-list
           :tasks="group.tasks"
           :groupId="group.id"
           :boardId="boardId"
           :group="group"
-          @update="updateTask"
-          @removeTask="removeTask"
-          @duplicateTask="duplicateTask"
-          @addComment="addComment"
         />
 
         <add-task :group="group" @addTask="addTask" />
@@ -64,11 +52,18 @@ export default {
     return {
       waitToUpdate: false,
       copyGroups: JSON.parse(JSON.stringify(this.groups)),
+
+      dropPlaceholderOptions: {
+        className: 'drop-preview',
+        animationDuration: '150',
+        showOnTop: false,
+      },
     }
   },
   computed: {},
   watch: {
     '$store.getters.currBoard'() {
+      // console.log('curr')
       var currBoard = this.$store.getters.currBoard
       this.copyGroups = JSON.parse(JSON.stringify(currBoard.groups))
     },
@@ -119,33 +114,6 @@ export default {
     removeGroup(groupId) {
       this.$store.dispatch({ type: 'removeGroup', groupId })
     },
-    duplicateGroup(groupId) {
-      this.$store.dispatch({ type: 'duplicateGroup', groupId })
-    },
-    updateTask(payload) {
-      this.$store.dispatch({ type: 'updateTask', ...payload })
-    },
-    removeTask(payload) {
-      this.$store.dispatch({ type: 'removeTask', ...payload })
-    },
-    duplicateTask(payload) {
-      this.$store.dispatch({ type: 'duplicateTask', ...payload })
-    },
-    addComment(payload) {
-      this.$store.dispatch({ type: 'openTaskDetails', ...payload })
-    },
-    toggleGroupCollapse(payload) {
-      // Handle group collapse toggling
-      console.log('Toggle group collapse', payload)
-    },
-    sortGroup(payload) {
-      // Handle group sorting
-      console.log('Sort group', payload)
-    },
-    openColorPicker(groupId) {
-      // Handle color picker opening
-      console.log('Open color picker for group', groupId)
-    },
     groupClicked() {
       console.log('group clicked')
     },
@@ -159,33 +127,19 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.group-list-container {
-  padding-bottom: var(--spacing-xl);
+<style>
+.ooo {
+  /* background-color: rgba(228, 225, 225,0.5); */
+  border: 1px rgb(78, 22, 22) dashed;
+  z-index: -20;
+  margin: 5px;
 }
-
-.group-item {
-  transition: all var(--transition-normal) ease;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-}
-
-.group-drag-item {
-  opacity: 0.8;
-  transform: scale(0.98);
-  background-color: white;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-large);
-}
-
-.group-drop-placeholder {
-  border: 2px dashed var(--color-light-gray);
-  background-color: rgba(240, 240, 240, 0.4);
-  margin: var(--spacing-md) 0;
-  border-radius: var(--radius-lg);
-  height: 70px;
-  transition: all var(--transition-fast) ease;
+/* .isInDrag {
+  z-index: 55555555;
+  transform: rotate(2deg);
+} */
+.drop-preview {
+  border: 1px dashed #c4c4c4;
+  margin: 10px 0 0px 10px;
 }
 </style>

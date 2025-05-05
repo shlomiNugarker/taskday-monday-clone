@@ -1,25 +1,11 @@
 <template>
-  <section class="dynamic-component">
-    <div class="dynamic-text-component" @click="onEdit">
-      <p 
-        v-if="!isEdit" 
-        class="dynamic-text truncate text-gray-600"
-        :title="task.text || '-'"
-      >
-        {{ task.text || '-' }}
-      </p>
-      
-      <input
-        ref="input"
-        type="text"
-        v-if="isEdit"
-        v-model="text"
-        @focusout="saveText"
-        @keyup.enter="saveText"
-        @keyup.esc="cancelEdit"
-        class="dynamic-text-input"
-        placeholder="Add text"
-      />
+  <section class="text-cmp" @click="add">
+    <div class="container-icon" v-if="!text && !isAdd">
+      <font-awesome-icon class="text-icon" icon="circle-plus" />
+    </div>
+    <div v-if="!isAdd">{{ text }}</div>
+    <div v-if="isAdd">
+      <input ref="input" v-model="text" type="text" @focusout="out(text)" />
     </div>
   </section>
 </template>
@@ -29,57 +15,37 @@ export default {
   props: {
     task: {
       type: Object,
-      required: true
     },
     boardId: String,
     groupId: String,
   },
-  name: 'text-cmp',
+  name: '',
   data() {
     return {
-      isEdit: false,
-      text: this.task.text || ''
+      text: this.task.text,
+      isAdd: false,
     }
   },
+  computed: {},
+  watch: {},
+  created() {},
   methods: {
-    onEdit() {
-      this.isEdit = true
-      this.$nextTick(() => {
-        if (this.$refs.input) {
-          this.$refs.input.focus()
-          this.$refs.input.select()
-        }
-      })
+    add() {
+      this.isAdd = true
+      setTimeout(() => this.$refs.input.focus(), 10)
     },
-    
-    saveText() {
-      const newText = this.text.trim()
-      this.isEdit = false
-      
-      if (newText === this.task.text) return
-      
+    out() {
+      this.isAdd = false
+      this.changeText()
+    },
+    changeText() {
       this.$emit('changeText', {
         groupId: this.groupId,
         taskId: this.task.id,
-        text: newText
+        text: this.text,
       })
     },
-    
-    cancelEdit() {
-      this.text = this.task.text || ''
-      this.isEdit = false
-    }
   },
-  watch: {
-    'task.text': {
-      handler(newVal) {
-        this.text = newVal || ''
-      }
-    }
-  }
+  components: {},
 }
 </script>
-
-<style scoped>
-/* Styles are imported from dynamic-components.css */
-</style>
