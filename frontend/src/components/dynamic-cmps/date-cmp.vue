@@ -1,20 +1,21 @@
 <template>
   <section
-    class="timeline-picker"
+    class="flex items-center justify-center w-[155px] cursor-pointer h-[35px] bg-[#f7f7f9] ml-0.5"
     @mouseover="isHover = true"
     @mouseleave="isHover = false"
   >
-    <div class="block flex">
-      <div class="time-to-show" :style="styleObject">
-        <span v-if="!isHover" class="date-to-show">{{ datesToShow }}</span>
-        <span v-if="isHover" class="days-count-to-show">{{
-          daysCountToshow
-        }}</span>
+    <div class="relative w-full flex justify-center">
+      <div 
+        class="absolute flex justify-center items-center w-[150px] py-0.5 rounded-full text-white h-[28px]"
+        :style="styleObject"
+      >
+        <span v-if="!isHover" class="text-sm truncate max-w-[130px]">{{ datesToShow }}</span>
+        <span v-if="isHover" class="text-sm font-medium">{{ daysCountToshow }}</span>
       </div>
 
       <el-date-picker
         v-model="value1"
-        class="timeline"
+        class="!opacity-0 !w-[150px]"
         size="small"
         type="daterange"
         range-separator="To"
@@ -108,3 +109,32 @@ export default {
   watch: {},
 }
 </script>
+
+<style scoped>
+/* Override element-plus date picker styles */
+:deep(.el-input__wrapper) {
+  @apply bg-transparent shadow-none p-0 m-0 box-border;
+}
+
+:deep(.el-input__inner) {
+  @apply hidden;
+}
+
+:deep(.el-range-editor) {
+  @apply border-none bg-transparent shadow-none p-0 m-0;
+}
+
+:deep(.el-icon-date),
+:deep(.el-range-input),
+:deep(.el-range-separator) {
+  @apply opacity-0;
+}
+
+:deep(.el-range__close-icon) {
+  @apply opacity-0;
+}
+
+:deep(.el-tooltip__trigger) {
+  @apply opacity-0;
+}
+</style>
