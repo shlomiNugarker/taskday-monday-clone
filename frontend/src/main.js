@@ -7,6 +7,7 @@ import VueSnip from 'vue-snip'
 
 import DropdownMenu from '@innologica/vue-dropdown-menu'
 
+import '../src/styles/tailwind.css'
 import '../src/styles/styles.scss'
 import 'element-plus/dist/index.css'
 
