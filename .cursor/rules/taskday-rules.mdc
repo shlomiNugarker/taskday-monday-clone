@@ -1,0 +1,102 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# TaskDay Project Rules
+
+## Code Style and Formatting
+- Use **2 spaces** for indentation.
+- Use `camelCase` for variables/functions, `PascalCase` for components/classes.
+- Add **descriptive comments** for non-obvious logic.
+- Keep lines **under 100 characters**.
+- Use **meaningful names** for all identifiers.
+- Use ESLint with Airbnb configuration.
+
+## Git Workflow
+- Branch from `develop` (not directly from `master`).
+- Name branches like: `feature/board-filtering`, `bugfix/login-error`.
+- Write **clear commit messages** describing changes.
+- Use Pull Requests for all merges to `develop` and `master`.
+- Make small, focused commits.
+- Update local `develop` branch and rebase before creating PRs.
+- Delete feature branches after merging.
+
+## Frontend Rules (Vue.js)
+- Put components in `/components`, group by domain if needed.
+- Use **Vuex** for global state management.
+- Follow Vue Style Guide (https://vuejs.org/style-guide/).
+- Place **API calls in dedicated service files**.
+- Use **SCSS** with clear naming conventions (e.g. BEM or scoped modules).
+- Ensure **mobile responsiveness** for all components.
+- Show **loading/error states** when fetching data.
+- Handle form validation consistently.
+- Implement lazy loading for routes when appropriate.
+
+## Backend Rules (Node.js)
+- Structure routes by domain (`/api/boards`, `/api/tasks`, `/api/users`).
+- Use **middleware** for authentication, logging, and validation.
+- Follow **RESTful API** patterns for consistency.
+- Implement consistent error handling with `try/catch`.
+- Store secrets in `.env` (never commit to repository).
+- Validate all user input before processing.
+- Use appropriate **HTTP status codes**.
+- Implement proper database transaction handling.
+- Use async/await over callbacks and promises.
+
+## Documentation
+- Use JSDoc for functions and methods.
+- Document all **API endpoints** with examples in comments.
+- Keep `README.md` updated with setup instructions.
+- Write inline docs for complex components.
+- Document data models and schemas.
+
+## Testing
+- Write **unit tests** for core logic.
+- Test critical **API routes**.
+- Implement **integration tests** for major flows.
+- Maintain **>70% test coverage** minimum.
+- Run tests before creating pull requests.
+- Mock external services for testing.
+
+## Performance
+- Optimize JS/CSS bundle sizes.
+- Use **caching** strategies where appropriate.
+- Avoid unnecessary database queries.
+- Implement **pagination** on large data lists.
+- Use code splitting for Vue components.
+- Optimize images and assets.
+
+## Security
+- Sanitize and validate all user input.
+- Use **HTTPS** in all environments.
+- Protect routes using **authentication middleware**.
+- Use JWT for authentication, never basic auth.
+- Follow **OWASP** security best practices.
+- Hide sensitive data in API responses.
+- Implement rate limiting for API endpoints.
+- Regularly update dependencies for security patches.
+
+## Collaboration
+- Communicate changes with team members.
+- Conduct thorough **code reviews** before merging.
+- Respond to review feedback promptly.
+- Keep dependencies updated via `npm audit`.
+- Use issue tracking for bugs and feature requests.
+
+## Deployment
+- Test on staging environment before production.
+- Use **CI/CD** pipelines for automated testing and deployment.
+- Monitor logs, performance metrics, and error rates.
+- Ensure there's a **backup & rollback** plan.
+- Set up proper logging for production issues.
+
+## Project-Specific Guidelines
+- Follow Monday.com UI/UX patterns when implementing interfaces.
+- Implement real-time updates using WebSockets or similar technology.
+- Create collaborative features with appropriate locking mechanisms.
+- Use consistent board and task data structures across the app.
+
+
+
+
