@@ -63,7 +63,6 @@ export default {
   computed: {},
   watch: {
     '$store.getters.currBoard'() {
-      // console.log('curr')
       var currBoard = this.$store.getters.currBoard
       this.copyGroups = JSON.parse(JSON.stringify(currBoard.groups))
     },
@@ -127,19 +126,15 @@ export default {
   },
 }
 </script>
+
 <style>
-.ooo {
-  /* background-color: rgba(228, 225, 225,0.5); */
-  border: 1px rgb(78, 22, 22) dashed;
-  z-index: -20;
-  margin: 5px;
-}
-/* .isInDrag {
-  z-index: 55555555;
-  transform: rotate(2deg);
-} */
 .drop-preview {
   border: 1px dashed #c4c4c4;
   margin: 10px 0 0px 10px;
+}
+
+.isInDrag {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 50;
 }
 </style>

@@ -1,130 +1,108 @@
 <template>
-  <section class="min-h-screen bg-white">
-    <!-- Header -->
-    <header class="flex justify-between items-center h-20 px-4 bg-gray-50 border-b border-gray-200">
-      <!-- Logo -->
-      <div class="flex items-center cursor-pointer" @click="goHome">
-        <div class="relative ml-4 group transition-transform duration-300 hover:scale-105">
-          <div class="absolute border-2 border-emerald-500 w-[50px] h-[25px]"></div>
-          <div class="absolute w-[25px] h-[50px] border-2 border-amber-400 left-[40px] top-[10px]">
-            <div class="absolute w-[2px] h-[2px] bg-emerald-500 rounded-full left-[-2px] top-[11px]"></div>
+  <section class="min-h-screen bg-white flex flex-col">
+    <header class="bg-[#f7f7f7] h-[80px] border-b border-[#e0e0e0] flex justify-between items-center px-2 sm:px-4">
+      <div class="flex items-center cursor-pointer w-[80px]" @click="goHome">
+        <div class="relative text-xl font-bold left-[30px] top-[-13px]">
+          <div class="absolute border-2 border-[#00c875] w-[50px] h-[25px]"></div>
+          <div class="absolute w-[25px] h-[50px] border-2 border-[#ffcb00] left-[40px] top-[10px]">
+            <div class="absolute w-[2px] h-[2px] bg-[#00c875] left-[-2px] top-[11px]"></div>
           </div>
-          <div class="absolute w-[25px] h-[25px] border-2 border-rose-500 left-[53px]">
-            <div class="absolute w-[2px] h-[2px] bg-amber-400 rounded-full left-[8px] bottom-[-2px]"></div>
+          <div class="absolute w-[25px] h-[25px] left-[53px] border-2 border-[#e2435c]">
+            <div class="absolute w-[2px] h-[2px] bg-[#ffcb00] left-[8px] bottom-[-2px]"></div>
           </div>
         </div>
-        <div class="relative ml-16 text-3xl font-semibold">
-          <span class="text-emerald-500">T</span>as<span class="text-amber-400">k</span>da<span class="text-rose-500">y</span>
+        <div class="relative left-[115px] text-[30px] hidden sm:inline">
+          <span class="text-[#00c875]">T</span>as<span class="text-[#ffcb00]">k</span>da<span class="text-[#e2435c]">y</span>
         </div>
       </div>
-
-      <!-- Demo Button -->
-      <div class="flex items-center px-4 py-2 rounded-full border border-gray-300 cursor-pointer hover:bg-gray-100 transition-colors duration-200" @click="goDemo">
-        <button class="bg-transparent text-gray-800 border-none cursor-pointer">See Demo</button>
-        <font-awesome-icon class="text-gray-800 ml-2" icon="arrow-right" />
+      <div class="flex items-center bg-[#f7f7f7] px-4 py-2 rounded-[25px] border border-gray-300 cursor-pointer" @click="goDemo">
+        <button class="bg-[#f7f7f7] text-black cursor-pointer border-none">See Demo</button>
+        <font-awesome-icon class="text-black ml-2" icon="arrow-right" />
       </div>
     </header>
 
-    <!-- Logged in User Display -->
-    <div v-if="loggedinUser" class="flex flex-col items-center mt-16">
-      <h3 class="text-xl font-medium mb-2">
-        Loggedin User: {{ loggedinUser.username }}
+    <div v-if="loggedinUser" class="mt-[60px] text-center">
+      <h3>
+        Loggedin User:
+        {{ loggedinUser.username }}
       </h3>
-      <button 
-        @click="doLogout" 
-        class="mt-4 bg-blue-600 text-white py-3 px-6 rounded hover:bg-blue-700 transition-colors duration-200 shadow-sm"
-      >
-        Logout
-      </button>
+      <button @click="doLogout" class="mt-4 mb-4 bg-[#0073ea] text-white border-none px-4 py-2 rounded h-[45px] cursor-pointer">Logout</button>
     </div>
 
-    <!-- Login/Signup Form Container -->
-    <div v-if="!loggedinUser" class="flex flex-col items-center max-w-md mx-auto mt-16 px-4">
-      <div class="w-full text-center">
-        <p class="text-3xl font-semibold mb-5">{{ isLogin ? 'Log in to your account' : 'Sign up for your account' }}</p>
-        <p class="text-gray-600 mb-5">Enter your work user name and password</p>
+    <div v-if="!loggedinUser" class="flex flex-col items-center mt-[60px] sm:mt-[60px]">
+      <div class="mb-4 text-center">
+        <p v-if="isLogin" class="text-3xl mb-2">Log in to your account</p>
+        <p v-if="!isLogin" class="text-3xl mb-2">Sign up in to your account</p>
       </div>
 
-      <!-- Login Form -->
-      <form v-if="isLogin" @submit.prevent="doLogin" class="w-full max-w-sm">
+      <p class="mb-1">Enter your work user name and password</p>
+
+      <form v-if="isLogin" class="flex flex-col items-center w-[90vw] max-w-[380px]" @submit.prevent="doLogin">
         <input
           type="text"
           placeholder="Username"
           v-model="loginCred.username"
-          class="w-full mb-3 px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          class="my-1 w-full rounded border border-gray-300 px-3 h-10 focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
         <input
           type="password"
           placeholder="Password"
           v-model="loginCred.password"
-          class="w-full mb-4 px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          class="my-1 w-full rounded border border-gray-300 px-3 h-10 focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
-        <button 
-          type="submit"
-          class="w-full bg-blue-600 text-white py-3 rounded hover:bg-blue-700 transition-colors duration-200 shadow-sm"
-        >
-          Login
-        </button>
+        <button class="w-full my-4 bg-[#0073ea] text-white border-none px-4 py-2 rounded h-[45px] cursor-pointer">Login</button>
       </form>
 
-      <!-- Signup Form -->
-      <form v-if="!isLogin" @submit.prevent="doSignup" class="w-full max-w-sm">
+      <form v-if="!isLogin" class="flex flex-col items-center w-[90vw] max-w-[380px]" @submit.prevent="doSignup">
         <input
           type="text"
           v-model="signupCred.fullname"
           placeholder="Your full name"
-          class="w-full mb-3 px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          class="my-1 w-full rounded border border-gray-300 px-3 h-10 focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
         <input
           type="text"
           placeholder="Username"
           v-model="signupCred.username"
-          class="w-full mb-3 px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          class="my-1 w-full rounded border border-gray-300 px-3 h-10 focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
         <input
           type="password"
           placeholder="Password"
           v-model="signupCred.password"
-          class="w-full mb-4 px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          class="my-1 w-full rounded border border-gray-300 px-3 h-10 focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
-        <button 
-          type="submit"
-          class="w-full bg-blue-600 text-white py-3 rounded hover:bg-blue-700 transition-colors duration-200 shadow-sm"
-        >
-          Signup
-        </button>
+        <button class="w-full my-4 bg-[#0073ea] text-white border-none px-4 py-2 rounded h-[45px] cursor-pointer">Signup</button>
       </form>
+      <p class="text-red-500">{{ msg }}</p>
 
-      <!-- Error Message -->
-      <p class="mt-3 text-red-500">{{ msg }}</p>
-
-      <!-- Or Sign in with separator -->
-      <div class="flex items-center justify-center w-full my-6">
-        <div class="flex-grow border-t border-gray-300"></div>
-        <p class="mx-4 text-sm text-gray-500">Or Sign in with</p>
-        <div class="flex-grow border-t border-gray-300"></div>
+      <div class="flex items-center justify-center mb-2 w-full max-w-[380px]">
+        <span class="flex-1 border-t border-gray-300 mx-4"></span>
+        <h2 class="text-base font-medium">Or Sign in with</h2>
+        <span class="flex-1 border-t border-gray-300 mx-4"></span>
       </div>
 
-      <!-- Google Sign In -->
-      <button type="button" class="flex items-center justify-center w-full max-w-sm py-2.5 border border-gray-300 rounded hover:bg-gray-50 transition-colors duration-200">
+      <button type="button" class="flex items-center bg-white border border-gray-300 rounded px-3 py-2 mb-2 w-full max-w-[380px]">
         <img
-          class="w-5 h-5 mr-3"
+          class="h-4 mr-2"
           src="../styles/icon/logo-google.svg"
           aria-hidden="true"
           alt=""
         />
-        <div class="font-medium text-gray-700">Google</div>
+        <div class="" aria-label="Login with Google">
+          Google
+        </div>
       </button>
 
-      <!-- Switch between Login/Signup -->
-      <div class="mt-6 text-sm text-center">
-        <div v-if="isLogin">
+      <div v-if="isLogin" class="mt-2 text-center">
+        <div>
           Don't have an account yet?
-          <span @click="isLogin = false" class="text-blue-500 cursor-pointer hover:underline">Sign up</span>
+          <span @click="isLogin = false" class="text-[#0fa2e2] cursor-pointer">Sign up</span>
         </div>
-        <div v-if="!isLogin">
-          Already have an account? 
-          <span @click="isLogin = true" class="text-blue-500 cursor-pointer hover:underline">Login</span>
+      </div>
+      <div v-if="!isLogin" class="mt-2 text-center">
+        <div>
+          Already have an account? <span @click="isLogin = true" class="text-[#0fa2e2] cursor-pointer">Login</span>
         </div>
       </div>
     </div>

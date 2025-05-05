@@ -1,150 +1,159 @@
 <template>
   <main>
-    <section class="fixed right-0 top-0 h-screen w-full sm:w-11/12 md:w-3/4 lg:w-[45%] bg-white border-l border-gray-200 shadow-lg z-10" ref="detailModal">
-      <!-- Header -->
-      <div class="p-5 border-b border-gray-200">
-        <div class="flex justify-between items-center px-5">
-          <h1 class="text-2xl font-medium">{{ currTask.title }}</h1>
-          
-          <div class="flex items-center">
-            <div class="h-5 w-px bg-gray-300 mx-2"></div>
-            <button class="p-2 text-gray-500 hover:bg-gray-100 rounded-md transition-colors duration-200" @click="handleClose">
-              <font-awesome-icon class="w-4 h-4" icon="x" />
-            </button>
+    <section class="task-details" ref="detailModal" style="z-index: 100;">
+      <div class="container">
+        <div class="close-details-btn" @click="handleClose">
+          <font-awesome-icon class="close-icon" icon="x" />
+        </div>
+
+        <div class="details-input">
+          <h1>{{ currTask.title }}</h1>
+          <div class="add-view-container flex">
+            <img src="" alt="" />
+            <p class="subset-tab-details"></p>
+            <div>
+              <font-awesome-icon class="dots" icon="ellipsis" />
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Content -->
-      <div class="h-[calc(100vh-80px)] overflow-y-auto">
-        <!-- Update Section -->
-        <div class="p-5">
-          <div class="flex items-center mb-10">
+      <div class="details-container">
+        <div class="update-details-page detail-page">
+          <div class="input-update">
             <input
               type="text"
               placeholder="Write an update"
               v-model="updateTxt"
               @keyup.enter="addUpdate"
-              class="flex-grow px-5 py-3 border border-blue-500 rounded-lg text-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            <button 
-              @click="addUpdate" 
-              class="ml-3 px-5 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200"
-            >
-              Update
-            </button>
+            <div>
+              <button class="update-btn" @click="addUpdate">update</button>
+            </div>
+          </div>
+          <div class="send-update">
+            <div></div>
           </div>
 
-          <!-- Comments -->
-          <div v-if="currTask.comments.length" class="space-y-4">
+          <div class="space-view" v-if="currTask.comments.length">
             <div
+              class="post-component"
               v-for="comment in currTask.comments"
               :key="comment._id"
-              class="border border-gray-200 rounded-lg overflow-hidden"
             >
-              <!-- Comment Header -->
-              <div class="flex justify-between p-4 border-b border-gray-100">
-                <div class="flex items-center">
-                  <img 
-                    :src="comment.byUser.imgUrl" 
-                    alt="User" 
-                    class="w-10 h-10 rounded-full object-cover"
-                  />
-                  <div class="ml-2 font-medium">{{ comment.byUser.fullname }}</div>
-                  <div class="ml-1.5 w-2.5 h-2.5 bg-emerald-500 rounded-full"></div>
+              <div class="post-header">
+                <div class="left-side-post">
+                  <div class="img-user-container">
+                    <img class="user-img" :src="comment.byUser.imgUrl" />
+                  </div>
+                  <div class="title">{{ comment.byUser.fullname }}</div>
+
+                  <div>
+                    <p class="green logged-in"></p>
+                  </div>
                 </div>
-                
-                <div class="flex items-center text-sm text-gray-500">
-                  <img class="w-4 h-4 mr-1" src="../styles/icon/clock.png" alt="Time" />
-                  <span class="mr-2">1d</span>
-                  <img class="w-4 h-4" src="../styles/icon/alarm-details.png" alt="Reminder" />
+                <div class="post-title">
+                  <div>
+                    <img
+                      class="clock-post-img"
+                      src="../styles/icon/clock.png"
+                      alt
+                    />
+                  </div>
+                  <div class="time">1d</div>
+                  <div>
+                    <img
+                      class="alarm-post-img"
+                      src="../styles/icon/alarm-details.png"
+                      alt
+                    />
+                  </div>
                 </div>
               </div>
-
-              <!-- Comment Body -->
-              <div class="p-4">
-                <p class="mb-4 text-gray-800">{{ comment.txt }}</p>
-                <div class="flex items-center justify-end text-sm text-gray-500">
-                  <img class="w-4 h-4 mr-1" src="../styles/icon/view.png" alt="Seen" />
-                  <span class="mr-1">1</span>
+              <div class="body-text">
+                <p class="text">{{ comment.txt }}</p>
+                <div class="seen-area">
+                  <span>
+                    <img class="view-icon" src="../styles/icon/view.png" alt />
+                  </span>
+                  <span class="seen">1</span>
                   <p>seen</p>
                 </div>
               </div>
 
-              <!-- Comment Actions -->
-              <div class="flex border-t border-gray-200">
-                <button 
-                  @click="addLike(comment.id)" 
-                  :class="[
-                    'flex items-center justify-center w-1/2 py-3 border-r border-gray-200 hover:bg-gray-50 transition-colors duration-200',
-                    { 'text-blue-500': comment.isLike }
-                  ]"
-                >
-                  <font-awesome-icon class="mr-2" icon="thumbs-up" />
-                  <span>Like</span>
-                </button>
-                
-                <button 
-                  @click="showReplay(comment.id)" 
-                  class="flex items-center justify-center w-1/2 py-3 hover:bg-gray-50 transition-colors duration-200"
-                >
-                  <font-awesome-icon class="mr-2" icon="reply" />
-                  <span>Reply</span>
-                </button>
-              </div>
+              <div class="post-actions">
+                <div class="left-btn" @click="addLike(comment.id)">
+                  <span>
+                    <font-awesome-icon
+                      :class="{ liked: comment.isLike }"
+                      class="like-icon"
+                      icon="thumbs-up"
+                    />
+                  </span>
+                  <p :class="{ liked: comment.isLike }">Like</p>
+                </div>
 
-              <!-- Existing Replies -->
-              <div v-if="comment.replies && comment.replies.length" class="border-t border-gray-200 bg-gray-50 p-2">
+                <div class="right-btn" @click="showReplay(comment.id)">
+                  <span>
+                    <font-awesome-icon class="reply-icon" icon="reply" />
+                  </span>
+                  <p>Reply</p>
+                </div>
+              </div>
+              <!-- Replay -->
+              <div class="replies-container" v-if="!comment.replies.lenght">
                 <div
+                  class="curr-replay"
                   v-for="reply in comment.replies"
-                  :key="reply.id"
-                  class="flex p-2"
+                  :key="reply"
                 >
                   <img
-                    :src="reply.byUser.imgUrl"
-                    alt="User"
-                    class="w-8 h-8 rounded-full mr-2"
+                    class="user-icon"
+                    src="../styles/icon/def-user.png"
+                    alt=""
                   />
-                  <div class="bg-white rounded-lg p-3 shadow-sm">
-                    <p class="text-sm font-medium text-blue-500">{{ reply.byUser.fullname }}</p>
-                    <p class="text-sm text-gray-700">{{ reply.txt }}</p>
+                  <div class="replay-area">
+                    <p class="name">{{ reply.byUser.fullname }}</p>
+                    <p class="replaies">{{ reply.txt }}</p>
                   </div>
                 </div>
               </div>
 
-              <!-- Reply Input -->
-              <div v-if="comment.id === replayToShow" class="flex p-3 border-t border-gray-200 bg-gray-50">
-                <img
-                  src="../styles/icon/def-user.png"
-                  alt="User"
-                  class="w-8 h-8 rounded-full mr-3"
-                />
-                <div class="flex-grow">
-                  <input 
-                    type="text" 
-                    v-model="replayTxt"
-                    placeholder="Write a reply..."
-                    class="w-full p-2 border border-gray-300 rounded-lg mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                  
-                  <div class="flex justify-between items-center">
-                    <div class="text-blue-500">
-                      <font-awesome-icon class="mr-1" icon="file" />
-                      <a href="#" class="text-sm hover:underline">Add files</a>
+              <div v-if="comment.id === replayToShow" class="reply-container">
+                <div class="left-side-reply">
+                  <div>
+                    <img
+                      class="user-img"
+                      src="../styles/icon/def-user.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+                <div class="right-side-reply">
+                  <div class="input-btns-container">
+                    <div>
+                      <input type="text" v-model="replayTxt" />
                     </div>
-                    
-                    <button 
-                      @click="addReplay(comment.id)"
-                      class="px-4 py-1.5 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-200"
-                    >
-                      Reply
-                    </button>
+
+                    <div class="btns-container-reply">
+                      <div>
+                        <span>
+                          <font-awesome-icon icon="file" />
+                          <a href>Add files</a>
+                        </span>
+                      </div>
+                      <div class="reply-btn" @click="addReplay(comment.id)">
+                        <button>Reply</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <div class="files-details-page detail-page"></div>
+        <div class="activity-details-page detail-page"></div>
       </div>
     </section>
   </main>
@@ -233,6 +242,7 @@ export default {
       this.replayTxt = ''
     },
     showReplay(commentId) {
+      console.log(commentId)
       this.replayToShow = commentId
     },
     getCurrTask() {
@@ -274,3 +284,5 @@ export default {
   },
 }
 </script>
+
+<style></style>

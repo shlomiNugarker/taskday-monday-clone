@@ -1,93 +1,66 @@
 <template>
-  <section class="min-h-screen bg-gradient-to-br from-indigo-950 to-indigo-900 font-sans overflow-auto">
-    <!-- Header -->
-    <div class="fixed w-full bg-white/95 shadow-md backdrop-blur-sm z-50">
-      <header class="flex items-center justify-between w-[90%] max-w-7xl mx-auto h-[70px] py-4 px-6">
-        <!-- Logo -->
+  <section class="bg-gradient-to-br from-[#040539] to-[#0a0a4d] min-h-screen font-[sofia-pro,Roboto,Helvetica,Arial,sans-serif] overflow-auto">
+    <div class="fixed w-full bg-white/95 flex justify-center items-center shadow-md z-[100] backdrop-blur-sm">
+      <header class="flex items-center justify-between w-[90%] h-[70px] p-[15px] max-w-[1400px]">
         <div class="flex items-center">
-          <div class="relative mr-4 group cursor-pointer transition-transform duration-300 hover:scale-105">
-            <div class="absolute border-2 border-emerald-500 w-[50px] h-[25px] transition-all duration-300"></div>
-            <div class="absolute w-[25px] h-[50px] border-2 border-amber-400 left-[40px] top-[10px] transition-all duration-300">
-              <div class="absolute w-[3px] h-[3px] bg-emerald-500 rounded-full left-[-2px] top-[11px]"></div>
+          <div class="relative text-2xl font-bold mt-[-25px] transition-transform duration-300 hover:scale-105">
+            <div class="absolute border-2 border-[#00c875] w-[50px] h-[25px] transition-all duration-300"></div>
+            <div class="absolute w-[25px] h-[50px] border-2 border-[#ffcb00] left-[40px] top-[10px] transition-all duration-300">
+              <div class="absolute w-[3px] h-[3px] bg-[#00c875] left-[-2px] top-[11px] rounded-full"></div>
             </div>
-            <div class="absolute w-[25px] h-[25px] border-2 border-rose-500 left-[53px] transition-all duration-300">
-              <div class="absolute w-[3px] h-[3px] bg-amber-400 rounded-full left-[8px] bottom-[-2px]"></div>
+            <div class="absolute w-[25px] h-[25px] left-[53px] border-2 border-[#e2435c] transition-all duration-300">
+              <div class="absolute w-[3px] h-[3px] bg-[#ffcb00] left-[8px] bottom-[-2px] rounded-full"></div>
             </div>
           </div>
-          <div class="relative font-semibold text-3xl tracking-tighter ml-6">
-            <span class="text-emerald-500">T</span>as<span class="text-amber-400">k</span>da<span class="text-rose-500">y</span>
+          <div class="relative left-[90px] top-[8px] text-[30px] font-semibold tracking-[-0.5px] md:block hidden">
+            <span class="text-[#00c875]">T</span>as<span class="text-[#ffcb00]">k</span>da<span class="text-[#e2435c]">y</span>
           </div>
         </div>
 
-        <!-- Navigation -->
         <nav>
           <ul class="flex items-center">
-            <li class="list-none ml-5">
-              <button class="text-gray-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-50 hover:text-indigo-600 transition-all duration-200">
-                Contact sales
-              </button>
+            <li class="list-none ml-[20px] transition-all duration-200 rounded-lg hover:bg-[#f0f3ff] hidden sm:block">
+              <button class="text-[#535768] p-[8px_12px] bg-transparent border-none text-[14px] font-medium transition-all duration-200 cursor-pointer hover:text-[#5034ff]">Contact sales</button>
             </li>
-            <li class="list-none ml-5" @click="goLogin">
-              <button class="text-gray-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-indigo-50 hover:text-indigo-600 transition-all duration-200">
-                Log in
-              </button>
+            <li class="list-none ml-[20px] transition-all duration-200 rounded-lg hover:bg-[#f0f3ff]" @click="goLogin">
+              <button class="text-[#535768] p-[8px_12px] bg-transparent border-none text-[14px] font-medium transition-all duration-200 cursor-pointer hover:text-[#5034ff]">Log in</button>
             </li>
-            <li class="list-none ml-5 bg-indigo-500 px-5 py-2.5 rounded-full cursor-pointer flex items-center transition-all duration-300 hover:bg-indigo-600 hover:shadow-lg hover:shadow-indigo-500/30 hover:-translate-y-0.5" @click="goDemo">
-              <button class="text-white font-medium text-sm">
-                See Demo
-              </button>
-              <font-awesome-icon class="text-white ml-1.5" icon="arrow-right" />
+            <li class="list-none ml-[20px] transition-all duration-300 bg-[#6c6cff] flex items-center p-[10px_16px] rounded-[25px] cursor-pointer hover:bg-[#5a5ad5] hover:translate-y-[-2px] hover:shadow-[0_4px_12px_rgba(108,108,255,0.3)]" @click="goDemo">
+              <button class="text-white cursor-pointer font-medium bg-transparent border-none text-[14px]">See Demo</button>
+              <font-awesome-icon class="text-white ml-[5px]" icon="arrow-right" />
             </li>
           </ul>
         </nav>
       </header>
     </div>
 
-    <!-- Hero Section -->
-    <div class="pt-[140px] px-6 md:px-10 flex flex-col items-center justify-center text-white">
-      <div class="text-center">
-        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight bg-gradient-to-r from-white to-indigo-100 bg-clip-text text-transparent drop-shadow-sm">
-          A platform built for a
-          <br>new way of working
-        </h1>
-        <p class="mt-6 text-base sm:text-lg md:text-xl opacity-90">
-          What would you like to manage with 
-          <span class="text-emerald-500">T</span>as<span class="text-amber-400">k</span>da<span class="text-rose-500">y</span>?
-        </p>
+    <div class="flex text-white justify-center items-center pt-[140px] px-4 sm:px-0">
+      <div class="flex flex-col items-center text-center">
+        <p class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold m-0 leading-tight bg-gradient-to-r from-white to-[#e0e0ff] bg-clip-text text-transparent shadow-[0_2px_15px_rgba(255,255,255,0.1)]">A platform built for a</p>
+        <p class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold m-0 leading-tight bg-gradient-to-r from-white to-[#e0e0ff] bg-clip-text text-transparent shadow-[0_2px_15px_rgba(255,255,255,0.1)]">new way of working</p>
+        <span class="mt-[25px] text-base sm:text-xl opacity-90">
+          What would you like to manage with
+          <span class="text-[#00c875]">T</span>as<span class="text-[#ffcb00]">k</span>da<span class="text-[#e2435c]">y</span>?
+        </span>
       </div>
+    </div>
 
-      <!-- CTA Button -->
-      <button 
-        @click="goDemo"
-        class="mt-12 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white px-7 py-4 rounded-full text-lg font-medium flex items-center shadow-lg shadow-indigo-500/40 hover:shadow-xl hover:shadow-indigo-500/50 hover:-translate-y-1 active:translate-y-0 transition-all duration-300"
-      >
+    <div class="flex justify-center items-center mt-[50px]">
+      <button @click="goDemo" class="bg-gradient-to-r from-[#6c6cff] to-[#5034ff] flex items-center text-white py-3 px-5 sm:py-4 sm:px-6 rounded-[30px] cursor-pointer border-none text-sm sm:text-base font-medium transition-all duration-300 shadow-[0_5px_20px_rgba(108,108,255,0.4)] hover:bg-[#5a5ad5] hover:translate-y-[-3px] hover:shadow-[0_8px_25px_rgba(108,108,255,0.5)] active:translate-y-[1px]">
         <span class="mr-2">See Demo</span>
         <font-awesome-icon icon="arrow-right" />
       </button>
+    </div>
 
-      <!-- Images Container -->
-      <div class="flex flex-col md:flex-row items-center justify-center mt-16 md:mt-20 w-full px-4 pb-10">
-        <div class="transform -rotate-5 md:w-1/4 transition-all duration-300 hover:-translate-y-2 mb-8 md:mb-0">
-          <img 
-            class="w-3/4 md:w-full mx-auto rounded-xl shadow-lg hover:shadow-xl transition-all duration-300" 
-            src="../styles/images/1.png" 
-            alt="Taskday screenshot" 
-          />
-        </div>
-        <div class="z-10 md:w-2/5 transition-all duration-300 hover:-translate-y-2 mb-8 md:mb-0 md:px-3">
-          <img 
-            class="w-11/12 md:w-full mx-auto rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300" 
-            src="../styles/images/2.png" 
-            alt="Taskday main interface" 
-          />
-        </div>
-        <div class="transform rotate-5 md:w-1/4 transition-all duration-300 hover:-translate-y-2">
-          <img 
-            class="w-3/4 md:w-full mx-auto rounded-xl shadow-lg hover:shadow-xl transition-all duration-300" 
-            src="../styles/images/3.png" 
-            alt="Taskday features" 
-          />
-        </div>
+    <div class="flex flex-col md:flex-row items-center justify-center mt-[70px] pb-[40px] px-4">
+      <div class="relative flex items-center justify-center transition-all duration-400 hover:translate-y-[-10px] my-4 md:my-0">
+        <img class="rounded-xl transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.3)] hover:shadow-[0_15px_40px_rgba(255,255,255,0.25)] w-[85%] md:w-3/4 transform md:-rotate-5" src="../styles/images/1.png" alt="Task management interface" />
+      </div>
+      <div class="relative flex items-center justify-center transition-all duration-400 hover:translate-y-[-10px] my-4 md:my-0">
+        <img class="rounded-xl transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.3)] hover:shadow-[0_15px_40px_rgba(255,255,255,0.25)] w-[85%] md:w-[120%] lg:w-[150%] z-[5]" src="../styles/images/2.png" alt="Project management dashboard" />
+      </div>
+      <div class="relative flex items-center justify-center transition-all duration-400 hover:translate-y-[-10px] my-4 md:my-0">
+        <img class="rounded-xl transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.3)] hover:shadow-[0_15px_40px_rgba(255,255,255,0.25)] w-[85%] md:w-3/4 transform md:rotate-5" src="../styles/images/3.png" alt="Team collaboration tools" />
       </div>
     </div>
   </section>
@@ -120,12 +93,13 @@ export default {
       this.$router.push(`/board/${boardId}`)
     },
     goLogin() {
-      this.$router.push('/login/')
+      this.$router.push(`/login/`)
     },
     loadUsers() {
       this.$store.dispatch({ type: 'loadUsers' })
     },
   },
+  components: {},
 }
 </script>
 

@@ -160,3 +160,47 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.task-preview {
+  display: flex;
+  padding-bottom: 1px;
+  cursor: grab;
+  margin-left: 10px;
+  transition: box-shadow 0.2s ease;
+}
+
+.task-preview:hover {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+}
+
+.end-cmps {
+  background-color: rgb(245 246 248 / 85%);
+  width: 25px;
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 2px;
+}
+
+.end-cmps div {
+  background-color: #d0d4e4;
+  width: 10px;
+}
+
+@media (max-width: 620px) {
+  .task-preview {
+    margin-bottom: 60px;
+  }
+  
+  .task-preview :deep(.status-cmp),
+  .task-preview :deep(.person-cmp),
+  .task-preview :deep(.priority-cmp),
+  .task-preview :deep(.timeline-picker),
+  .task-preview :deep(.text-cmp),
+  .task-preview .end-cmps {
+    position: relative;
+    top: 40px;
+    left: -115px;
+  }
+}
+</style>

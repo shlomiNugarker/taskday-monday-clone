@@ -17,4 +17,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.side-bar {
+  z-index: 5;
+  display: flex;
+}
+</style>

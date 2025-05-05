@@ -1,9 +1,7 @@
 <template>
-  <main class="flex h-screen bg-gray-50">
+  <main class="flex">
     <side-bar></side-bar>
-    <div class="flex-grow">
-      <router-view />
-    </div>
+    <router-view />
   </main>
 </template>
 
@@ -26,3 +24,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.boardView {
+  display: flex;
+}
+</style>

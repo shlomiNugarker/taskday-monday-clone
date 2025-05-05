@@ -2,7 +2,7 @@
   display: none;
 }
 .main-menu {
-  z-index: 15;
+  z-index: 2265;
   background-color: #292f4c;
   width: 70px;
   height: 100vh;
@@ -35,6 +35,7 @@
     border: 1px solid #d0d4e4;
     cursor: pointer;
     transition: width 0.3s;
+    z-index: 3000;
 
     &:hover {
       background-color: $blue;
@@ -238,6 +239,7 @@
     display: none;
     .toggle-nav-bar {
       left: 57px;
+      z-index: 2000;
     }
   }
 

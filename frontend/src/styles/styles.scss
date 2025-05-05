@@ -33,8 +33,5 @@
 @import 'components/dynamic-cmps/priority-cmp';
 
 // views
-// @import 'views/boardDetailsView'; // Removed as now using Tailwind
-// @import 'views/_boardView'; // Removed as now using Tailwind
-// @import 'views/task-details'; // Removed as now using Tailwind
-// @import 'views/HomeView'; // Removed as now using Tailwind
-// @import 'views/loginView'; // Removed as now using Tailwind
+@import 'views/boardDetailsView';
+@import 'views/task-details';

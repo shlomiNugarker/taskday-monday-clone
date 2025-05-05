@@ -72,3 +72,32 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.board-details-header {
+  width: calc(100vw - 120px);
+  padding: 15px 30px;
+  position: sticky;
+  left: 0;
+  background-color: white;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.nav-bar-open {
+  position: sticky;
+  left: 0;
+  width: calc(100vw - 340px);
+}
+
+@media (max-width: 620px) {
+  .board-details-header {
+    width: 100vw;
+    margin-top: 70px;
+  }
+  
+  .board-details-header .subtitle {
+    width: 80vw;
+  }
+}
+</style>
