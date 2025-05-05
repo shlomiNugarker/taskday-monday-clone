@@ -27,7 +27,6 @@
 // dynamic cmps
 @import 'components/dynamic-cmps/task-cmp';
 @import 'components/dynamic-cmps/status-cmp';
-@import 'components/dynamic-cmps/person-cmp';
 @import 'components/dynamic-cmps/date-cmp';
 @import 'components/dynamic-cmps/text-cmp';
 @import 'components/dynamic-cmps/priority-cmp';
@@ -36,5 +35,4 @@
 @import 'views/boardDetailsView';
 @import 'views/_boardView';
 @import 'views/task-details';
-@import 'views/HomeView';
 @import 'views/loginView';

@@ -1,45 +1,47 @@
 <template>
-  <section class="person-cmp" @mouseover="mouseOver" @mouseleave="mouseLeave">
+  <section class="flex items-center justify-center min-w-[150px] h-[35px] pt-[5px] bg-[#f5f6f8d8]" @mouseover="mouseOver" @mouseleave="mouseLeave">
     <el-dropdown class="side-drop-down" trigger="click">
-      <span class="el-dropdown-link">
-        <font-awesome-icon icon="plus" class="plus-icon" :class="hideStyle" />
-        <div v-if="assignedMembers.length">
-          <img
-            v-for="(member, idx) in assignedMembers"
-            :key="idx"
-            class="avater-img"
-            :src="member.imgUrl"
-            alt=""
-            :style="{ marginLeft: idx * this.margin + 'px' }"
-          />
+      <span class="el-dropdown-link relative">
+        <font-awesome-icon icon="plus" class="absolute -left-6 top-2 z-10 text-white text-[13px] rounded-full p-[2px] bg-[#0073ea]" :class="{'invisible': !isOver}" />
+        <div v-if="assignedMembers.length" class="relative flex justify-center items-center" :style="{ minWidth: (assignedMembers.length - 1) * 20 + 30 + 'px', height: '30px' }">
+          <div class="absolute left-1/2 -translate-x-1/2 flex" :style="{ width: (assignedMembers.length - 1) * 20 + 30 + 'px', height: '30px' }">
+            <img
+              v-for="(member, idx) in assignedMembers"
+              :key="idx"
+              class="w-[30px] h-[30px] rounded-full object-cover border-2 border-white shadow-sm absolute"
+              :src="member.imgUrl"
+              alt=""
+              :style="{ left: idx * 20 + 'px', zIndex: assignedMembers.length - idx }"
+            />
+          </div>
         </div>
         <div v-else>
           <img
-            class="avater-img"
+            class="w-[30px] h-[30px] rounded-full object-cover border-2 border-white shadow-sm"
             src="https://cdn.monday.com/icons/dapulse-person-column.svg"
             alt=""
           />
         </div>
 
-        <el-icon class="el-icon2"> </el-icon>
+        <el-icon class="el-icon2 ml-2"> </el-icon>
       </span>
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item v-for="member in assignedMembers" :key="member._id">
-            <span class="member-opt" @click="removePerson(member)">
-              <img class="img-url-person" :src="member.imgUrl" alt="" />
-              <span> {{ member.fullname }}</span>
-              <font-awesome-icon icon="xmark" />
+            <span class="flex items-center justify-between min-w-[115px]" @click="removePerson(member)">
+              <img class="w-[20px] h-[20px] rounded-full object-cover" :src="member.imgUrl" alt="" />
+              <span class="mx-2 flex-grow"> {{ member.fullname }}</span>
+              <font-awesome-icon icon="xmark" class="text-gray-500 hover:text-red-500" />
             </span>
           </el-dropdown-item>
-          <p class="divider-p">People</p>
+          <p class="m-0 border-b border-t border-[#d7d7d7] text-center text-gray-500 text-sm py-1">People</p>
           <el-dropdown-item
             v-for="member in notAssignedMembers"
             :key="member._id"
           >
-            <span @click="addPerson(member)" class="flex">
-              <img class="img-url-person" :src="member.imgUrl" alt="" />
-              <span>
+            <span @click="addPerson(member)" class="flex items-center min-w-[115px]">
+              <img class="w-[20px] h-[20px] rounded-full object-cover" :src="member.imgUrl" alt="" />
+              <span class="mx-2">
                 {{ member.fullname }}
               </span>
             </span>
@@ -62,16 +64,12 @@ export default {
   name: 'person-cmp',
   data() {
     return {
-      margin: -7,
       isOver: false,
       assignedMembers: [],
       notAssignedMembers: [],
     }
   },
   computed: {
-    hideStyle() {
-      return !this.isOver ? 'hidden' : ''
-    },
     members() {
       return this.$store.getters.members
     },
@@ -119,49 +117,3 @@ export default {
   components: {},
 }
 </script>
-
-<style>
-.plus-icon {
-  position: relative;
-  left: -55px;
-  color: white;
-  font-size: 13px;
-  border-radius: 50%;
-  padding: 2px;
-  background-color: #0073ea;
-}
-.hidden {
-  visibility: hidden;
-}
-
-.avater-img {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  object-fit: cover;
-  /* margin-left: 20px; */
-  border: 1px solid white;
-}
-.avater-container {
-  display: flex;
-  margin-left: 5px;
-  color: #7c7c81;
-}
-
-.relative {
-  position: relative;
-}
-.member-opt {
-  display: flex;
-  min-width: 115px;
-
-  justify-content: space-between;
-  align-items: center;
-}
-.img-url-person {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-</style>
