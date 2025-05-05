@@ -1,39 +1,24 @@
 <template>
-  <el-dropdown trigger="click" class="w-[150px] h-[42px] flex items-center justify-center">
-    <div class="w-full h-full bg-[rgb(245,246,248,0.85)] flex items-center justify-center cursor-pointer">
-      <div :class="getPriorityClass" class="w-[80px] h-[22px] rounded-[4px] flex items-center justify-center text-xs">
-        {{ getPriorityText }}
+  <section class="dynamic-priority relative"
+    @click="showOptions = !showOptions">
+    <div class="dynamic-priority-indicator"
+      :style="{ backgroundColor: priorityStyle }">
+      {{ priorityLabel || '-' }}
+    </div>
+    
+    <!-- Options dropdown -->
+    <div v-if="showOptions" 
+      class="dynamic-dropdown-menu"
+      @click.stop>
+      <div v-for="(option, idx) in priorityOptions" 
+        :key="idx"
+        class="dynamic-status-option"
+        :style="{ backgroundColor: option.color }"
+        @click="changePriority(option.value)">
+        {{ option.label }}
       </div>
     </div>
-    <template #dropdown>
-      <el-dropdown-menu>
-        <el-dropdown-item @click="setPriority('Critical')">
-          <div class="flex items-center">
-            <div class="w-[10px] h-[10px] rounded-full bg-[#e2445c] mr-2"></div>
-            <span>Critical</span>
-          </div>
-        </el-dropdown-item>
-        <el-dropdown-item @click="setPriority('High')">
-          <div class="flex items-center">
-            <div class="w-[10px] h-[10px] rounded-full bg-[#fdab3d] mr-2"></div>
-            <span>High</span>
-          </div>
-        </el-dropdown-item>
-        <el-dropdown-item @click="setPriority('Medium')">
-          <div class="flex items-center">
-            <div class="w-[10px] h-[10px] rounded-full bg-[#ffcb00] mr-2"></div>
-            <span>Medium</span>
-          </div>
-        </el-dropdown-item>
-        <el-dropdown-item @click="setPriority('Low')">
-          <div class="flex items-center">
-            <div class="w-[10px] h-[10px] rounded-full bg-[#00c875] mr-2"></div>
-            <span>Low</span>
-          </div>
-        </el-dropdown-item>
-      </el-dropdown-menu>
-    </template>
-  </el-dropdown>
+  </section>
 </template>
 
 <script>
@@ -41,41 +26,63 @@ export default {
   props: {
     task: {
       type: Object,
+      required: true
     },
     boardId: String,
     groupId: String,
   },
-  name: 'priority-cmp',
   data() {
     return {
+      showOptions: false,
       priorityOptions: [
-        { value: 'Critical', color: 'bg-[#e2445c] text-white' },
-        { value: 'High', color: 'bg-[#fdab3d] text-white' },
-        { value: 'Medium', color: 'bg-[#ffcb00] text-black' },
-        { value: 'Low', color: 'bg-[#00c875] text-white' }
+        { value: 'high', label: 'High', color: '#e2445c' },
+        { value: 'medium', label: 'Medium', color: '#fdab3d' },
+        { value: 'low', label: 'Low', color: '#00c875' },
+        { value: null, label: '-', color: '#c4c4c4' }
       ]
     }
   },
   computed: {
-    getPriorityText() {
-      return this.task.priority || 'Set Priority'
+    priorityStyle() {
+      const priority = this.task.priority;
+      if (priority === 'high') return '#e2445c';
+      if (priority === 'medium') return '#fdab3d';
+      if (priority === 'low') return '#00c875';
+      return '#c4c4c4';
     },
-    getPriorityClass() {
-      const priority = this.priorityOptions.find(option => option.value === this.task.priority)
-      return priority ? priority.color : 'bg-gray-200 text-[#676879]'
+    priorityLabel() {
+      const priority = this.task.priority;
+      if (priority === 'high') return 'High';
+      if (priority === 'medium') return 'Medium';
+      if (priority === 'low') return 'Low';
+      return null;
     }
   },
+  mounted() {
+    document.addEventListener('click', this.closeOptions);
+  },
+  beforeDestroy() {
+    document.removeEventListener('click', this.closeOptions);
+  },
   methods: {
-    setPriority(priority) {
-      const taskToEdit = JSON.parse(JSON.stringify(this.task))
-      taskToEdit.priority = priority
+    closeOptions(event) {
+      if (this.showOptions && !event.target.closest('.priority-cmp')) {
+        this.showOptions = false;
+      }
+    },
+    changePriority(priority) {
+      this.showOptions = false;
       
-      this.$store.dispatch({
-        type: 'editTask',
-        task: taskToEdit,
-        groupId: this.groupId
-      })
+      this.$emit('changePriority', {
+        groupId: this.groupId,
+        taskId: this.task.id,
+        priority
+      });
     }
   }
 }
 </script>
+
+<style scoped>
+/* All styling moved to common.css */
+</style>

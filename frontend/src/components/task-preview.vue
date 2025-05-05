@@ -1,16 +1,18 @@
 <template>
   <section 
-    class="task-row group relative flex rounded-md overflow-hidden bg-white hover:bg-neutral-50 border border-transparent hover:border-gray-200 transition-all duration-200 ease-in-out"
+    class="task-row group relative flex rounded-lg overflow-hidden bg-white hover:bg-neutral-50 border border-transparent hover:border-neutral-lightGray transition-all duration-200 ease-in-out"
     @mouseenter="setHover(true)"
     @mouseleave="setHover(false)"
   >
-    <!-- Colored Bar (Right Side for RTL) -->
-    <div class="absolute right-0 top-0 bottom-0 w-1.5" :style="{ backgroundColor: groupColor }"></div>
+    <!-- Color indicator (Right Side for RTL) -->
+    <div class="absolute right-0 top-0 bottom-0 w-1.5 transition-colors duration-300" 
+      :style="{ backgroundColor: groupColor }">
+    </div>
     
     <!-- Task Content -->
-    <div class="w-full grid task-grid min-h-[42px] h-[42px] pl-2 mr-2.5 rtl">
+    <div class="w-full task-grid py-0 min-h-[52px] h-[52px] pl-2 mr-2.5 rtl">
       <!-- Task Title Component -->
-      <div class="cell-wrapper">
+      <div class="task-cell title-cell">
         <taskCmp
           :task="task"
           :isHover="isHover"
@@ -18,12 +20,13 @@
           :boardId="boardId"
           :groupColor="groupColor"
           @changeTitle="changeTitle"
+          @removeTask="deleteTask"
           class="w-full min-w-0 h-full"
         />
       </div>
       
       <!-- Status Component -->
-      <div class="cell-wrapper status-cell">
+      <div class="task-cell status-cell">
         <statusCmp
           :task="task"
           :groupId="groupId"
@@ -34,19 +37,18 @@
       </div>
       
       <!-- Person Component -->
-      <div class="cell-wrapper member-cell">
+      <div class="task-cell person-cell">
         <personCmp
           :task="task"
           :groupId="groupId"
           :boardId="boardId"
-          @removeAssignedMember="removeAssignedMember"
-          @addAssignedMember="addAssignedMember"
+          @changePerson="updatePerson"
           class="w-full h-full"
         />
       </div>
       
       <!-- Priority Component -->
-      <div class="cell-wrapper priority-cell">
+      <div class="task-cell priority-cell">
         <priorityCmp
           :task="task"
           :groupId="groupId"
@@ -57,7 +59,7 @@
       </div>
       
       <!-- Date Component -->
-      <div class="cell-wrapper date-cell">
+      <div class="task-cell date-cell">
         <dateCmp
           :task="task"
           :groupId="groupId"
@@ -69,7 +71,7 @@
       </div>
       
       <!-- Text Component -->
-      <div class="cell-wrapper text-cell">
+      <div class="task-cell text-cell">
         <textCmp
           :task="task"
           :groupId="groupId"
@@ -79,11 +81,12 @@
         />
       </div>
 
-      <!-- More Options Button (visible on hover) -->
-      <div class="cell-wrapper options-cell opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+      <!-- Actions Menu -->
+      <div class="task-cell actions-cell opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+        <!-- Task actions button -->
         <button
           @click.stop="toggleDropdown"
-          class="more-options-btn text-neutral-gray hover:text-neutral-darkGray p-1 rounded-full hover:bg-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary transition-colors duration-200"
+          class="task-action-button"
           aria-label="פתח תפריט אפשרויות"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -97,41 +100,43 @@
         <Transition name="fade">
           <div 
             v-if="showDropdown" 
-            class="dropdown-menu absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-xl z-50 overflow-hidden"
+            class="task-dropdown-menu"
             @click.stop
           >
-            <div class="py-1">
-              <button 
-                @click="duplicateTask" 
-                class="w-full flex items-center px-4 py-2 text-sm text-neutral-darkGray hover:bg-neutral-100 cursor-pointer transition-colors duration-150"
-                aria-label="שכפל משימה"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
-                שכפל
-              </button>
-              <button 
-                @click="addComment" 
-                class="w-full flex items-center px-4 py-2 text-sm text-neutral-darkGray hover:bg-neutral-100 cursor-pointer transition-colors duration-150"
-                aria-label="הוסף תגובה"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-                </svg>
-                הוסף תגובה
-              </button>
-              <button 
-                @click="deleteTask" 
-                class="w-full flex items-center px-4 py-2 text-sm text-status-error hover:bg-red-50 cursor-pointer transition-colors duration-150"
-                aria-label="מחק משימה"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
-                מחק
-              </button>
-            </div>
+            <button 
+              @click="duplicateTask" 
+              class="task-dropdown-item"
+              aria-label="שכפל משימה"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+              <span>שכפל</span>
+            </button>
+            
+            <button 
+              @click="addComment" 
+              class="task-dropdown-item"
+              aria-label="הוסף תגובה"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+              </svg>
+              <span>הוסף תגובה</span>
+            </button>
+            
+            <div class="task-dropdown-divider"></div>
+            
+            <button 
+              @click="deleteTask" 
+              class="task-dropdown-item-danger"
+              aria-label="מחק משימה"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+              <span>מחק</span>
+            </button>
           </div>
         </Transition>
       </div>
@@ -142,7 +147,7 @@
 <script>
 import textCmp from './dynamic-cmps/text-cmp.vue'
 import statusCmp from './dynamic-cmps/status-cmp.vue'
-import priorityCmp from './dynamic-cmps/priority1-cmp.vue'
+import priorityCmp from './dynamic-cmps/priority-cmp.vue'
 import personCmp from './dynamic-cmps/person-cmp.vue'
 import dateCmp from './dynamic-cmps/date-cmp.vue'
 import taskCmp from './dynamic-cmps/task-cmp.vue'
@@ -205,7 +210,7 @@ export default {
     
     handleOutsideClick(event) {
       // Close dropdown if clicked outside
-      if (this.showDropdown && !event.target.closest('.dropdown-menu') && !event.target.closest('.more-options-btn')) {
+      if (this.showDropdown && !event.target.closest('.task-dropdown-menu') && !event.target.closest('.task-action-button')) {
         this.showDropdown = false
       }
     },
@@ -250,8 +255,8 @@ export default {
     },
     
     changeText(payload) {
-      const txt = typeof payload === 'object' ? payload.txt : payload
-      this.updateTask({ txt })
+      const text = typeof payload === 'object' ? payload.text : payload
+      this.updateTask({ text })
     },
     
     changePriority(payload) {
@@ -259,26 +264,19 @@ export default {
       this.updateTask({ priority })
     },
     
-    removeAssignedMember(memberId) {
-      const taskToUpdate = structuredClone(this.task)
-      const idx = taskToUpdate.memberIds?.findIndex(id => id === memberId)
-      if (idx !== -1) {
-        taskToUpdate.memberIds.splice(idx, 1)
-        this.$emit('update', { task: taskToUpdate, groupId: this.groupId })
-      }
+    updatePerson(payload) {
+      const person = payload.person
+      this.updateTask({ person })
     },
     
-    addAssignedMember(memberId) {
-      const taskToUpdate = structuredClone(this.task)
-      if (!taskToUpdate.memberIds) taskToUpdate.memberIds = []
-      if (!taskToUpdate.memberIds.includes(memberId)) {
-        taskToUpdate.memberIds.push(memberId)
-        this.$emit('update', { task: taskToUpdate, groupId: this.groupId })
-      }
-    },
-    
-    changeTimeline(timeline) {
-      this.updateTask({ dueDate: timeline })
+    changeTimeline(payload) {
+      const dates = payload.dates
+      this.updateTask({ 
+        timeline: {
+          startDate: dates[0],
+          endDate: dates[1]
+        }
+      })
     }
   }
 }
@@ -287,66 +285,130 @@ export default {
 <style scoped>
 .task-row {
   box-sizing: border-box;
-  min-height: 42px;
-  height: 42px;
+  min-height: 52px;
+  height: 52px;
   align-items: center;
-  border-bottom: 1px solid #f5f5f5;
+  border-bottom: 1px solid rgba(240, 240, 240, 0.8);
+  margin-bottom: 1px;
 }
 
 .task-row:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  z-index: 1;
+  z-index: 2;
+  border-bottom-color: transparent;
 }
 
+/* Task grid layout */
 .task-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr 1fr 0.5fr 0.2fr;
+  grid-template-columns: 2.5fr 1.2fr 1.2fr 1.2fr 1.3fr 1.6fr 50px;
   gap: 0;
   align-items: center;
   text-align: right;
   direction: rtl;
 }
 
-.cell-wrapper {
+/* Cell styling */
+.task-cell {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
   position: relative;
   overflow: visible;
-  padding: 0 4px;
+  padding: 0 6px;
 }
 
-.cell-wrapper:not(:last-child)::after {
+.task-cell:first-child {
+  padding-right: 12px;
+}
+
+.task-cell:last-child {
+  padding-left: 6px;
+}
+
+/* Title cell alignment */
+.title-cell {
+  justify-content: flex-start;
+}
+
+/* Cell dividers */
+.task-cell:not(:last-child)::after {
   content: '';
   position: absolute;
-  top: 25%;
+  top: 20%;
   left: 0;
-  height: 50%;
+  height: 60%;
   width: 1px;
-  background-color: #f0f0f0;
+  background-color: rgba(230, 230, 230, 0.7);
 }
 
-/* Status cell specific styling */
-.status-cell, .priority-cell, .date-cell {
+/* Actions menu styling */
+.task-action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: #919191;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  background-color: transparent;
+}
+
+.task-action-button:hover {
+  color: #525252;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.task-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 180px;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  z-index: 50;
+  overflow: hidden;
+  padding: 4px 0;
+}
+
+.task-dropdown-item, 
+.task-dropdown-item-danger {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 0.875rem;
+  text-align: right;
+  transition: background-color 0.15s ease;
   cursor: pointer;
 }
 
-.member-cell:hover, .priority-cell:hover, .status-cell:hover, .date-cell:hover, .text-cell:hover {
-  background-color: rgba(0, 0, 0, 0.02);
+.task-dropdown-item {
+  color: #333;
 }
 
-/* Ensure min width is 0 for text truncation */
-.min-w-0 {
-  min-width: 0;
+.task-dropdown-item:hover {
+  background-color: #f6f7fb;
 }
 
-/* RTL support */
-.rtl {
-  direction: rtl;
+.task-dropdown-item-danger {
+  color: #e2445c;
 }
 
-/* Transition for dropdown menu */
+.task-dropdown-item-danger:hover {
+  background-color: rgba(226, 68, 92, 0.08);
+}
+
+.task-dropdown-divider {
+  height: 1px;
+  background-color: #eee;
+  margin: 4px 0;
+}
+
+/* Transition for dropdown */
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.15s ease, transform 0.15s ease;
@@ -358,16 +420,14 @@ export default {
   transform: translateY(-5px);
 }
 
-.dropdown-menu {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-}
-
+/* Mobile responsiveness */
 @media (max-width: 768px) {
   .task-grid {
-    grid-template-columns: 2fr 1fr 1fr 1fr 0.5fr;
+    grid-template-columns: 2.5fr 1.2fr 1.2fr 1.2fr 0.6fr;
   }
   
-  .text-cell, .options-cell {
+  .text-cell, 
+  .actions-cell {
     display: none;
   }
 }

@@ -1,20 +1,20 @@
 <template>
   <section
-    class="relative w-full h-full flex items-center justify-center"
+    class="dynamic-date relative"
     @mouseover="isHover = true"
     @mouseleave="isHover = false"
   >
     <div class="flex w-full h-full items-center">
       <div 
-        class="w-full h-8 rounded-md px-2 flex items-center justify-center text-white text-sm font-medium transition-all duration-200 hover:shadow-sm hover:opacity-90"
+        class="dynamic-date-display"
         :style="styleObject"
       >
         <div class="flex items-center">
-          <svg v-if="value1" xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1.5 opacity-90" viewBox="0 0 20 20" fill="currentColor">
+          <svg v-if="value1" xmlns="http://www.w3.org/2000/svg" class="dynamic-date-icon" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
           </svg>
-          <span v-if="!isHover" class="text-center truncate">{{ datesToShow }}</span>
-          <span v-if="isHover" class="text-center truncate">{{ daysCountToshow }}</span>
+          <span v-if="!isHover" class="dynamic-date-text">{{ datesToShow }}</span>
+          <span v-if="isHover" class="dynamic-date-text">{{ daysCountToshow }}</span>
         </div>
       </div>
 
@@ -35,7 +35,7 @@
     <!-- Tooltip that appears on hover when no dates are set -->
     <div 
       v-if="!value1 && isHover" 
-      class="absolute top-full mt-1 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded-md z-10 whitespace-nowrap"
+      class="dynamic-date-tooltip"
     >
       Click to set date range
     </div>

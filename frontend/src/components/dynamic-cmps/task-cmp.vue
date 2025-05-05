@@ -1,15 +1,15 @@
 <template>
-  <div class="flex flex-1 min-w-0 group h-full">
-    <span class="flex items-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+  <div class="dynamic-task flex flex-1 min-w-0 group h-full">
+    <span class="flex items-center">
       <el-dropdown class="side-drop-down" trigger="click">
-        <span class="ml-1 p-1 hover:bg-gray-100 rounded-full transition-colors duration-200">
-          <font-awesome-icon icon="caret-down" class="text-[#676879] hover:text-[#0073ea] text-xs" />
+        <span class="dynamic-task-action-button ml-1">
+          <font-awesome-icon icon="caret-down" class="text-xs" />
         </span>
         <template #dropdown>
-          <el-dropdown-menu>
-            <el-dropdown-item @click="removeTask()" class="hover:bg-red-50 transition-colors duration-200">
-              <font-awesome-icon icon="trash-can" class="text-red-500 mr-2" />
-              <span class="text-red-500">Delete</span>
+          <el-dropdown-menu class="dynamic-dropdown-menu">
+            <el-dropdown-item @click="removeTask()" class="dynamic-dropdown-item-danger">
+              <font-awesome-icon icon="trash-can" class="mr-2" />
+              <span>Delete</span>
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>
@@ -18,7 +18,7 @@
     
     <div class="flex-1 min-w-0 flex items-center h-full">
       <div class="relative flex items-center w-full min-w-0 h-full">
-        <span class="w-[3px] h-[18px] absolute left-0 rounded-l-md" :style="{ 'background-color': groupColor }"></span>
+        <span class="dynamic-task-side-indicator" :style="{ 'background-color': groupColor }"></span>
         
         <div class="w-full min-w-0 flex justify-between items-center pl-2 h-full">
           <!-- Task Title -->
@@ -26,7 +26,7 @@
             <p 
               v-if="!isEdit" 
               @click="onEdit"
-              class="text-sm text-gray-800 font-medium truncate cursor-pointer hover:text-gray-900 transition-colors duration-200"
+              class="dynamic-task-title"
             >
               {{ task.title }}
             </p>
@@ -39,7 +39,7 @@
               @focusout="saveTitle"
               @keyup.enter="saveTitle"
               @keyup.esc="cancelEdit"
-              class="text-sm text-gray-800 font-medium w-full border-b border-blue-500 focus:outline-none focus:ring-0 bg-blue-50/50 px-1 py-0.5 rounded transition-all duration-200"
+              class="dynamic-task-input"
             />
           </div>
           
@@ -47,11 +47,11 @@
           <div class="flex items-center ml-2 shrink-0">
             <add-comment-btn 
               @click="openDetails()" 
-              class="cursor-pointer hover:scale-110 transition-transform duration-200 text-gray-500 hover:text-blue-500" 
+              class="cursor-pointer hover:scale-110 transition-transform duration-200 text-neutral-darkGray hover:text-primary-500" 
             />
             <span 
               v-if="commentsNum" 
-              class="bg-[#0073ea] text-white text-[10px] rounded-full w-[18px] h-[18px] flex items-center justify-center ml-1 cursor-pointer hover:bg-[#0060d9] transition-colors duration-200 shadow-sm"
+              class="bg-primary-500 text-white text-[10px] rounded-full w-[18px] h-[18px] flex items-center justify-center ml-1 cursor-pointer hover:bg-primary-600 transition-colors duration-200 shadow-sm"
               @click="openDetails()"
             >
               {{ commentsNum }}
@@ -186,9 +186,5 @@ export default {
 </script>
 
 <style scoped>
-.truncate {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
+/* All styling moved to common.css */
 </style>
