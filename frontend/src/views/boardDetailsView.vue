@@ -1,9 +1,11 @@
 <template>
-  <section class="container-details-view">
+  <section class="h-full">
     <main
-      class="boardDetails"
       v-if="!isLoading"
-      :class="[{ 'nav-bar-open': isNavBarOpen }]"
+      :class="[
+        'h-full w-full transition-all duration-300',
+        { 'ml-64': isNavBarOpen }
+      ]"
     >
       <router-view></router-view>
       <board-details-header />
@@ -21,11 +23,13 @@
     </main>
 
     <div
-      class="loading"
       v-if="isLoading"
-      :class="[{ 'nav-bar-open': isNavBarOpen }]"
+      :class="[
+        'flex items-center justify-center h-full w-full',
+        { 'ml-64': isNavBarOpen }
+      ]"
     >
-      <img src="../styles/images/Loader.gif" alt="" />
+      <img src="../styles/images/Loader.gif" alt="Loading" class="w-16 h-16" />
     </div>
   </section>
 </template>
@@ -35,6 +39,7 @@ import boardDetailsHeader from '../components/board-details-header.vue'
 import groupList from '../components/group-list.vue'
 import kanban from '../components/kanban-group-list.vue'
 import { socketService } from '../services/socket.service'
+
 export default {
   name: 'board-details',
   data() {
@@ -73,7 +78,6 @@ export default {
       this.$store.commit({ type: 'setCurrBoard', board })
     },
   },
-
   watch: {
     '$route.params.boardId'() {
       const boardId = this.$route.params.boardId
@@ -88,5 +92,3 @@ export default {
   },
 }
 </script>
-
-<style></style>

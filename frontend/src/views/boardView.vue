@@ -1,7 +1,9 @@
 <template>
-  <main class="boardView">
+  <main class="flex h-screen bg-gray-50">
     <side-bar></side-bar>
-    <router-view />
+    <div class="flex-grow">
+      <router-view />
+    </div>
   </main>
 </template>
 
@@ -24,4 +26,3 @@ export default {
   },
 }
 </script>
-<style></style>
