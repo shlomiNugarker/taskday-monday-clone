@@ -1,119 +1,143 @@
-# TaskDay - Monday Clone
+# Taskday - Modern Project Management Platform
 
-TaskDay is a clone of the popular project management tool, Monday.com. This project is built using a full-stack approach, featuring a Node.js backend and a Vue.js frontend. The goal of this project is to offer a task management platform where users can create, manage, and collaborate on tasks and boards seamlessly.
+![Taskday Logo](frontend/src/styles/images/logo.png)
 
-## Project Structure
+Taskday is a sophisticated project management application inspired by Monday.com, built with Vue.js and modern web technologies. This platform enables teams to manage tasks efficiently with an intuitive interface and powerful features.
 
-The project is divided into two main parts:
+## 🚀 Features
 
-- **Backend**: Handles the server-side logic, APIs, authentication, and data management.
-- **Frontend**: Handles the client-side user interface and interactions.
+- **Interactive Kanban Boards**: Drag-and-drop task management with customizable workflows
+- **Real-time Collaboration**: Instant updates and team communication tools
+- **Advanced Analytics**: Custom dashboards and performance metrics
+- **Smart Scheduling**: Automated timeline management and deadline tracking
+- **Seamless Integrations**: Connect with GitHub, Slack, Google Drive, and more
+- **Enterprise-grade Security**: Role-based access control and data encryption
 
-### Directory Overview
+## 💻 Technology Stack
 
-- **backend/**: Contains the server-side code written in Node.js.
-  - `api/`: Includes API controllers, routes, and services for different modules (e.g., `auth`, `board`, `user`).
-  - `middlewares/`: Contains middleware functions such as authentication and logging.
-  - `config/`: Configuration files for different environments (e.g., `dev`, `prod`).
-  - `services/`: General services used across the backend, like database and logging.
-  - `public/`: Static files served by the server.
-- **frontend/**: Contains the client-side code written in Vue.js.
-  - `src/`: Main source folder containing components, views, and utility functions.
-  - `assets/`: Holds static assets like images and styles.
-  - `data/`: Example data files.
+- **Frontend**: Vue.js, Vuex, Vue Router, TailwindCSS
+- **Backend**: Node.js, Express
+- **Database**: MongoDB
+- **Authentication**: JWT, OAuth
+- **Deployment**: Docker, AWS/Azure
+- **Testing**: Jest, Cypress
 
-## Technologies Used
+## 📸 Screenshots
 
-### Backend
-- **Node.js** and **Express.js**: Used for building the server and creating RESTful APIs.
-- **MongoDB** (or other databases): Used to store board, task, and user data.
-- **Authentication**: Custom authentication services to handle user sessions.
-- **Socket.IO**: Real-time communication for collaborative features.
+### Dashboard
+![Dashboard](frontend/src/styles/images/1.png)
 
-### Frontend
-- **Vue.js**: JavaScript framework used for building the user interface.
-- **Vuex**: State management pattern for Vue.js applications.
-- **Vite**: Fast front-end build tool used for development and bundling.
-- **SASS**: CSS preprocessor for easier and more efficient styling.
+### Task Management
+![Task Board](frontend/src/styles/images/2.png)
 
-## Features
-- **Authentication System**: Register and login functionality.
-- **Task and Board Management**: Create, update, delete, and manage tasks and boards.
-- **Collaborative Boards**: Users can collaborate on the same board and manage tasks.
-- **Real-Time Updates**: Using WebSockets to provide real-time feedback on board updates.
-- **Responsive Design**: Fully responsive user interface for both desktop and mobile.
+### Project Overview
+![Project View](frontend/src/styles/images/3.png)
 
-## Hosted Version
-The project is hosted on Railway: [TaskDay Live](https://taskday-monday-production.up.railway.app/)
+## 🛠️ Installation and Setup
 
-## Getting Started
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/taskday.git
 
-### Prerequisites
-- **Node.js** (>= 14.0.0)
-- **npm** or **yarn**
-- **MongoDB** (or any other database supported by the backend configuration)
+# Navigate to project directory
+cd taskday
 
-### Installation
+# Install dependencies
+npm install
 
-1. **Clone the repository**
-   ```sh
-   git clone https://github.com/your-username/taskday-monday-clone.git
-   cd taskday-monday-clone
-   ```
+# Start development server
+npm run serve
 
-2. **Install backend dependencies**
-   ```sh
-   cd backend
-   npm install
-   ```
+# Build for production
+npm run build
 
-3. **Install frontend dependencies**
-   ```sh
-   cd ../frontend
-   npm install
-   ```
-
-### Running the Project
-
-1. **Backend**: To start the server
-   ```sh
-   cd backend
-   npm start
-   ```
-
-2. **Frontend**: To start the client
-   ```sh
-   cd frontend
-   npm run dev
-   ```
-
-3. Visit `http://localhost:3000` to view the application in the browser.
-
-## Environment Variables
-Create a `.env` file in the `backend` directory with the following information:
-
-```
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
+# Run tests
+npm run test
 ```
 
-## Screenshots
+## 🌐 Project Structure
 
-### Screenshot of the Application
+```
+taskday/
+├── frontend/             # Vue.js frontend
+│   ├── public/           # Static files
+│   ├── src/              # Source files
+│   │   ├── assets/       # Images, fonts, etc.
+│   │   ├── components/   # Vue components
+│   │   ├── router/       # Vue router
+│   │   ├── store/        # Vuex store
+│   │   ├── styles/       # CSS/SCSS styles
+│   │   ├── utils/        # Utility functions
+│   │   ├── views/        # Page components
+│   │   ├── App.vue       # Root component
+│   │   └── main.js       # Entry point
+│   └── tests/            # Frontend tests
+├── backend/              # Node.js backend
+│   ├── config/           # Configuration files
+│   ├── controllers/      # Request handlers
+│   ├── models/           # Data models
+│   ├── routes/           # API routes
+│   ├── services/         # Business logic
+│   ├── utils/            # Utility functions
+│   └── server.js         # Server entry point
+├── docker/               # Docker configuration
+└── docs/                 # Documentation
+```
 
-![TaskDay Screenshot](https://res.cloudinary.com/duajg3ah1/image/upload/v1660916126/myPortfolio/qdtzolm9ldd5qlquq2aj.png)
+## 🔒 Security Features
 
-## Video Demo
+- HTTPS encryption for all data in transit
+- JWT-based authentication with refresh tokens
+- Role-based access control
+- Input validation and sanitization
+- Security headers and protection against common web vulnerabilities
+- Regular security audits and dependency updates
 
-You can watch the demo video of TaskDay here:
+## 🔄 CI/CD Pipeline
 
-https://user-images.githubusercontent.com/98424459/205487579-41207e1e-68fd-474e-86d1-951ca09fe890.mp4
+- Automated testing for frontend and backend
+- Code quality checks with ESLint and Prettier
+- Docker containerization for consistent deployment
+- Continuous integration with GitHub Actions
+- Automated deployment to staging and production environments
 
-## Contributing
-Contributions are welcome! Please create an issue or submit a pull request for new features or bug fixes.
+## 📝 Development Principles
 
-## Contact
-For any questions or feedback, please reach out via [shlomin1231@gmail.com](mailto:shlomin1231@gmail.com).
+- **Clean Code**: Following best practices and SOLID principles
+- **Component-Based Architecture**: Reusable, modular components
+- **Responsive Design**: Mobile-first approach for all screen sizes
+- **Accessibility**: WCAG 2.1 compliant
+- **Performance Optimization**: Lazy loading, code splitting, and efficient rendering
+
+## 🌟 Key Technical Challenges Solved
+
+1. **Real-time Synchronization**: Implemented WebSockets for live updates across clients
+2. **Complex State Management**: Designed a robust Vuex store architecture with modules
+3. **Drag-and-Drop Performance**: Optimized rendering for smooth user interactions
+4. **Authentication Flow**: Created a secure, seamless login experience with JWT
+5. **Data Visualization**: Built dynamic charts and reports with D3.js
+
+## 📊 Future Enhancements
+
+- AI-powered task prioritization
+- Enhanced reporting and analytics
+- Resource allocation optimization
+- Native mobile applications
+- Advanced automation workflows
+
+## 👤 About the Developer
+
+This project was designed and developed by Shlomi Assaf, a full-stack developer passionate about creating intuitive, high-performance web applications. With expertise in Vue.js, Node.js, and modern web technologies, I specialize in building scalable solutions for complex problems.
+
+## 📫 Contact
+
+- **Email**: shlomin1231@gmail.com
+- **GitHub**: [github.com/shlomiassaf](https://github.com/shlomiassaf)
+- **LinkedIn**: [linkedin.com/in/shlomiassaf](https://linkedin.com/in/shlomiassaf)
+- **Portfolio**: [shlomiassaf.com](https://shlomiassaf.com)
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 
